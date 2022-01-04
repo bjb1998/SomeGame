@@ -59,33 +59,9 @@ object.function = printIt; // note this is not the proper way to attach a functi
 console.log(object);
 console.log({message: "This object is defined on the fly.", property: "It has two properties."});
 
-// in JavaScript (ES6) classes look like this 
-class Person {
-    constructor(name, age) {
-        // we use this to refer to the current object
-        this.name = name;
-        this.age = age;
-        // this line does the same as above but in a more clever way
-        // Object.assign(this, { name, age });
+var player = new Player("bob", 1, 1, 1, 1, 1, 1, 1, 1);
 
-        // local variables are still declared with var
-        var int = 1337;
-        console.log("Local Variable ");
-        console.log(int);
-    };
-
-    getOlder() {
-        this.age++;
-    };
-};
-
-// we use new to create new instances of the object
-var alice = new Person("Alice", 33);
-var bob = new Person("Bob", 43)
-alice.getOlder();
-console.log(alice);
-console.log(bob);
-
+console.log(player);
 
 // advanced JavaScript
 // JavaScript is asynchronous
