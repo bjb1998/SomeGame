@@ -30,7 +30,7 @@ class Stats {
     };
 };
 
-class Player extends Entity {
+class MC extends Entity {
     constructor(name, stats, money, items, skillsToAdd) {
         super(name, stats, skillsToAdd);
         this.money = money;
