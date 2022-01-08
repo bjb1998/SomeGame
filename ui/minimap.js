@@ -8,19 +8,23 @@ class Minimap{
         this.squareSize = size / units;
         this.map = map;
         this.half = false;
+        this.playerSprite = new Texture('assets/arrow.png', this.squareSize, this.squareSize);
+        this.root = Math.sqrt(units);
     }
 
-    //todo make more dyanmic based on tile state and make it prettier
-    //side-todo allow more world states besides wall and no wall
+    //todo have textures for the world map
     drawMap() {
         const size = this.squareSize;
         const units = this.gridSize;
         for (var i = 0; i < units; i++)
             for (var j = 0; j < units; j++) {
                 const coord = this.getCoordinate(i, j);
-                if (i === units / 2 - 1 && j === units / 2 - 1)
-                    this.ctx.fillStyle = "blue";
-                else if (coord < 0)
+                if (i === units / 2 - 1 && j === units / 2 - 1) {
+                    this.ctx.fillRect(this.startX + i * size, this.startY + j * size,
+                        size, size);
+                    this.drawPlayerSpr(i, j);
+                    continue;
+                }else if (coord < 0)
                     this.ctx.fillStyle = "black";
                 else
                     this.ctx.fillStyle = this.map.colors[coord];
@@ -30,7 +34,6 @@ class Minimap{
             }
     }
 
-    //todo make player center of map, unfuck me
     getCoordinate(x, y) {
         const pos = playerPos;
         const startGrid = [pos[0] - x + this.gridSize / 2 - 1, pos[1] - y + this.gridSize / 2 - 1];
@@ -39,4 +42,16 @@ class Minimap{
         const n = this.map.get(startGrid[0], startGrid[1]);
         return n;
     }
+
+    //todo have this thing actually work on sizes besides 16 :(
+    drawPlayerSpr(i, j) {
+        const size = this.squareSize;
+        const root = this.root;
+        this.ctx.translate((this.startX + i * size) + root, (this.startY + j * size) + root); //translate and rotate
+        this.ctx.rotate(Math.PI + playerDir);
+        this.ctx.drawImage(this.playerSprite.image, -this.playerSprite.width / 2, -this.playerSprite.height / 2,
+            this.playerSprite.width, this.playerSprite.height);
+        this.ctx.rotate(Math.PI - playerDir);                               //then reverse it
+        this.ctx.translate(-(this.startX + i * size) - root, -(this.startY + j * size) - root);
+    };
 }

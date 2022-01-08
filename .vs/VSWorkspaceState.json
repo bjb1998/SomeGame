@@ -1,9 +1,10 @@
 {
   "ExpandedNodes": [
     "",
+    "\\scripts",
     "\\ui",
     "\\world"
   ],
-  "SelectedNode": "\\world\\camera.js",
+  "SelectedNode": "\\ui\\minimap.js",
   "PreviewInSolutionExplorer": false
 }

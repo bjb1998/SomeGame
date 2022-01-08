@@ -50,12 +50,16 @@ window.onload = () => {
     var minimap = new Minimap(minimapCanvas, 16, 125, 20, 20, map);
 
     var controls = new Controls();
-    var camera = new Camera(game, res, fov);
+    var camera = new Camera(game, res);
     var loop = new GameLoop();
 
     map.randomize();
 
     console.log(map);
+
+    document.onkeydown = function (e) {
+        if(debug === false) return (e.which || e.keyCode) != 116;
+    };
 
     loop.start(function frame() {
         player.update(controls.states, map);

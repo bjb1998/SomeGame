@@ -4,7 +4,8 @@ class Player{
 		this.paces = 0;
 	};
 
-	rotate(dir) {
+    rotate(dir) {
+        const angles = [0, 0 + rightAngle, 2 * rightAngle, 3 * rightAngle, CIRCLE]; //the 4 right angles (radians)
 		let start = Date.now();
 		if (!moving) {
 			moving = true;
@@ -13,9 +14,10 @@ class Player{
 
 				if (timePassed >= 250) {
 					clearInterval(timer);
-					camera.direction = angles.reduce(function (prev, curr) { //floating points are a bitch
+					camera.direction = angles.reduce(function (prev, curr) { //get the closest value to the angles array
 						return (Math.abs(curr - camera.direction) < Math.abs(prev - camera.direction) ? curr : prev);
-					});
+                    });
+                    playerDir = camera.direction;
 					moving = false;
 					return;
 				}
@@ -49,18 +51,38 @@ class Player{
 				// get change in camera distance, check distance, then move when needed
 				const dx = Math.cos(camera.direction) * 0.1;
 				const dy = Math.sin(camera.direction) * 0.1;
-				const destX = camera.x + (step * Math.sign(dx)) + 0.05;
-				const destY = camera.y + (step * Math.sign(dy)) + 0.05;
+				const destX = camera.x + (0.6 * Math.sign(dx)) + 0.05;
+				const destY = camera.y + (0.6 * Math.sign(dy)) + 0.05;
 				if (map.get(destX, camera.y) <= 0) camera.x += dx;
                 if (map.get(camera.x, destY) <= 0) camera.y += dy;
 
 			}, 20, this, map);
 		};
-	};
+    };
 
-	update(controls, map) {
-		if (controls.left) this.rotate(-1);
-		if (controls.right) this.rotate(1);
-		if (controls.forward) this.walk(map);
+    pause() {
+        let start = Date.now()
+        if (!moving) {
+            moving = true;
+            let timer = setInterval(function(){
+                let timePassed = Date.now() - start;
+                if (timePassed >= 100) {
+                    clearInterval(timer);
+                    currentState != GameState.PAUSE ? currentState = GameState.PAUSE : currentState = GameState.DUNGEON;
+                    console.log("Game State: " + currentState);
+                    moving = false;
+                    return;
+                }
+            }, this);
+        };
+    };
+
+    update(controls, map) {
+        if (currentState === GameState.DUNGEON) {
+            if (controls.left) this.rotate(-1);
+            if (controls.right) this.rotate(1);
+            if (controls.forward) this.walk(map);
+        };
+            if (controls.pause) this.pause();
 	};
 };

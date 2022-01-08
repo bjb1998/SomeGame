@@ -5,10 +5,9 @@ class Camera {
         this.height = canvas.height = 600;              //Y-Resolution of canvas
         this.resolution = resolution;                   //amount of columns to draw per frame
         this.spacing = this.width / resolution;         //space between each columnn
-        this.focalLength = fov;                         //FOV of the camera
+        this.focalLength = 0.8;                         //FOV of the camera
         this.range = 14;                                //draw distance of the vectors
         this.lightRange = 5;                            //range of light
-        //this.scale = (this.width + this.height) / 100; //???
     }
 
     project(height, angle, distance) {
