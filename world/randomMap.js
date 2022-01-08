@@ -4,9 +4,9 @@ class RandomMap {
 		this.size = size;                                                           //size of map (n^2)
 		this.wallGrid = new Uint8Array(size * size);                                //Random array of walls, 0 is floor, 1 is wall
 		this.skybox = new Texture('assets/deathvalley_panorama.jpg', 2000, 750);    //skybox texture
-        this.wallTexture = new Texture('assets/wall_texture.jpg', 1024, 1024);      //wall texture
-        this.doorTexture = new Texture('assets/door.jpg', 1024, 1024);              //door texture
-        this.textures = [this.wallTexture, this.doorTexture];
+        this.textures = [new Texture('assets/wall_texture.jpg', 1024, 1024),        //array of textures to put in
+                            new Texture('assets/door.jpg', 1024, 1024)];                       
+        this.colors = ["green", "red", "orange"];                                   //colors per cooresponding texture (no wall = index 0)
         this.wallHeight = 1;
         this.light = 1;
         this.states = 3;                                                            //possible sattes a wall can be (max = n - 1)

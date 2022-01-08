@@ -47,7 +47,7 @@ window.onload = () => {
 
     var map = new RandomMap(32);
     var player = new Player(0.5, 0.5, rightAngle);
-    var minimap = new Minimap(minimapCanvas, 9, 100, 20, 20, map);
+    var minimap = new Minimap(minimapCanvas, 16, 125, 20, 20, map);
 
     var controls = new Controls();
     var camera = new Camera(game, res, fov);
