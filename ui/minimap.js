@@ -8,7 +8,7 @@ class Minimap{
         this.squareSize = size / units;
         this.map = map;
         this.half = false;
-        this.playerSprite = new Texture('assets/arrow.png', this.squareSize, this.squareSize);
+        this.playerSprite = new Texture('assets/arrow.PNG', this.squareSize, this.squareSize);
         this.root = Math.sqrt(units);
     }
 
