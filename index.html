@@ -5,14 +5,15 @@
     <meta charset="utf-8">
     <title>Game Project Shell</title>
 
-    <script src="./world/globals.js"></script>
+    <script src="./scripts/globals.js"></script>
     <script src="./world/gameLoop.js"></script>
     <script src="./world/texture.js"></script>
     <script src="./world/camera.js"></script>
-    <script src="./world/control.js"></script>
-    <script src="./world/player.js"></script>
+    <script src="./scripts/control.js"></script>
+    <script src="./world/controlsWorld.js"></script>
     <script src="./world/randomMap.js"></script>
 
+    <script src="./ui/menu.js"></script>
     <script src="./ui/minimap.js"></script>
 
     <script src="./scripts/entity.js"></script>
@@ -29,9 +30,9 @@
     <script src="./boot.js"></script>
 </head>
 <body>
-    <canvas id="game" tabindex="1" width="800" height="600"
+    <canvas id="game" tabindex="1" width="1024" height="768"
             style="border: 1px solid brown; position: absolute; left: 0; top: 0; z-index: 0;"></canvas>
-    <canvas id="UI" tabindex="1" width="800" height="600"
+    <canvas id="ui" tabindex="1" width="1024" height="768"
             style="border: 1px solid brown; position: absolute; left: 0; top: 0; z-index: 1;"></canvas>
 </body>
 </html>

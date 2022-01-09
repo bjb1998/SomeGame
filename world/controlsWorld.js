@@ -1,7 +1,9 @@
-class Player{
+class ControlsWorld{
 	constructor(x, y, direction){
 		Object.assign(this, {x, y, direction});
-		this.paces = 0;
+        this.paces = 0;
+        playerPos = [x - 0.5, y - 0.5];         //inialize playerPos global
+        playerDir = direction;
 	};
 
     rotate(dir) {

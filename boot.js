@@ -43,19 +43,18 @@ console.log(theParty);*/
 window.onload = () => {
     console.log(document);
     var game = document.getElementById('game');
-    var minimapCanvas = document.getElementById('UI');
+    var UICanvas = document.getElementById('ui');
 
     var map = new RandomMap(32);
-    var player = new Player(0.5, 0.5, rightAngle);
-    var minimap = new Minimap(minimapCanvas, 16, 125, 20, 20, map);
+    var player = new ControlsWorld(0.5, 0.5, rightAngle);
 
     var controls = new Controls();
     var camera = new Camera(game, res);
+    var minimap = new Minimap(UICanvas, controls, 16, 125, 20, 20, map);
+    var menu = new Menu(UICanvas, map, null, null); //todo make player and party not null
     var loop = new GameLoop();
 
     map.randomize();
-
-    console.log(map);
 
     document.onkeydown = function (e) {
         if(debug === false) return (e.which || e.keyCode) != 116;
@@ -65,6 +64,7 @@ window.onload = () => {
         player.update(controls.states, map);
         camera.render(player, map);
         minimap.drawMap();
+        menu.draw(controls.states);
     });
 };
 

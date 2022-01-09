@@ -1,8 +1,8 @@
 class Camera {
     constructor(canvas, resolution, focalLength) {
         this.ctx = canvas.getContext('2d');             //technically 3D but not reall,y Ala-doom
-        this.width = canvas.width = 800;                //X-resolution of canvas
-        this.height = canvas.height = 600;              //Y-Resolution of canvas
+        this.width = canvas.width = canvas.width;       //X-resolution of canvas
+        this.height = canvas.height = canvas.height;    //Y-Resolution of canvas
         this.resolution = resolution;                   //amount of columns to draw per frame
         this.spacing = this.width / resolution;         //space between each columnn
         this.focalLength = 0.8;                         //FOV of the camera

@@ -16,5 +16,6 @@ var moving = false;																//boolean to determine if camera animation is
 const res = 300;                                                                //resolution of the camera
 var playerPos = [];                                                             //player as an x, y coordinate
 var playerDir = 0;                                                              //direction of player (radians)
-
+var gameFont = new FontFace('Reactor7', 'url(assets/fonts/Reactor7.ttf)');      //font to laod
+document.fonts.add(gameFont);
 

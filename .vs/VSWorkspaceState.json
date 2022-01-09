@@ -1,10 +1,12 @@
 {
   "ExpandedNodes": [
     "",
+    "\\assets",
+    "\\assets\\fonts",
     "\\scripts",
     "\\ui",
     "\\world"
   ],
-  "SelectedNode": "\\ui\\minimap.js",
+  "SelectedNode": "\\boot.js",
   "PreviewInSolutionExplorer": false
 }
