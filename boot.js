@@ -50,7 +50,7 @@ window.onload = () => {
 
     var controls = new Controls();
     var camera = new Camera(game, res);
-    var minimap = new Minimap(UICanvas, controls, 16, 125, 20, 20, map);
+    var minimap = new Minimap(UICanvas, 16, 125, 20, 20, map);
     var menu = new Menu(UICanvas, map, null, null); //todo make player and party not null
     var loop = new GameLoop();
 
