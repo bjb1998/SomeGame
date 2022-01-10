@@ -3,10 +3,13 @@
     "",
     "\\assets",
     "\\assets\\fonts",
+    "\\data",
     "\\scripts",
     "\\ui",
+    "\\ui\\menus",
+    "\\ui\\menus\\elements",
     "\\world"
   ],
-  "SelectedNode": "\\ui\\minimap.js",
+  "SelectedNode": "\\ui\\menus\\elements\\statsMenuElem.js",
   "PreviewInSolutionExplorer": false
 }
