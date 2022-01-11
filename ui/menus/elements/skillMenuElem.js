@@ -13,7 +13,10 @@ class skillMenuElem extends menuElem {
     }
 
     drawMenuText() {
-        this.drawText("skills", this.width * 0.09, (50 * (/*i + */ 1)) + (this.height / 8.5));
+        var skills = this.party.active[this.party.playerIndex].skills;
+        for (var i = 0; i < skills.length; i++) {
+            this.drawText(skills[i].name, this.width * 0.09, (50 * (i + 1)) + (this.height / 8.5)); //draw the options in order by index
+        }
     }
 
     select() { }

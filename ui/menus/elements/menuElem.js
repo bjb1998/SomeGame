@@ -19,7 +19,7 @@ class menuElem{
         this.width = menu.width;
         this.height = menu.height;
         this.controls = menu.controls;
-        this.menus = [itemMenu, skillMenu, partyMenu, statsMenu, settingsMenu, quitMenu]; //todo finish other menus
+        this.menus = [itemMenu, skillMenu, partyMenu, statsMenu, quitMenu]; //todo finish other menus
     }
 
     drawElem() {
