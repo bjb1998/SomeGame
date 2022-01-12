@@ -7,9 +7,8 @@
     "\\scripts",
     "\\ui",
     "\\ui\\menus",
-    "\\ui\\menus\\elements",
-    "\\world"
+    "\\ui\\menus\\elements"
   ],
-  "SelectedNode": "\\world\\controlsWorld.js",
+  "SelectedNode": "\\ui\\menus\\elements\\itemMenuElem.js",
   "PreviewInSolutionExplorer": false
 }

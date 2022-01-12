@@ -32,28 +32,23 @@ class Menu{
         if (this.top != 0) {
             this.menuStack[this.top - 1].state = 0;
             this.menuStack[this.top - 1].resetTimer();
+            this.clear();
         } else {
             this.exit();
         }
     };
 
-    //draw the background
-    fillBackground() {
-        this.ctx.fillStyle = "black";
-        this.ctx.fillRect(0, 0, this.width, this.height);
-    }
-
     //todo fix bug when quitting via back button
     draw() {
         if (currentState === GameState.PAUSE) {
             //create new main menu if the stack is empty
-            if (this.top === 0) { 
+            if (this.top === 0) {
                 this.mainMenu = new menuElem(mainMenuBackground, mainMenuOptions, 35, 50, 40, 150, 600);
                 this.pushMenu(this.mainMenu);
+                this.clear();
             }
             var currentMenu = this.menuStack[this.top - 1];
             this.active = true;
-            this.fillBackground();
             currentMenu.drawElem();
 
             //Based on the menus state, push or pop the menu stack
@@ -63,16 +58,20 @@ class Menu{
                 this.popMenu();
             }
 
-        } else {
+        } else
             this.exit();
-            this.partyStats.draw();
-        }
+
+        this.partyStats.draw();
+    }
+
+    clear() {
+        this.ctx.clearRect(0, 0, this.width, this.height);
     }
 
     //exit the menu, return to the game
     exit() {
         if (this.active)
-            this.ctx.clearRect(0, 0, this.width, this.height);
+            this.clear();
 
         this.menuStack = [];
         this.top = 0;

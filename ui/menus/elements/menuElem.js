@@ -17,6 +17,7 @@ class menuElem{
     init(menu) {
         this.ctx = menu.ctx;
         this.controls = menu.controls;
+        this.party = menu.party;
     }
 
     drawElem() {
@@ -87,11 +88,9 @@ class menuElem{
     nextMenu() {
         var menu;
         switch (this.selection) {
-            case 0: menu = new itemMenuElem(this); break;
-            case 1: menu = new skillMenuElem(this); break;
-            case 2: menu = new statsMenuElem(this); break;
-            case 3: menu = new partyMenuElem(this); break;
-            case 4: menu = new quitMenuElem(); break;
+            case 0: menu = new itemMenuElem(this.party.active[this.party.playerIndex].inv, this); break;
+            case 1: menu = new partyMenuElem(this.party, this); break;
+            case 2: menu = new quitMenuElem(); break;
             default: return;
         }
         return menu;

@@ -11,26 +11,15 @@ class Inventory {
         itemsToAdd.forEach(current => this.items.push(new ItemSlot(current, 1)));
     }
 
-    use(slot) {
-        slot.exec();
-        if (slot.count === 0)
+    use(slot, entity) {
+        slot.exec(entity);
+        if (slot.count <= 0)
             this.items.splice(this.items.indexOf(slot), 1);
     };
 
 };
 
-class Item {
-    constructor(name, desc, type, func) {
-        Object.assign(this, { name, desc, type, func });
-    }
-
-    exec() {
-        this.func();
-    };
-
-};
-
-class ItemSlot{
+class ItemSlot {
     constructor(item, count) {
         this.max = 99;
         this.item = item;
@@ -43,9 +32,21 @@ class ItemSlot{
         if (this.count >= this.max) this.count = this.max;
     }
 
-    exec() {
-        this.item.exec();
+    exec(entity) {
+        this.item.exec(entity);
         --this.count;
     };
 
 };
+
+class Item {
+    constructor(name, desc, type, func) {
+        Object.assign(this, { name, desc, type, func });
+    }
+
+    exec(entity) {
+        this.func(entity);
+    };
+
+};
+

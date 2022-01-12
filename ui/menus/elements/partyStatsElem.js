@@ -7,7 +7,7 @@ class partyStatsElem {
         var posX = this.posX;
         const posY = this.posY;
         const width = this.width;
-        const offset = 10;
+        const offset = 15;
 
         for (var i = 0; i < this.party.length; i++) {
             var member = this.party[i];
@@ -21,6 +21,8 @@ class partyStatsElem {
                 posX + offset, posY + 70);
             this.drawText(member.stats.mp + '/' + member.stats.maxMP + ' MP',
                 posX + offset, posY + 100);
+            this.drawText(member.stats.status,
+                posX + offset, posY + 125);
         }
     };
 
