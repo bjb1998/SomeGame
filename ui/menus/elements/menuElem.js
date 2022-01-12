@@ -1,15 +1,13 @@
 class menuElem{
-    constructor(color, options, posX, posY, fontSize, widthFactor, heightFactor) {
+    constructor(color, options, posX, posY, fontSize, width, height) {
         this.ctx = null;
         this.background = color;
         this.controls = null;
-        options = null ? this.options = [] : this.options = options;
+        this.options = options;
         this.posX = posX;
         this.posY = posY;
-        this.width = null;
-        this.height = null;
-        this.widthFactor = widthFactor;
-        this.heightFactor = heightFactor;
+        this.width = width;
+        this.height = height;
         this.fontSize = fontSize;
         this.selection = 0;
         this.state = 0;
@@ -18,17 +16,13 @@ class menuElem{
 
     init(menu) {
         this.ctx = menu.ctx;
-        this.width = menu.width;
-        this.height = menu.height;
         this.controls = menu.controls;
     }
 
     drawElem() {
         var ctx = this.ctx;
-        var width = this.width;
-        var height = this.height;   
         ctx.fillStyle = this.background;
-        ctx.fillRect(this.posX, this.posY, width * this.widthFactor, height * this.heightFactor);
+        ctx.fillRect(this.posX, this.posY, this.width, this.height);
         this.setFontCtx();
         this.drawMenuText();
         this.drawSelection();
@@ -54,19 +48,19 @@ class menuElem{
 
     drawMenuText() {
         for (var i = 0; i < this.options.length; i++)
-            this.drawText(this.options[i], this.width * 0.09, (50 * (i + 1)) + (this.height / 8.5)); //draw the options in order by index
+            this.drawText(this.options[i], this.width - 70, (50 * (i + 1)) + (this.height / 8.5)); //draw the options in order by index
     };
 
     setFontCtx() {
-        this.ctx.font = this.fontSize + this.fontSize + 'px Reactor7';
+        this.ctx.font = this.fontSize + 'px Reactor7';
     };
 
     drawSelection() {
         this.ctx.drawImage(selectionSprite.image,
-            this.width * 0.06,
-            (50 * (this.selection + 1) + (this.height / 12)),
-            this.width / 50,
-            this.height / 50);
+            this.width - 100,
+            (50 * (this.selection + 1) + (this.height / 13)),
+            10,
+            10);
     }
 
     select() {
@@ -93,10 +87,10 @@ class menuElem{
     nextMenu() {
         var menu;
         switch (this.selection) {
-            case 0: menu = new itemMenuElem(mainMenuBackground, null, 50, 50, 20, 0.3, 0.9); break;
-            case 1: menu = new skillMenuElem(mainMenuBackground, null, 50, 50, 20, 0.3, 0.9); break;
-            case 2: menu = new statsMenuElem(mainMenuBackground, null, 50, 50, 20, 0.3, 0.9); break;
-            case 3: menu = new partyMenuElem(mainMenuBackground, null, 50, 50, 20, 0.3, 0.9);; break;
+            case 0: menu = new itemMenuElem(this); break;
+            case 1: menu = new skillMenuElem(this); break;
+            case 2: menu = new statsMenuElem(this); break;
+            case 3: menu = new partyMenuElem(this); break;
             case 4: menu = new quitMenuElem(); break;
             default: return;
         }

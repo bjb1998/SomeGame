@@ -44,6 +44,7 @@ window.onload = () => {
     console.log(document);
     var player = playerPreset;
     var theParty = new Party(player);
+    theParty.recruit(DUMMY);
 
     var game = document.getElementById('game');
     var UICanvas = document.getElementById('ui');

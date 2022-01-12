@@ -1,16 +1,17 @@
 class skillMenuElem extends menuElem {
-    constructor(color, options, posX, posY, fontSize, widthFactor, heightFactor) {
-        super(color, options, posX, posY, fontSize, widthFactor, heightFactor);
+    constructor(prevMenu) {
+        super(prevMenu.background, null,
+            prevMenu.posX, prevMenu.posY,
+            prevMenu.fontSize,
+            prevMenu.width, prevMenu.height);
+        this.options = null;
     }
 
     init(menu) {
         this.ctx = menu.ctx;
-        this.width = menu.width;
-        this.height = menu.height;
         this.controls = menu.controls;
         this.selection = 0;
         this.party = menu.party;
-        console.log(this.party);
         this.activeMember = 0;
         this.options = this.party.active[this.activeMember].skills;
     }
@@ -18,24 +19,24 @@ class skillMenuElem extends menuElem {
     drawMenuText() {
         this.options = this.party.active[this.activeMember].skills;
         for (var i = 0; i < this.options.length; i++)
-            this.drawText(this.options[i].name, this.width * 0.09, (50 * (i + 1)) + (this.height / 8.5)); //draw the options in order by index
+            this.drawText(this.options[i].name, this.width - 70, (50 * (i + 1)) + (this.height / 8.5)); //draw the options in order by index
     }
 
     //draw the selected skills stats
     nextMenu() {
-        console.log(this.options);
         const skill = this.options[this.selection];
-        console.log(skill);
-        var skillPopup = new popUpSkillMenu(skill,
-            this.posX, this.posY, this.background, this.fontSize, this.widthFactor, this.heightFactor);
+        var skillPopup = new popUpSkillMenu(skill, this);
         return skillPopup;
     }
 }
 
 class popUpSkillMenu extends menuElem{
-    constructor(skill, posX, posY, background, fontSize, widthFactor, heightFactor) {
-        super(background, null, posX, posY, fontSize, widthFactor, heightFactor)
-        this.skill = skill;
+    constructor(skill, prevMenu) {
+        var params = [skill.name, skill.type, skill.cost + ' MP', skill.desc];
+        super(prevMenu.background, params,
+            prevMenu.posX, prevMenu.posY,
+            prevMenu.fontSize,
+            prevMenu.width, prevMenu.height);
     };
 
     init(menu) {
@@ -43,12 +44,7 @@ class popUpSkillMenu extends menuElem{
         this.controls = menu.controls;
     }
 
-    drawMenuText() {
-        this.drawText(this.skill.name, this.width * 0.09, (50 * (0 + 1)) + (this.height / 8.5));
-        this.drawText(this.skill.type, this.width * 0.09, (50 * (1 + 1)) + (this.height / 8.5));
-        this.drawText(this.skill.cost, this.width * 0.09, (50 * (2 + 1)) + (this.height / 8.5));
-        this.drawText(this.skill.desc, this.width * 0.09, (50 * (3 + 1)) + (this.height / 8.5));
-    }
+    drawSelection() { }
 
     nextMenu() {}
 

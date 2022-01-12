@@ -1,12 +1,14 @@
 class statsMenuElem extends menuElem {
-    constructor(color, options, posX, posY, fontSize, widthFactor, heightFactor) {
-        super(color, options, posX, posY, fontSize, widthFactor, heightFactor);
+    constructor(prevMenu) {
+        super(prevMenu.background, null,
+            prevMenu.posX, prevMenu.posY,
+            prevMenu.fontSize,
+            prevMenu.width, prevMenu.height);
+        this.options = null;
     }
 
     init(menu) {
         this.ctx = menu.ctx;
-        this.width = menu.width;
-        this.height = menu.height;
         this.controls = menu.controls;
         this.party = menu.party;
         console.log(this.party);
@@ -24,9 +26,9 @@ class statsMenuElem extends menuElem {
             if (i == 1) statStr = statStrArr[i] + ': ' + statArr[i] + "/" + stats.maxHP;
             if (i == 2) statStr = statStrArr[i] + ': ' + statArr[i] + "/" + stats.maxMP;
 
-            this.drawText(statStr, this.width * 0.09, (50 * (i + 1)) + (this.height / 8.5)); //draw the options in order by index
+            this.drawText(statStr, this.width - 70, (50 * (i + 1)) + (this.height / 8.5)); //draw the options in order by index
         }
 
-        this.drawText("Status: " + stats.status, this.width * 0.09, (50 * (statArr.length + 2)) + (this.height / 8.5)); //draw the options in order by index
+        this.drawText("Status: " + stats.status, this.width - 70, (50 * (statArr.length + 2)) + (this.height / 8.5)); //draw the options in order by index
     }
 }
