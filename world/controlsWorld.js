@@ -68,7 +68,7 @@ class ControlsWorld{
             moving = true;
             let timer = setInterval(function(){
                 let timePassed = Date.now() - start;
-                if (timePassed >= 100) {
+                if (timePassed >= 250) {
                     clearInterval(timer);
                     currentState != GameState.PAUSE ? currentState = GameState.PAUSE : currentState = GameState.DUNGEON;
                     console.log("Game State: " + currentState);

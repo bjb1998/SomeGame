@@ -23,6 +23,8 @@ class Menu{
     popMenu() {
         this.menuStack.pop();
         this.top = this.menuStack.length;
+        this.menuStack[this.top - 1].state = 0;
+        this.menuStack[this.top - 1].resetTimer();
     };
 
     fillBackground() {
@@ -40,11 +42,10 @@ class Menu{
             this.fillBackground();
             currentMenu.drawElem();
 
-            if (currentMenu.controls.confirm && !this.menuStack.includes(partyMenu)) {
-                if (currentMenu.nextMenu() != null)
-                    this.pushMenu(currentMenu.nextMenu());
-            } else if (currentMenu.controls.decline) {
-               this.popMenu();
+            if (currentMenu.state === 1 && currentMenu.nextMenu() != null) {
+                this.pushMenu(currentMenu.nextMenu());
+            } else if (currentMenu.state === -1) {
+                this.popMenu();
             }
 
         } else {

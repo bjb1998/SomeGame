@@ -17,8 +17,4 @@ class partyMenuElem extends menuElem {
             this.drawText(this.party.active[i].name, this.width * 0.09, (50 * (i + 1)) + (this.height / 8.5)); //draw the options in order by index
         }
     }
-
-    select() { }
-
-    nextMenu() { }
 }

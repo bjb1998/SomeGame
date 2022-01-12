@@ -9,7 +9,7 @@ class Controls {
         document.addEventListener('keyup', this.onKey.bind(this, false), false);
     }
 
-    //check state of each key
+    //reset state of each key
     resetState() {
         this.codes = { 37: 'left', 39: 'right', 38: 'forward', 40: 'backward', 27: 'pause', 90: 'confirm' , 88: 'decline'};
         this.states = {

@@ -29,8 +29,4 @@ class statsMenuElem extends menuElem {
 
         this.drawText("Status: " + stats.status, this.width * 0.09, (50 * (statArr.length + 2)) + (this.height / 8.5)); //draw the options in order by index
     }
-
-    select() { }
-
-    nextMenu() { }
 }

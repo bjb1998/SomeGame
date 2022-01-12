@@ -16,7 +16,3 @@ mainMenuElem = new menuElem(mainMenuBackground, mainMenuOptions, 50, 50, 20, 0.2
 
 
 quitMenu = new quitMenuElem();
-itemMenu = new itemMenuElem(mainMenuBackground, null, 50, 50, 20, 0.3, 0.9);
-skillMenu = new skillMenuElem(mainMenuBackground, null, 50, 50, 20, 0.3, 0.9);
-statsMenu = new statsMenuElem(mainMenuBackground, null, 50, 50, 20, 0.3, 0.9);
-partyMenu = new partyMenuElem(mainMenuBackground, null, 50, 50, 20, 0.3, 0.9);

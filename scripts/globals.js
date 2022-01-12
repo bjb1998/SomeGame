@@ -9,6 +9,7 @@ const GameState = {                                                             
 };
 
 var debug = true;
+var menuBuffer = 100;                                                           //how long to wait until the next input
 var currentState = GameState.DUNGEON;                                           //current state the game is in
 const CIRCLE = Math.PI * 2; 													//2pi in radians (all angles are in radians)
 const rightAngle = CIRCLE / 4;													//right angle, frequently used for rotations
