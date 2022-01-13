@@ -11,7 +11,6 @@ class menuElem{
         this.fontSize = fontSize;
         this.selection = 0;
         this.state = 0;
-        this.start = Date.now();
     };
 
     init(menu) {
@@ -28,14 +27,14 @@ class menuElem{
         this.drawMenuText();
         this.drawSelection();
 
-        if (Date.now() - this.start <= menuBuffer) return; //check timer for input
+        if (Date.now() - startTime <= menuBuffer) return; //check timer for input
         this.resetTimer();
 
         this.select(this.controls);
     }
 
     resetTimer() {
-        this.start = Date.now();
+        startTime = Date.now();
     }
 
     drawText(words, x, y) {

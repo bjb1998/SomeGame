@@ -69,8 +69,6 @@ class selectElem extends menuElem{
 
     nextMenu() {
         var count = this.itemSlot.count;
-        console.log(this.party.active[this.selection]);
-        console.log(this.inv);
         this.inv.use(this.itemSlot, this.party.active[this.selection]);
         if (count - 1 <= 0)
             this.state = -1;
