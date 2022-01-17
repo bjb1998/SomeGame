@@ -1,4 +1,4 @@
-class partyMenuElem extends menuElem {
+class partyMenuElem extends pauseMenuElem {
     constructor(party, prevMenu) {
         super(prevMenu.background, party.active,
             prevMenu.posX, prevMenu.posY,
@@ -27,7 +27,7 @@ class partyMenuElem extends menuElem {
     }
 }
 
-class selectionElem extends menuElem {
+class selectionElem extends pauseMenuElem {
     constructor(member, prevMenu) {
         super(prevMenu.background, ['Skills', 'Stats'],
             prevMenu.posX, prevMenu.posY,

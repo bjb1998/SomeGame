@@ -1,4 +1,4 @@
-class itemMenuElem extends menuElem {
+class itemMenuElem extends pauseMenuElem {
     constructor(inv, prevMenu) {
         super(prevMenu.background, inv.items,
             prevMenu.posX, prevMenu.posY,
@@ -30,9 +30,9 @@ class itemMenuElem extends menuElem {
 
     drawDesc(desc) {
         this.ctx.fillStyle = this.background;
-        this.ctx.fillRect(200, 600, 900, 50);
+        this.ctx.fillRect(200, 700, 400, 50);
         this.setFontCtx();
-        this.drawText(desc, 200 + 25, 600 + 40);
+        this.drawText(desc, 200 + 25, 700 + 40);
     }
 
     nextMenu() {
@@ -43,7 +43,7 @@ class itemMenuElem extends menuElem {
 
 }
 
-class selectElem extends menuElem{
+class selectElem extends pauseMenuElem{
     constructor(inv, itemSlot, prevMenu) {
         super(prevMenu.background, prevMenu.party,
             prevMenu.posX, prevMenu.posY,

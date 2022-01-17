@@ -8,6 +8,10 @@ const GameState = {                                                             
     PAUSE: 'Pause'
 };
 
+function setChance() {
+    chance = Math.floor(Math.random() * 100) + 1;
+};
+
 var debug = true;
 var currentState = GameState.DUNGEON;                                           //current state the game is in
 const CIRCLE = Math.PI * 2; 													//2pi in radians (all angles are in radians)
@@ -16,10 +20,8 @@ var moving = false;																//boolean to determine if camera animation is
 const res = 300;                                                                //resolution of the camera
 var playerPos = [];                                                             //player as an x, y coordinate
 var playerDir = 0;                                                              //direction of player (radians)
+var chance = 100;                                                               //for random stuff (encounters, etc.)
 
 var startTime = Date.now();                                                     //universal timer for menu input
 var menuBuffer = 75;                                                            //how long to wait until the next input
-
-var gameFont = new FontFace('Reactor7', 'url(assets/fonts/Reactor7.ttf)');      //font to load
-document.fonts.add(gameFont);
 

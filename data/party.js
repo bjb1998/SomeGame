@@ -34,7 +34,6 @@ class Party {
         [this.active[i1], this.active[i2]] = [this.active[i2], this.active[i1]];
     }
 
-    //todo support empty slot swappage
     swapReserve(entity1, entity2) {
         let i1 = this.active.indexOf(entity1);
         let i2 = this.reserve.indexOf(entity2);
@@ -52,4 +51,18 @@ class Party {
         return bool;
     };
 
+};
+
+class EnemyParty extends Party{
+    constructor(player) {
+        super(player);
+    };
+
+    recruit(entity) {
+        if (this.active.length < activeMax)
+            this.active.push(entity);
+        else
+            //todo implement party full dialog
+            console.log("Full party :(");
+    }
 };

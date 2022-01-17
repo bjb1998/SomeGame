@@ -1,21 +1,15 @@
-class Menu{
-    constructor(canvas, controls, map, party){
+class battleMenu {
+    constructor(canvas, controls, party) {
         this.ctx = canvas.getContext('2d');
-        this.controls = controls;
-        this.map = map;
-        this.party = party;
+        this.playerControls;
+        this.battleChance = 50;
+        this.selction = 0;
         this.width = canvas.width;
         this.height = canvas.height;
-        this.active == false;
-        this.fontColorBottom = "rgb(8,39,101)";
-        this.fontColorTop = "rgb(226,226,226)";
-        this.menuColorBackground = "rgb(43,49,61)";
         this.menuStack = [];
-        this.top = this.menuStack.length;
-        this.mainMenu = 0;
-        this.statsX = 450;
-        this.statsY = 20;
-        this.partyStats = 0;
+        this.enemies = [];
+        this.controls = controls;
+        this.playerParty = party;
     }
 
     pushMenu(elem) {
@@ -38,12 +32,32 @@ class Menu{
         }
     };
 
-    //todo fix bug when quitting via back button
+    initBattle() {
+        if (currentState === GameState.DUNGEON && chance <= this.battleChance) {
+            currentState = GameState.BATTLE;
+            console.log("AAAAAA A BATTLE!!!!!1!111!1");
+
+            this.enemies = new EnemyParty(DUMMY);
+            this.enemies.recruit(DUMMY);
+            this.enemies.recruit(DUMMY);
+            this.enemies.recruit(DUMMY);
+
+            console.log(this.enemies.active);
+
+            this.partyStats = new partyStatsElem(this.ctx, this.playerParty.active,
+                menuColorBackground, 200, 35, 135, 150);
+
+            this.enemyStats = new partyStatsElem(this.ctx, this.enemies.active,
+                menuColorBackground, 350, 35, 135, 150);
+        }
+    }
+
     draw() {
-        if (currentState === GameState.PAUSE) {
+        this.initBattle();
+        if (currentState === GameState.BATTLE) {
             //create new main menu if the stack is empty
             if (this.top === 0) {
-                this.mainMenu = new menuElem(mainMenuBackground, mainMenuOptions, 35, 50, 40, 150, 600);
+                this.mainMenu = new battleMenuElem(mainMenuBackground, battleMenuOptions, 35, 50, 40, 150, 600);
                 this.pushMenu(this.mainMenu);
                 this.clear();
             }
@@ -51,44 +65,34 @@ class Menu{
             this.active = true;
             currentMenu.drawElem();
 
+            this.partyStats.draw();
+            this.enemyStats.draw();
+
             //Based on the menus state, push or pop the menu stack
             if (currentMenu.state === 1 && currentMenu.nextMenu() != null) {
                 this.pushMenu(currentMenu.nextMenu());
-            } else if (currentMenu.state === -1) {
+            } else if (currentMenu.state === -1 && this.menuStack.length > 1) {
                 this.popMenu();
             }
 
         } else
             this.exit();
-
-        this.partyStats.draw();
     }
 
     clear() {
         this.ctx.clearRect(0, 0, this.width, this.height);
     }
 
-    //exit the menu, return to the game
     exit() {
         if (this.active)
             this.clear();
 
         this.menuStack = [];
+        this.enemies = [];
         this.top = 0;
         this.selection = 0;
-        this.active = false;
-        this.partyStats = new partyStatsElem(this.ctx, this.party.active,
-            this.menuColorBackground, 450, 20, 130, 150);
-        currentState = GameState.DUNGEON;
+        if (currentState === GameState.BATTLE) currentState = GameState.DUNGEON;
     }
 
-    drawParty() {
-        this.ctx.font = '20px Reactor7';
-        var posX = 300;
-        var posY = 20;
-        for (var i = 0; i < this.party.active.length; i++) {
-            this.ctx.fillStyle = this.menuColorBackground;
-            this.ctx.fillRect(posX * (i + 1), posY, 130, 130);
-        }
-    }
+
 }

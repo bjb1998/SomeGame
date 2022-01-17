@@ -1,4 +1,4 @@
-class quitMenuElem extends menuElem {
+class quitMenuElem extends pauseMenuElem {
 
     init() {
         currentState = GameState.DUNGEON;

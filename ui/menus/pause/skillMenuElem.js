@@ -1,4 +1,4 @@
-class skillMenuElem extends menuElem {
+class skillMenuElem extends pauseMenuElem {
     constructor(skills, prevMenu) {
         super(prevMenu.background, skills,
             prevMenu.posX, prevMenu.posY,
@@ -26,7 +26,7 @@ class skillMenuElem extends menuElem {
     }
 }
 
-class popUpSkillMenu extends menuElem{
+class popUpSkillMenu extends pauseMenuElem{
     constructor(skill, prevMenu) {
         var params = [skill.name, skill.type, skill.cost + ' MP', skill.desc];
         super(prevMenu.background, params,

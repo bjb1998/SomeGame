@@ -43,7 +43,6 @@ class Minimap{
         return n;
     }
 
-    //todo have this thing actually work on sizes besides 16 :(
     drawPlayerSpr(i, j) {
         const size = this.squareSize;
         const root = this.root;

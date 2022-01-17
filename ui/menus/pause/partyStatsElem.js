@@ -1,18 +1,18 @@
 class partyStatsElem {
     constructor(ctx, party, color, posX, posY, width, height) {
-        Object.assign(this, {ctx, party, color, posX, posY, width, height})
+        Object.assign(this, { ctx, party, color, posX, posY, width, height });
     };
 
     draw() {
-        var posX = this.posX;
-        const posY = this.posY;
-        const width = this.width;
+        const posX = this.posX;
+        var posY = this.posY;
+        const height = this.height;
         const offset = 15;
 
         for (var i = 0; i < this.party.length; i++) {
             var member = this.party[i];
             this.ctx.fillStyle = this.color;
-            posX = posX + (i * width) + offset;
+            posY = this.posY + (i * height) + offset;
             this.ctx.fillRect(posX, posY, 130, 130);
 
             //draw members name, HP, MP;

@@ -46,7 +46,9 @@ class ControlsWorld{
 					camera.y = Math.round(camera.y * 10) / 10;
 					camera.y = (camera.y < Math.floor(camera.y) + 0.5) ? Math.floor(camera.y) + 0.5 : camera.y;
                     playerPos = [camera.x - 0.5, camera.y - 0.5]; //sotre to glboals for minimap drawing
-					moving = false;
+                    moving = false;
+                    setChance();
+                    console.log(chance);
 					return;
 				}
 
@@ -70,7 +72,8 @@ class ControlsWorld{
                 let timePassed = Date.now() - start;
                 if (timePassed >= 250) {
                     clearInterval(timer);
-                    currentState != GameState.PAUSE ? currentState = GameState.PAUSE : currentState = GameState.DUNGEON;
+                    if(currentState === GameState.PAUSE) currentState = GameState.DUNGEON;
+                    else if(currentState === GameState.DUNGEON) currentState = GameState.PAUSE;
                     console.log("Game State: " + currentState);
                     moving = false;
                     return;

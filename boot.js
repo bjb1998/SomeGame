@@ -1,44 +1,5 @@
 
-/*var player = playerPreset;
-var theParty = new Party(player);
-console.log(theParty);
-
-//make in ivnentory with a so-called potion, then use it
-console.log(player.inv);
-player.inv.use(player.inv.items[0]);
-console.log(player.inv);
-
-//Put skills into the players skill slot, then do them
-player.skills[0].exec();
-
-var dummy = DUMMY;
-theParty.recruit(dummy);
-console.log(theParty);
-
-theParty.recruit(dummy);
-console.log(theParty);
-
-theParty.swapActive(player, DUMMY);
-console.log(theParty);
-
-theParty.swapActive(player, DUMMY);
-console.log(theParty);
-
-theParty.swapReserve(player, DUMMY);
-console.log(theParty);
-
-theParty.swapActive(player, DUMMY);
-console.log(theParty);
-
-theParty.swapReserve(player, DUMMY);
-console.log(theParty);*/
-
-// advanced JavaScript
-// JavaScript is asynchronous
-    // window is the top object
-    // setTimeout delays a function call
-// functions can be declared inline even as arguments
-// functions can be passed as arguments to other functions
+//todo get rid of duplicate code shred between menus
 
 window.onload = () => {
     console.log(document);
@@ -48,14 +9,17 @@ window.onload = () => {
 
     var game = document.getElementById('game');
     var UICanvas = document.getElementById('ui');
+    var battleCanvas = document.getElementById('battle');
 
     var map = new RandomMap(32);
-    var player = new ControlsWorld(0.5, 0.5, rightAngle);
+    var playerControls = new ControlsWorld(0.5, 0.5, rightAngle);
 
     var controls = new Controls();
+    
     var camera = new Camera(game, res);
     var minimap = new Minimap(UICanvas, 16, 125, 20, 20, map);
-    var menu = new Menu(UICanvas, controls.states, map, theParty); //todo make player and party not null
+    var menu = new pauseMenu(UICanvas, controls.states, map, theParty);
+    var battler = new battleMenu(battleCanvas, controls.states, theParty);
     var loop = new GameLoop();
 
     map.randomize();
@@ -65,10 +29,11 @@ window.onload = () => {
     };
 
     loop.start(function frame() {
-        player.update(controls.states, map);
-        camera.render(player, map);
+        playerControls.update(controls.states, map);
+        camera.render(playerControls, map);
         minimap.drawMap();
         menu.draw();
+        battler.draw();
     });
 };
 

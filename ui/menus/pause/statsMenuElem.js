@@ -1,4 +1,4 @@
-class statsMenuElem extends menuElem {
+class statsMenuElem extends pauseMenuElem {
     constructor(stats, prevMenu) {
         super(prevMenu.background, stats,
             prevMenu.posX, prevMenu.posY,
@@ -13,7 +13,6 @@ class statsMenuElem extends menuElem {
         console.log(this.party);
     }
 
-    //todo print the status conditon too
     drawMenuText() {
         const statArr = [this.options.lvl,
             this.options.hp, this.options.mp,

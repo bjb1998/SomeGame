@@ -1,4 +1,4 @@
-class menuElem{
+class battleMenuElem{
     constructor(color, options, posX, posY, fontSize, width, height) {
         this.ctx = null;
         this.background = color;

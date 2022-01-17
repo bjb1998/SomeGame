@@ -7,8 +7,10 @@
     "\\scripts",
     "\\ui",
     "\\ui\\menus",
-    "\\ui\\menus\\elements"
+    "\\ui\\menus\\battle",
+    "\\ui\\menus\\pause",
+    "\\world"
   ],
-  "SelectedNode": "\\scripts\\globals.js",
+  "SelectedNode": "\\world\\controlsWorld.js",
   "PreviewInSolutionExplorer": false
 }
