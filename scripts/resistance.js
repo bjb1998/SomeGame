@@ -1,5 +1,4 @@
 /* Resistance labels:
- * -2 - Reflect
  * -1 - Drain
  *  0 - Null
  *  1 - Normal

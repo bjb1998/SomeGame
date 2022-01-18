@@ -46,6 +46,7 @@ class pauseMenu{
             }
             var currentMenu = this.menuStack[this.top - 1];
             this.active = true;
+            this.partyStats.draw();
             currentMenu.drawElem();
 
             //Based on the menus state, push or pop the menu stack
@@ -55,8 +56,6 @@ class pauseMenu{
                 this.popMenu();
             }
 
-            this.partyStats.draw();
-
         } else
             this.exit();
 
@@ -64,14 +63,13 @@ class pauseMenu{
     }
 
     clear() {
-        this.ctx.clearRect(0, 0, this.width, this.height);
+        this.ctx.clearRect(0, 0, 1000, 1000);
     }
 
     //exit the menu, return to the game
     exit() {
         if (this.active)
             this.clear();
-
         this.menuStack = [];
         this.top = 0;
         this.selection = 0;

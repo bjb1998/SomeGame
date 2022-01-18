@@ -11,12 +11,15 @@ class battleMenuElem{
         this.fontSize = fontSize;
         this.selection = 0;
         this.state = 0;
+        this.entityNum = 0;
+        this.turn = [];
     };
 
     init(menu) {
         this.ctx = menu.ctx;
         this.controls = menu.controls;
-        this.party = menu.party;
+        this.playerIndex = menu.party.playerIndex;
+        this.battle = menu.battle;
     }
 
     drawElem() {
@@ -47,8 +50,9 @@ class battleMenuElem{
     }
 
     drawMenuText() {
+        this.drawText(this.battle.playerParty[this.battle.turn.currentMember].name, this.width - 70, (50) + (this.height / 8.5)); //draw the options in order by index
         for (var i = 0; i < this.options.length; i++)
-            this.drawText(this.options[i], this.width - 70, (50 * (i + 1)) + (this.height / 8.5)); //draw the options in order by index
+            this.drawText(this.options[i], this.width - 70, (50 * (i + 2)) + (this.height / 8.5)); //draw the options in order by index
     };
 
     setFontCtx() {
@@ -58,7 +62,7 @@ class battleMenuElem{
     drawSelection() {
         this.ctx.drawImage(selectionSprite.image,
             this.width - 100,
-            (50 * (this.selection + 1) + (this.height / 13)),
+            (50 * (this.selection + 2) + (this.height / 13)),
             10,
             10);
     }
@@ -84,12 +88,17 @@ class battleMenuElem{
         else this.state = 0;
     }
 
+    //todo implement battle item versions of this
     nextMenu() {
         var menu;
+        const party = this.battle.playerParty;
         switch (this.selection) {
-            case 0: menu = new itemMenuElem(this.party.active[this.party.playerIndex].inv, this); break;
-            case 1: menu = new partyMenuElem(this.party, this); break;
-            case 2: menu = new quitMenuElem(); break;
+            case 0:
+                menu = new entitySelectElem(this, this.battle.enemyParty, StrikeFunc);
+                break;
+            case 1: menu = new battleItemMenuElem(this, party[this.playerIndex].inv); break; //todo implement skill menu
+            case 2: menu = new battleItemMenuElem(this, party[this.playerIndex].inv); break;
+            case 3: menu = new runElem(); break;
             default: return;
         }
         return menu;

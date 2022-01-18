@@ -29,14 +29,7 @@ class statsMenuElem extends pauseMenuElem {
             this.drawText(statStr, this.width - 70, (50 * (i + 1)) + (this.height / 8.5)); //draw the options in order by index
         }
 
-        this.drawStatus(this.options.status);
-    }
-
-    drawStatus(desc) {
-        this.ctx.fillStyle = this.background;
-        this.ctx.fillRect(200, 600, 900, 50);
-        this.setFontCtx();
-        this.drawText(desc, 200 + 25, 600 + 40);
+        this.drawDesc(this.options.status);
     }
 
     nextMenu() { }

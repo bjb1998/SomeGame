@@ -37,6 +37,13 @@ class pauseMenuElem{
         startTime = Date.now();
     }
 
+    drawDesc(desc) {
+        this.ctx.fillStyle = this.background;
+        this.ctx.fillRect(200, 700, 400, 50);
+        this.setFontCtx();
+        this.drawText(desc, 200 + 25, 700 + 40);
+    }
+
     drawText(words, x, y) {
         var ctx = this.ctx;
         ctx.fillStyle = fontColorBottom;

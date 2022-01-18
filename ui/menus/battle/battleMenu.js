@@ -9,7 +9,7 @@ class battleMenu {
         this.menuStack = [];
         this.enemies = [];
         this.controls = controls;
-        this.playerParty = party;
+        this.party = party;
     }
 
     pushMenu(elem) {
@@ -33,36 +33,41 @@ class battleMenu {
     };
 
     initBattle() {
-        if (currentState === GameState.DUNGEON && chance <= this.battleChance) {
-            currentState = GameState.BATTLE;
-            console.log("AAAAAA A BATTLE!!!!!1!111!1");
+        battleCheck = false;
+        if (currentState === GameState.DUNGEON) {
+            const chance = setChance();
+            if (chance <= this.battleChance) {
+                currentState = GameState.BATTLE;
 
-            this.enemies = new EnemyParty(DUMMY);
-            this.enemies.recruit(DUMMY);
-            this.enemies.recruit(DUMMY);
-            this.enemies.recruit(DUMMY);
+                this.enemies = new EnemyParty(DUMMY);
+                this.enemies.recruit(DUMMY);
+                this.enemies.recruit(DUMMY);
+                this.enemies.recruit(DUMMY);
 
-            console.log(this.enemies.active);
+                this.partyStats = new partyStatsElem(this.ctx, this.party.active,
+                    menuColorBackground, 200, 35, 135, 150);
 
-            this.partyStats = new partyStatsElem(this.ctx, this.playerParty.active,
-                menuColorBackground, 200, 35, 135, 150);
+                this.enemyStats = new partyStatsElem(this.ctx, this.enemies.active,
+                    menuColorBackground, 350, 35, 135, 150);
 
-            this.enemyStats = new partyStatsElem(this.ctx, this.enemies.active,
-                menuColorBackground, 350, 35, 135, 150);
+                this.battle = new Battle(this.party.active, this.enemies.active);
+            }
         }
     }
 
     draw() {
-        this.initBattle();
+        if (battleCheck)
+            this.initBattle();
         if (currentState === GameState.BATTLE) {
             //create new main menu if the stack is empty
             if (this.top === 0) {
-                this.mainMenu = new battleMenuElem(mainMenuBackground, battleMenuOptions, 35, 50, 40, 150, 600);
+                this.mainMenu = new battleMenuElem(mainMenuBackground, battleMenuOptions, 35, 50, 40, 150, 600, this.party);
                 this.pushMenu(this.mainMenu);
                 this.clear();
             }
             var currentMenu = this.menuStack[this.top - 1];
             this.active = true;
+            
             currentMenu.drawElem();
 
             this.partyStats.draw();
@@ -84,14 +89,17 @@ class battleMenu {
     }
 
     exit() {
-        if (this.active)
+        if (this.active)    
             this.clear();
-
         this.menuStack = [];
+        this.active = false;
         this.enemies = [];
+        this.battle = null;
         this.top = 0;
         this.selection = 0;
+        battleChance = 101;
         if (currentState === GameState.BATTLE) currentState = GameState.DUNGEON;
+        
     }
 
 

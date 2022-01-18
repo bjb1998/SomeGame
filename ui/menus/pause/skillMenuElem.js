@@ -28,12 +28,18 @@ class skillMenuElem extends pauseMenuElem {
 
 class popUpSkillMenu extends pauseMenuElem{
     constructor(skill, prevMenu) {
-        var params = [skill.name, skill.type, skill.cost + ' MP', skill.desc];
+        var params = [skill.name, skill.type, skill.cost + ' MP'];
         super(prevMenu.background, params,
             prevMenu.posX, prevMenu.posY,
             prevMenu.fontSize,
             prevMenu.width, prevMenu.height);
+        this.desc = skill.desc;
     };
+
+    drawMenuText() {
+        super.drawMenuText();
+        this.drawDesc(this.desc);
+    }
 
     init(menu) {
         this.ctx = menu.ctx;

@@ -5,7 +5,8 @@ const statusType = {
     HAZE: 'Haze',
     CHARM: 'Charm',
     SEAL: 'Seal',
-    POISON: 'Poison'
+    POISON: 'Poison',
+    DEAD: 'Dead'
 };
 const maxSkills = 4;
 
@@ -28,6 +29,13 @@ class Stats {
         this.maxMP = mp;
         this.status = statusType.HEALTHY;
     };
+
+    damage(dmg, type) {
+        console.log(dmg, type);
+        this.damageMult = Object.keys(elemType).indexOf(type);
+        this.hp -= dmg * this.damageMult;
+        if (this.hp <= 0) this.hp === 0; this.status = statusType.DEAD; 
+    }
 };
 
 class MC extends Entity {

@@ -10,7 +10,7 @@ class itemMenuElem extends pauseMenuElem {
     init(menu) {
         this.ctx = menu.ctx;
         this.controls = menu.controls; 
-        this.menus = null;
+        //this.menus = null;
         this.party = menu.party;
     }
 
@@ -69,7 +69,7 @@ class selectElem extends pauseMenuElem{
 
     nextMenu() {
         var count = this.itemSlot.count;
-        this.inv.use(this.itemSlot, this.party.active[this.selection]);
+        this.inv.use(this.party.active[this.selection], this.itemSlot);
         if (count - 1 <= 0)
             this.state = -1;
     }

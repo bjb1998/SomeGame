@@ -47,8 +47,7 @@ class ControlsWorld{
 					camera.y = (camera.y < Math.floor(camera.y) + 0.5) ? Math.floor(camera.y) + 0.5 : camera.y;
                     playerPos = [camera.x - 0.5, camera.y - 0.5]; //sotre to glboals for minimap drawing
                     moving = false;
-                    setChance();
-                    console.log(chance);
+                    battleCheck = true;
 					return;
 				}
 
