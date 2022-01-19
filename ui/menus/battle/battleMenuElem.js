@@ -96,7 +96,7 @@ class battleMenuElem{
             case 0:
                 menu = new entitySelectElem(this, this.battle.enemyParty, StrikeFunc);
                 break;
-            case 1: menu = new battleItemMenuElem(this, party[this.playerIndex].inv); break; //todo implement skill menu
+            case 1: menu = new battleSkillMenuElem(this, this.battle.playerParty[this.battle.turn.currentMember]); break;
             case 2: menu = new battleItemMenuElem(this, party[this.playerIndex].inv); break;
             case 3: menu = new runElem(); break;
             default: return;

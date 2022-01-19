@@ -61,7 +61,6 @@ class Turn {
         this.playerAction.exec();
         this.currentMember++;
         //once all selections made, make enemy actions start their turn
-        console.log(this.playerParty.length);
         if (this.currentMember === this.playerParty.length) {
             this.dummyActions();
             this.exec();
@@ -102,10 +101,9 @@ class Action {
     }
 
     exec() {
-        console.log(this.actionCtx);
-        if (this.actionCtx === "item") this.func.use(this.target, this.slot)
-        else
-            this.func(this.target, this.slot);
+        if (this.actionCtx === "item") this.func.use(this.target, this.slot);
+        else if (this.actionCtx === "skill") this.func.execSkill(this.target, this.slot);
+        else this.func(this.target, this.slot);
         
     }
 }

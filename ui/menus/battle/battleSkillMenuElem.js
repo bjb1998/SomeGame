@@ -1,10 +1,10 @@
-class battleItemMenuElem extends battleMenuElem {
-    constructor(prevMenu, inv) {
-        super(prevMenu.background, inv.items,
+class battleSkillMenuElem extends battleMenuElem {
+    constructor(prevMenu, member) {
+        super(prevMenu.background, member.skills,
             prevMenu.posX, prevMenu.posY,
             prevMenu.fontSize,
             prevMenu.width, prevMenu.height);
-        this.inv = inv;
+        this.member = member;
         this.battle = prevMenu.battle;
         this.done = false;
     }
@@ -22,10 +22,9 @@ class battleItemMenuElem extends battleMenuElem {
         }
 
         for (var i = 0; i < this.options.length; i++) {
-            this.drawText(this.options[i].item.name, this.width - 70, (50 * (i + 2)) + (this.height / 8.5)); //draw the options in order by index
+            this.drawText(this.options[i].name, this.width - 70, (50 * (i + 2)) + (this.height / 8.5)); //draw the options in order by index
         }
-
-        this.drawDesc(this.options[this.selection].item.desc);
+        this.drawDesc(this.options[this.selection].desc);
 
     }
 
@@ -37,8 +36,9 @@ class battleItemMenuElem extends battleMenuElem {
     }
 
     nextMenu() {
-        if (this.options.length > 0)
-            var menu = new entitySelectElem(this, this.battle.playerParty, this.inv, this.options[this.selection], "item");
+        const cost = this.options[this.selection].cost;
+        if (this.member.checkMp(cost) && this.options.length > 0)
+            var menu = new entitySelectElem(this, this.battle.enemyParty, this.member, this.selection, "skill");
         this.done = true;
         return menu;
     }

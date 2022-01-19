@@ -16,9 +16,7 @@ class entitySelectElem extends battleMenuElem {
     }
 
     nextMenu() {
-        console.log(this.actionCtx);
-        if (this.actionCtx === "item") this.battle.addAction(this.func, this.options[this.selection], this.slot, "item");
-        //else if (this.actionCtx == "skill") this.battle.addAction(this.func, this.slot, this.options[this.selection]);
+        if (this.actionCtx != null) this.battle.addAction(this.func, this.options[this.selection], this.slot, this.actionCtx);
         else this.battle.addAction(this.func, this.options[this.selection]);
         this.state = -1;
     }

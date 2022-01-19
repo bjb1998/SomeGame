@@ -39,10 +39,10 @@ class battleMenu {
             if (chance <= this.battleChance) {
                 currentState = GameState.BATTLE;
 
-                this.enemies = new EnemyParty(DUMMY);
-                this.enemies.recruit(DUMMY);
-                this.enemies.recruit(DUMMY);
-                this.enemies.recruit(DUMMY);
+                this.enemies = new EnemyParty(newEnemy(DUMMY));
+                this.enemies.recruit(newEnemy(DUMMY));
+                this.enemies.recruit(newEnemy(DUMMY));
+                this.enemies.recruit(newEnemy(DUMMY));
 
                 this.partyStats = new partyStatsElem(this.ctx, this.party.active,
                     menuColorBackground, 200, 35, 135, 150);
@@ -59,6 +59,8 @@ class battleMenu {
         if (battleCheck)
             this.initBattle();
         if (currentState === GameState.BATTLE) {
+            this.partyStats.draw();
+            this.enemyStats.draw();
             //create new main menu if the stack is empty
             if (this.top === 0) {
                 this.mainMenu = new battleMenuElem(mainMenuBackground, battleMenuOptions, 35, 50, 40, 150, 600, this.party);
@@ -69,9 +71,6 @@ class battleMenu {
             this.active = true;
             
             currentMenu.drawElem();
-
-            this.partyStats.draw();
-            this.enemyStats.draw();
 
             //Based on the menus state, push or pop the menu stack
             if (currentMenu.state === 1 && currentMenu.nextMenu() != null) {

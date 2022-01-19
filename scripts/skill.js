@@ -14,8 +14,8 @@ class Skill {
         Object.assign(this, { name, desc, type, cost, func });
     };
 
-    exec() {
-        this.func();
+    exec(entity) {
+        this.func(entity);
     };
 
 };

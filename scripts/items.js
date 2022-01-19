@@ -12,16 +12,9 @@ class Inventory {
     }
 
     use(entity, slot) {
-        console.log(this);
-        console.log("Entity: ");
-        console.log(entity);
-        console.log("Slot: ");
-        console.log(slot);
         slot.exec(entity);
-        console.log(this.items);
         if (this.items != null && slot.count <= 0)
             this.items.splice(this.items.indexOf(slot), 1);
-        console.log(this.items);
     };
 
 };

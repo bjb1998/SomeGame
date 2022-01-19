@@ -19,6 +19,17 @@ class Entity{
             skillsToAdd.forEach(current => this.skills.push(current));
     };
 
+    execSkill(entity, slot) {
+        console.log(this.stats);
+        this.skills[slot].exec(entity);
+        this.stats.useMP(this.skills[slot].cost);
+        console.log(this.stats);
+    }
+
+    checkMp(Mp) {
+        return this.stats.checkMp(Mp);
+    }
+
 };
 
 class Stats {
@@ -35,6 +46,15 @@ class Stats {
         this.damageMult = Object.keys(elemType).indexOf(type);
         this.hp -= dmg * this.damageMult;
         if (this.hp <= 0) this.hp === 0; this.status = statusType.DEAD; 
+    }
+
+    checkMp(Mp) {
+        if (this.mp >= Mp) return true;
+        return false;
+    }
+
+    useMP(Mp) {
+        this.mp - Mp <= 0 ? this.mp = 0 : this.mp -= Mp;
     }
 };
 
