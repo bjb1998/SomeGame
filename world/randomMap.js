@@ -1,15 +1,14 @@
 //map of any respective dungeon
 class RandomMap {
 	constructor(size) {
-		this.size = size;                                                           //size of map (n^2)
-		this.wallGrid = new Uint8Array(size * size);                                //Random array of walls, 0 is floor, 1 is wall
-		this.skybox = new Texture('assets/deathvalley_panorama.jpg', 2000, 750);    //skybox texture
-        this.textures = [new Texture('assets/wall_texture.jpg', 1024, 1024),        //array of textures to put in
-                            new Texture('assets/door.jpg', 1024, 1024)];                       
-        this.colors = ["green", "red", "orange"];                                   //colors per cooresponding texture (no wall = index 0)
+		this.size = size;                             //size of map (n^2)
+        this.wallGrid = new Uint8Array(size * size);  //Random array of walls, 0 is floor, 1 is wall
+        this.skybox = skyboxSprite;                   //skybox texture
+        this.textures = [wallSprite, doorSprite];     //array of textures to put in
+        this.colors = ["green", "red", "orange"];     //colors per cooresponding texture (no wall = index 0)
         this.wallHeight = 1;
         this.light = 1;
-        this.states = 3;                                                            //possible sattes a wall can be (max = n - 1)
+        this.states = 3;                              //possible sattes a wall can be (max = n - 1)
 	};
 
     //get x,y coordinate of map
@@ -71,7 +70,7 @@ class RandomMap {
             (pos >= 1) ? step.height = (pos - (pos - 1)) * self.wallHeight : step.height = pos;
 			step.distance = distance + Math.sqrt(step.length2); //calculate distance of wall/vector
             step.offset = offset - Math.floor(offset);
-            step.value = pos;                                   //get the valuen of the square itself (for textures)
+            step.value = pos;                                   //get the value of the square itself (for textures)
 			return step;
 		}
 	};

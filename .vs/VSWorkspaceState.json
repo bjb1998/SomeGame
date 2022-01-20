@@ -3,14 +3,9 @@
     "",
     "\\assets",
     "\\assets\\fonts",
-    "\\data",
-    "\\scripts",
-    "\\ui",
-    "\\ui\\menus",
-    "\\ui\\menus\\battle",
-    "\\ui\\menus\\pause",
+    "\\scripts\\animation",
     "\\world"
   ],
-  "SelectedNode": "\\ui\\menus\\battle\\battleMenu.js",
+  "SelectedNode": "\\ui",
   "PreviewInSolutionExplorer": false
 }

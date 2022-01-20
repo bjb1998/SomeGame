@@ -6,11 +6,11 @@ const GameState = {                                 //possible states the game c
     BATTLE: 'Battle',
     OTHER: 'Other',
     PAUSE: 'Pause'
-};
+};                                //sates the game can be in
 
 function setChance() {
     return Math.floor(Math.random() * 100) + 1;
-};
+};                             //Set chance for random stuff
 
 var debug = true;
 var currentState = GameState.DUNGEON;                //current state the game is in
@@ -24,6 +24,5 @@ var battleChance = 100;                              //for random stuff (encount
 const runChance = 100;                               //Chance for running away from battle
 var battleCheck = false;
 
-var startTime = Date.now();                          //universal timer for menu input
 var menuBuffer = 65;                                //how long to wait until the next input
 

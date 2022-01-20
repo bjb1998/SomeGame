@@ -2,7 +2,6 @@
 //todo get rid of duplicate code shred between menus
 
 window.onload = () => {
-    console.log(document);
     var player = playerPreset;
     var theParty = new Party(player);
     theParty.recruit(newEnemy(DUMMY));

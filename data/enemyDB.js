@@ -1,7 +1,7 @@
 newEnemy = function (enemy) {
     const stats = newObj(enemy.stats);
     const skills = newObj(enemy.skills);
-    return new Pawn(enemy.name, stats, enemy.exp, skills);
+    return new Pawn(enemy.name, stats, enemy.exp, skills, enemy.animation);
 } //make new instance of Enemy
 
 newObj = function(obj){
@@ -16,5 +16,6 @@ newObj = function(obj){
 const DUMMYRes = new Resistance(1, 1, 1, 1, 1, 1, 1, 1, 1);
 const DUMMYStats = new Stats(1, 1, 15, 1, 1, 1, 1, 1, DUMMYRes);
 const DUMMYSkills = [strike, poof];
-var DUMMY = new Pawn('DUMMY', DUMMYStats, 100, DUMMYSkills);
+var DUMMY = new Pawn('DUMMY', DUMMYStats, 100, DUMMYSkills, DUMMYanim);
+console.log(DUMMY);
 

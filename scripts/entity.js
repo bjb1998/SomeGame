@@ -66,9 +66,10 @@ class MC extends Entity {
 };
 
 class Pawn extends Entity {
-    constructor(name, stats, exp, skillsToAdd) {
+    constructor(name, stats, exp, skillsToAdd, animation) {
         super(name, stats, skillsToAdd);
         this.exp = exp;
+        this.animation = animation;
     };
 
     talk() {

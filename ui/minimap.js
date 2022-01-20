@@ -7,7 +7,7 @@ class Minimap{
         this.grid = [];
         this.squareSize = size / units;
         this.map = map;
-        this.playerSprite = new Texture('assets/arrow.PNG', this.squareSize, this.squareSize);
+        this.playerSprite = playerMap;
         this.root = Math.sqrt(units);
     }
 
@@ -46,11 +46,11 @@ class Minimap{
     drawPlayerSpr(i, j) {
         const size = this.squareSize;
         const root = this.root;
+        const center = -size / 2;
         this.ctx.translate((this.startX + i * size) + root, (this.startY + j * size) + root); //translate and rotate
         this.ctx.rotate(Math.PI + playerDir);
-        this.ctx.drawImage(this.playerSprite.image, -this.playerSprite.width / 2, -this.playerSprite.height / 2,
-            this.playerSprite.width, this.playerSprite.height);
-        this.ctx.rotate(Math.PI - playerDir);                               //then reverse it
+        this.ctx.drawImage(this.playerSprite.image, center, center, size, size);
+        this.ctx.rotate(Math.PI - playerDir);                                                 //then reverse it
         this.ctx.translate(-(this.startX + i * size) - root, -(this.startY + j * size) - root);
     };
 }

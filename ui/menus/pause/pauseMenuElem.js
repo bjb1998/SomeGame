@@ -32,14 +32,7 @@ class pauseMenuElem{
         this.drawMenuText();
         this.drawSelection();
 
-        if (Date.now() - startTime <= menuBuffer) return; //check timer for input
-        this.resetTimer();
-
         this.select(this.controls);
-    }
-
-    resetTimer() {
-        startTime = Date.now();
     }
 
     drawDesc(desc) {
@@ -111,7 +104,7 @@ class pauseMenuElem{
         switch (this.selection) {
             case 0: menu = new itemMenuElem(this.party.active[this.party.playerIndex].inv, this); break;
             case 1: menu = new partyMenuElem(this.party, this); break;
-            case 2: menu = new quitMenuElem(); break;
+            case 2: currentState = GameState.DUNGEON; break;
             default: return;
         }
         return menu;

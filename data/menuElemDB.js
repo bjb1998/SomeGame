@@ -1,7 +1,6 @@
 
 var canvas = document.getElementById('ui');
 const mainMenuBackground = "rgb(43,49,61)";
-const selectionSprite = new Texture('assets/selector.png', 10, 10);
 var gameFont = new FontFace('Reactor7', 'url(assets/fonts/Reactor7.ttf)');      //font to load
 document.fonts.add(gameFont);
 

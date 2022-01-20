@@ -27,7 +27,7 @@ class Camera {
     }
 
     drawSky(direction, sky) {
-        var width = sky.width * (this.height / sky.height) * 2;                 //width of drawing
+        var width = sky.image.width * (this.height / sky.image.height) * 2;                 //width of drawing
         var left = (direction / CIRCLE) * -width;                               //left edge of the screen
 
         this.ctx.save();
@@ -65,11 +65,11 @@ class Camera {
 
             if (s === hit) {
                 texture = map.textures[ray[s].value - 1];                   //get the texture for the space based on the arrays value
-                var textureX = Math.floor(texture.width * step.offset);     //get the texture offset from the ray
+                var textureX = Math.floor(texture.image.width * step.offset);     //get the texture offset from the ray
                 var wall = this.project(step.height, angle, step.distance); //get texture parameters for the column
 
                 ctx.globalAlpha = 1;
-                ctx.drawImage(texture.image, textureX, 0, 1, texture.height, left, wall.top, width, wall.height);   //draw the actual texture from the ray
+                ctx.drawImage(texture.image, textureX, 0, 1, texture.image.height, left, wall.top, width, wall.height);   //draw the actual texture from the ray
                 ctx.globalAlpha = 0.01;
             }
         }

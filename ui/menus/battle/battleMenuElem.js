@@ -24,7 +24,6 @@ class battleMenuElem{
         this.controls = menu.controls;
         this.playerIndex = menu.party.playerIndex;
         this.battle = menu.battle;
-        this.resetTimer();
     }
 
     drawElem() {
@@ -34,12 +33,7 @@ class battleMenuElem{
             this.setFontCtx();
             this.drawMenuText();
             this.drawSelection();
-            this.resetTimer();  
             this.select(this.controls);
-    }
-
-    resetTimer() {
-        startTime = Date.now();
     }
 
     drawText(words, x, y) {
@@ -111,8 +105,8 @@ class battleMenuElem{
                 break;
             case 1: menu = new battleSkillMenuElem(this, currentMember); break;                        //use a skill
             case 2: menu = new battleItemMenuElem(this, party[this.playerIndex].inv); break;           //use an item
-            case 3: menu = this.battle.addAction(guard.func, currentMember); console.log(Date.now() - startTime); break; //guard current member
-            case 4: menu = new runElem(); break;                                                       //run away from battle
+            case 3: menu = this.battle.addAction(guard.func, currentMember); break; //guard current member
+            case 4: currentState = GameState.DUNGEON; break;                                                       //run away from battle
             default: return;
         }
         return menu;

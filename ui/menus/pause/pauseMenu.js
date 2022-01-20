@@ -1,39 +1,8 @@
-class pauseMenu{
-    constructor(canvas, controls, map, party){
-        this.ctx = canvas.getContext('2d');
-        this.controls = controls;
+class pauseMenu extends Menu{
+    constructor(canvas, controls, map, party) {
+        super(canvas, controls, party);
         this.map = map;
-        this.party = party;
-        this.width = canvas.width;
-        this.height = canvas.height;
-        this.active == false;
-        this.menuStack = [];
-        this.top = this.menuStack.length;
-        this.mainMenu = 0;
-        this.statsX = 450;
-        this.statsY = 20;
-        this.partyStats = 0;
     }
-
-    pushMenu(elem) {
-        elem.init(this);
-        this.menuStack.push(elem);
-        this.top = this.menuStack.length;
-    }
-
-    popMenu() {
-        this.menuStack.pop();
-        this.top = this.menuStack.length;
-        //If the stack is not empty, reset its state
-        //otherwise, exit
-        if (this.top != 0) {
-            this.menuStack[this.top - 1].state = 0;
-            this.menuStack[this.top - 1].resetTimer();
-            this.clear();
-        } else {
-            this.exit();
-        }
-    };
 
     //todo fix bug when quitting via back button
     draw() {
@@ -60,10 +29,6 @@ class pauseMenu{
             this.exit();
 
         
-    }
-
-    clear() {
-        this.ctx.clearRect(0, 0, 1000, 1000);
     }
 
     //exit the menu, return to the game
