@@ -25,5 +25,5 @@ const runChance = 100;                               //Chance for running away f
 var battleCheck = false;
 
 var startTime = Date.now();                          //universal timer for menu input
-var menuBuffer = 75;                                 //how long to wait until the next input
+var menuBuffer = 65;                                //how long to wait until the next input
 

@@ -14,6 +14,7 @@ const battleMenuOptions = [
     'Attack',
     'Skill',
     'Item',
+    'Guard',
     'Run'
 ];
 fontColorBottom = "rgb(8,39,101)";

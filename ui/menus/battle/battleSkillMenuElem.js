@@ -16,7 +16,7 @@ class battleSkillMenuElem extends battleMenuElem {
     }
 
     drawMenuText() {
-        if (this.options.length <= 0 || this.done) { //If inventory is empty, go back
+        if (this.options.length <= 0 || this.done) { //If inventory is empty or we're done, go back
             this.state = -1;
             return;
         }

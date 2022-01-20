@@ -25,7 +25,7 @@ class battleMenu {
         //otherwise, exit
         if (this.top != 0) {
             this.menuStack[this.top - 1].state = 0;
-            this.menuStack[this.top - 1].resetTimer();
+            this.menuStack[this.top - 1].denyBuffer = true;
             this.clear();
         } else {
             this.exit();
@@ -55,6 +55,7 @@ class battleMenu {
         }
     }
 
+    //draw all things battling
     draw() {
         if (battleCheck)
             this.initBattle();
@@ -77,6 +78,11 @@ class battleMenu {
                 this.pushMenu(currentMenu.nextMenu());
             } else if (currentMenu.state === -1 && this.menuStack.length > 1) {
                 this.popMenu();
+            }
+
+            //todo implement exp gain, leveling up, etc.
+            if (this.battle.turn.check() === endState.WIN) {
+                this.exit();
             }
 
         } else

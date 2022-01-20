@@ -1,12 +1,13 @@
 const elemType = {
     PHYS: 'Phys',
+    GUN: 'Gun',
     FIRE: 'Fire',
     ICE: 'Ice',
-    ELEC: 'Electric',
     FORCE: 'Force',
+    ELEC: 'Electric',
     LIGHT: 'Light',
     DARK: 'Dark',
-    ALM: 'Almighty'
+    ALLM: 'Almighty'
 };
 
 class Skill {

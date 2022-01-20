@@ -11,6 +11,6 @@
     "\\ui\\menus\\pause",
     "\\world"
   ],
-  "SelectedNode": "\\scripts\\entity.js",
+  "SelectedNode": "\\ui\\menus\\battle\\battleMenu.js",
   "PreviewInSolutionExplorer": false
 }

@@ -15,15 +15,14 @@ class Entity{
         // we use this to refer to the current object
         Object.assign(this, { name, stats });
         this.skills = [];
+        this.guard = false;
         if (this.skills.length <= maxSkills)
             skillsToAdd.forEach(current => this.skills.push(current));
     };
 
     execSkill(entity, slot) {
-        console.log(this.stats);
         this.skills[slot].exec(entity);
         this.stats.useMP(this.skills[slot].cost);
-        console.log(this.stats);
     }
 
     checkMp(Mp) {
@@ -42,10 +41,10 @@ class Stats {
     };
 
     damage(dmg, type) {
-        console.log(dmg, type);
-        this.damageMult = Object.keys(elemType).indexOf(type);
-        this.hp -= dmg * this.damageMult;
-        if (this.hp <= 0) this.hp === 0; this.status = statusType.DEAD; 
+        const damageMult = this.res.getRes(type); //get Resistance multipler from damage type
+        this.hp -= dmg * damageMult;
+        this.hp = Math.min(Math.max(this.hp, 0), this.maxHP); //clamp the HP between 0 and max HP
+        if (this.hp <= 0) { this.status = statusType.DEAD; } 
     }
 
     checkMp(Mp) {

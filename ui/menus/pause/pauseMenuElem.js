@@ -1,6 +1,7 @@
 class pauseMenuElem{
     constructor(color, options, posX, posY, fontSize, width, height) {
         this.ctx = null;
+        this.held = false;
         this.background = color;
         this.controls = null;
         this.options = options;
@@ -11,6 +12,10 @@ class pauseMenuElem{
         this.fontSize = fontSize;
         this.selection = 0;
         this.state = 0;
+        this.backBuffer = true;
+        this.forwardBuffer = true;
+        this.confirmBuffer = true;
+        this.denyBuffer = false;
     };
 
     init(menu) {
@@ -74,9 +79,14 @@ class pauseMenuElem{
         //check confirmation/declinations
         this.confirmDeny();
 
+        const forward = this.controls.forward;
+        const back = this.controls.backward;
+
         //move up/down the menu
-        if (this.controls.backward) this.selection++;
-        if (this.controls.forward) this.selection--;
+        if (forward && forward != this.forwardBuffer) this.selection--;
+        if (back && back != this.backBuffer) this.selection++;
+        this.backBuffer = back
+        this.forwardBuffer = forward;
 
         if (this.options != null)
             if (this.selection > this.options.length - 1)
@@ -86,9 +96,14 @@ class pauseMenuElem{
     }
 
     confirmDeny() {
-        if (this.controls.confirm) this.state = 1;
-        else if (this.controls.decline) this.state = -1;
+        const confirm = this.controls.confirm;
+        const decline = this.controls.decline;
+        if (confirm && confirm != this.confirmBuffer) this.state = 1;
+        else if (decline && decline === this.denyBuffer) this.state = -1;
+        else if (this.done) this.state = -1;
         else this.state = 0;
+        this.confirmBuffer = confirm;
+        this.denyBuffer = decline;
     }
 
     nextMenu() {

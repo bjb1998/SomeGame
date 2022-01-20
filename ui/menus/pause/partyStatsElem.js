@@ -11,18 +11,20 @@ class partyStatsElem {
 
         for (var i = 0; i < this.party.length; i++) {
             var member = this.party[i];
-            this.ctx.fillStyle = this.color;
-            posY = this.posY + (i * height) + offset;
-            this.ctx.fillRect(posX, posY, 130, 130);
+            if (member != null) {
+                this.ctx.fillStyle = this.color;
+                posY = this.posY + (i * height) + offset;
+                this.ctx.fillRect(posX, posY, 130, 130);
 
-            //draw members name, HP, MP;
-            this.drawText(member.name, posX + offset, posY + 40);
-            this.drawText(member.stats.hp + '/' + member.stats.maxHP + ' HP',
-                posX + offset, posY + 70);
-            this.drawText(member.stats.mp + '/' + member.stats.maxMP + ' MP',
-                posX + offset, posY + 100);
-            this.drawText(member.stats.status,
-                posX + offset, posY + 125);
+                //draw members name, HP, MP;
+                this.drawText(member.name, posX + offset, posY + 40);
+                this.drawText(member.stats.hp + '/' + member.stats.maxHP + ' HP',
+                    posX + offset, posY + 70);
+                this.drawText(member.stats.mp + '/' + member.stats.maxMP + ' MP',
+                    posX + offset, posY + 100);
+                this.drawText(member.stats.status,
+                    posX + offset, posY + 125);
+            }
         }
     };
 
