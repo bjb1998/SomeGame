@@ -7,6 +7,7 @@ document.fonts.add(gameFont);
 const mainMenuOptions = [
     'Item',
     'Party',
+    'Swap',
     'Exit'
 ];
 const battleMenuOptions = [

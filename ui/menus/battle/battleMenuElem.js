@@ -25,10 +25,10 @@ class battleMenuElem extends MenuElem{
         const currentMember = this.battle.playerParty[this.battle.turn.currentMember];
         switch (this.selection) {
             case 0:
-                menu = new entitySelectElem(this, this.battle.enemyParty, StrikeFunc);
+                menu = new battleEntitySelectElem(this, this.battle.enemyParty, StrikeFunc);
                 break;
-            case 1: menu = new battleSkillMenuElem(this, currentMember); break;                        //use a skill
-            case 2: menu = new battleItemMenuElem(this, party[this.playerIndex].inv); break;           //use an item
+            case 1: menu = new battleSkillElem(this, currentMember); break;                        //use a skill
+            case 2: menu = new battleItemElem(this, party[this.playerIndex].inv); break;           //use an item
             case 3: menu = this.battle.addAction(guard.func, currentMember); break; //guard current member
             case 4: currentState = GameState.DUNGEON; break;                                                       //run away from battle
             default: return;

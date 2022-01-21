@@ -1,4 +1,4 @@
-class battleSkillMenuElem extends battleMenuElem {
+class battleSkillElem extends battleMenuElem {
     constructor(prevMenu, member) {
         super(prevMenu.background, member.skills,
             prevMenu.posX, prevMenu.posY,
@@ -17,7 +17,7 @@ class battleSkillMenuElem extends battleMenuElem {
 
     drawMenuText() {
         if (this.options.length <= 0 || this.done) { //If inventory is empty or we're done, go back
-            this.state = -1;
+            this.done = true;
             return;
         }
 
@@ -28,17 +28,10 @@ class battleSkillMenuElem extends battleMenuElem {
 
     }
 
-    drawDesc(desc) {
-        this.ctx.fillStyle = this.background;
-        this.ctx.fillRect(200, 700, 400, 50);
-        this.setFontCtx();
-        this.drawText(desc, 200 + 25, 700 + 40);
-    }
-
     nextMenu() {
         const cost = this.options[this.selection].cost;
         if (this.member.checkMp(cost) && this.options.length > 0)
-            var menu = new entitySelectElem(this, this.battle.enemyParty, this.member, this.selection, "skill");
+            var menu = new battleEntitySelectElem(this, this.battle.enemyParty, this.member, this.selection, "skill");
         this.done = true;
         return menu;
     }

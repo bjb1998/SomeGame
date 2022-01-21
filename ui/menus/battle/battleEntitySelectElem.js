@@ -1,4 +1,4 @@
-class entitySelectElem extends battleMenuElem {
+class battleEntitySelectElem extends battleMenuElem {
     constructor(prevMenu, party, func, slot, actionCtx) {
         super(prevMenu.background, party,
             prevMenu.posX, prevMenu.posY,
@@ -20,7 +20,6 @@ class entitySelectElem extends battleMenuElem {
     nextMenu() {
         if (this.actionCtx != null) this.battle.addAction(this.func, this.options[this.selection], this.slot, this.actionCtx);
         else this.battle.addAction(this.func, this.options[this.selection]);
-        this.state = -1;
         this.done = true;
     }
 }

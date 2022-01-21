@@ -46,7 +46,7 @@ class popUpSkillMenu extends pauseMenuElem{
         this.controls = menu.controls;
     }
 
-    nextMenu() { }
-    drawSelection() { }
+    nextMenu() { };
+    drawSelection() { };
 
 }

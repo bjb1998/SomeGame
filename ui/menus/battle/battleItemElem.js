@@ -1,4 +1,4 @@
-class battleItemMenuElem extends battleMenuElem {
+class battleItemElem extends battleMenuElem {
     constructor(prevMenu, inv) {
         super(prevMenu.background, inv.items,
             prevMenu.posX, prevMenu.posY,
@@ -29,16 +29,9 @@ class battleItemMenuElem extends battleMenuElem {
 
     }
 
-    drawDesc(desc) {
-        this.ctx.fillStyle = this.background;
-        this.ctx.fillRect(200, 700, 400, 50);
-        this.setFontCtx();
-        this.drawText(desc, 200 + 25, 700 + 40);
-    }
-
     nextMenu() {
         if (this.options.length > 0)
-            var menu = new entitySelectElem(this, this.battle.playerParty, this.inv, this.options[this.selection], "item");
+            var menu = new battleEntitySelectElem(this, this.battle.playerParty, this.inv, this.options[this.selection], "item");
         return menu;
     }
 
