@@ -13,7 +13,7 @@ class battleMenu extends Menu{
             this.enemyStats.draw();
             //create new main menu if the stack is empty
             if (this.top === 0) {
-                this.mainMenu = new battleMenuElem(mainMenuBackground, battleMenuOptions, 35, 50, 40, 150, 600, this.party);
+                this.mainMenu = new battleMenuElem(mainMenuBackground, battleMenuOptions, 35, 50, 40, 175, 600, this.party);
                 this.pushMenu(this.mainMenu);
                 this.clear();
             }

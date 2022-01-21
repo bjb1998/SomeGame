@@ -14,14 +14,12 @@ class partyMenuElem extends pauseMenuElem {
     }
 
     drawMenuText() {
-        var i;
-        for (i = 0; i < this.party.active.length; i++){
-            this.drawText(this.party.active[i].name, this.width - 70,  (50 * (i + 1)) + (this.height / 8.5));
+        for (var i = 0; i < this.party.active.length; i++){
+            this.drawText(this.party.active[i].name, this.width - 100,  (50 * (i + 2)) + (this.height / 8.5));
         }
     }
 
     nextMenu() {
-        console.log(this.party.active[this.selection]);
         var menu = new selectionElem(this.party.active[this.selection], this);
         return menu;
     }
@@ -37,8 +35,8 @@ class selectionElem extends pauseMenuElem {
     }
 
     drawMenuText() {
-        this.drawText('Skills', this.width - 70, (50 * (1)) + (this.height / 8.5));
-        this.drawText('Stats', this.width - 70, (50 * (2)) + (this.height / 8.5));
+        this.drawText('Skills', this.width - 100, (50 * (2)) + (this.height / 8.5));
+        this.drawText('Stats', this.width - 100, (50 * (3)) + (this.height / 8.5));
     };
 
     nextMenu() {

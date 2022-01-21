@@ -3,6 +3,7 @@ class partyStatsElem {
         Object.assign(this, { ctx, party, color, posX, posY, width, height });
     };
 
+    //draw status boxes for each member of the party
     draw() {
         const posX = this.posX;
         var posY = this.posY;
@@ -28,6 +29,7 @@ class partyStatsElem {
         }
     };
 
+    //draw text in respective location
     drawText(words, x, y) {
         const ctx = this.ctx;
         ctx.font = '30px Reactor7';

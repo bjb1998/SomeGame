@@ -22,7 +22,7 @@ class battleSkillMenuElem extends battleMenuElem {
         }
 
         for (var i = 0; i < this.options.length; i++) {
-            this.drawText(this.options[i].name, this.width - 70, (50 * (i + 2)) + (this.height / 8.5)); //draw the options in order by index
+            this.drawText(this.options[i].name, this.width - 100, (50 * (i + 2)) + (this.height / 8.5)); //draw the options in order by index
         }
         this.drawDesc(this.options[this.selection].desc);
 

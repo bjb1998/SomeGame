@@ -3,9 +3,13 @@
     "",
     "\\assets",
     "\\assets\\fonts",
-    "\\scripts\\animation",
+    "\\data",
+    "\\ui",
+    "\\ui\\menus",
+    "\\ui\\menus\\battle",
+    "\\ui\\menus\\pause",
     "\\world"
   ],
-  "SelectedNode": "\\ui",
+  "SelectedNode": "\\ui\\menus\\pause\\viewStatsElem.js",
   "PreviewInSolutionExplorer": false
 }

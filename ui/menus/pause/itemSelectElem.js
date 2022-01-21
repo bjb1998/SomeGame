@@ -15,24 +15,18 @@ class itemMenuElem extends pauseMenuElem {
     }
 
     drawMenuText() {
+        console.log(this.options.length);
         if (this.options.length <= 0) { //If inventory is empty, go back
-            this.state = -1;
+            this.done = true;
             return;
         }
 
         for (var i = 0; i < this.options.length; i++) {
-            this.drawText(this.options[i].item.name, this.width - 70, (50 * (i + 1)) + (this.height / 8.5)); //draw the options in order by index
+            this.drawText(this.options[i].item.name, this.width - 100, (50 * (i + 2)) + (this.height / 8.5)); //draw the options in order by index
         }
 
         this.drawDesc(this.options[this.selection].item.desc);
 
-    }
-
-    drawDesc(desc) {
-        this.ctx.fillStyle = this.background;
-        this.ctx.fillRect(200, 700, 400, 50);
-        this.setFontCtx();
-        this.drawText(desc, 200 + 25, 700 + 40);
     }
 
     nextMenu() {
@@ -63,7 +57,7 @@ class selectElem extends pauseMenuElem{
     drawMenuText() {
         var i;
         for (i = 0; i < this.party.active.length; i++) {
-            this.drawText(this.party.active[i].name, this.width - 70, (50 * (i + 1)) + (this.height / 8.5));
+            this.drawText(this.party.active[i].name, this.width - 100, (50 * (i + 2)) + (this.height / 8.5));
         }
     }
 
@@ -71,6 +65,7 @@ class selectElem extends pauseMenuElem{
         var count = this.itemSlot.count;
         this.inv.use(this.party.active[this.selection], this.itemSlot);
         if (count - 1 <= 0)
-            this.state = -1;
+            this.done = true;
+
     }
 }

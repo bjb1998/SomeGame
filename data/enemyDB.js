@@ -14,7 +14,7 @@ newObj = function(obj){
 
 
 const DUMMYRes = new Resistance(1, 1, 1, 1, 1, 1, 1, 1, 1);
-const DUMMYStats = new Stats(1, 1, 15, 1, 1, 1, 1, 1, DUMMYRes);
+const DUMMYStats = new Stats(1, 1, 99, 1, 1, 1, 1, 1, DUMMYRes);
 const DUMMYSkills = [strike, poof];
 var DUMMY = new Pawn('DUMMY', DUMMYStats, 100, DUMMYSkills, DUMMYanim);
 console.log(DUMMY);
