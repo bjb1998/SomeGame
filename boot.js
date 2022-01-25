@@ -18,10 +18,13 @@ window.onload = () => {
     var camera = new Camera(game, res);
     var minimap = new Minimap(UICanvas, 16, 125, 20, 20, map);
     var menu = new pauseMenu(UICanvas, controls.states, map, theParty);
+    var diag = new DialogueBox(UICanvas, controls.states, 900, 250, 33, testDiag);
     var battler = new battleMenu(battleCanvas, controls.states, theParty);
     var loop = new GameLoop();
 
     map.randomize();
+
+    currentState = GameState.DIALOGUE;
 
     document.onkeydown = function (e) {
         if(debug === false) return (e.which || e.keyCode) != 116;
@@ -33,6 +36,7 @@ window.onload = () => {
         minimap.drawMap();
         menu.draw();
         battler.draw();
+        diag.draw();
     });
 };
 

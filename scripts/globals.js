@@ -4,7 +4,7 @@ const GameState = {                                 //possible states the game c
     MENU: 'Menu',
     SHOP: 'Shop',
     BATTLE: 'Battle',
-    OTHER: 'Other',
+    DIALOGUE: 'Dialogue',
     PAUSE: 'Pause'
 };                                //sates the game can be in
 
