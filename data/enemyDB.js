@@ -19,3 +19,13 @@ const DUMMYSkills = [strike, poof];
 var DUMMY = new Pawn('DUMMY', DUMMYStats, 100, DUMMYSkills, DUMMYanim);
 console.log(DUMMY);
 
+
+const microwaveRes = new Resistance(4, 2, 3, 10, 3, 4, 8, 2, 1);
+const microwaveStats = new Stats(1, 5, 6, 2, 4, 8, 3, 5, microwaveRes);
+const microwaveSkills = [reheat];
+var microwave = new Pawn('Microwave',microwaveStats,100,microwaveSkills,microwaveAnim);
+
+const plungerRes = new Resistance(1, 5, 2, 2, 10, 6, 6, 1);
+const plungerStats = new Stats(1, 5, 6, 2, 4, 8, 3, 5, microwaveRes);
+const plungerSkills = [unclog];
+var plunger = new Pawn('Plunger', plungerStats, 100, plungerSkills, plungerAnim);

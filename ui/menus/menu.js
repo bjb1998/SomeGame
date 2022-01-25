@@ -40,10 +40,10 @@ class Menu {
             if (chance <= this.battleChance) {
                 currentState = GameState.BATTLE;
 
-                this.enemies = new EnemyParty(newEnemy(DUMMY)); //todo make maps have an enemy pool
-                this.enemies.recruit(newEnemy(DUMMY));
-                this.enemies.recruit(newEnemy(DUMMY));
-                this.enemies.recruit(newEnemy(DUMMY));
+                this.enemies = new EnemyParty(newEnemy(plunger)); //todo make maps have an enemy pool
+                this.enemies.recruit(newEnemy(microwave));
+                this.enemies.recruit(newEnemy(microwave));
+            
 
                 this.partyStats = new partyStatsElem(this.ctx, this.party.active, //draw player party stats
                     menuColorBackground, 225, 35, 135, 150);

@@ -5,3 +5,6 @@ const wallSprite = new Texture('assets/wall_texture.jpg');
 const doorSprite = new Texture('assets/door_texture.jpg');
 
 const DUMMYTexture = new Texture('assets/sprites/DUMMY.png');
+
+const microwaveTexture = new Texture('assets/enemies/Microwave.png');
+const plungerTexture = new Texture('assets/enemies/Plunger.png');

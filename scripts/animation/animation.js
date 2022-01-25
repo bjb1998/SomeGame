@@ -1,21 +1,21 @@
 class Animation {
-    constructor(sheet, xStart, yStart, width, height, frameCount, duration) {
-        Object.assign(this, { sheet, xStart, yStart, width, height, frameCount, duration });
+    constructor(sheet, xStart, yStart, width, height, frameCount, duration, scale) {
+        Object.assign(this, { sheet, xStart, yStart, width, height, frameCount, duration, scale });
         this.elapsedTime = 0;
         this.totalTime = frameCount * duration;
 
     };
 
-    draw(ctx, x, y, scale) {
+    draw(ctx, x, y) {
         this.elapsedTime += animTimer.tick();
         if (this.elapsedTime > this.totalTime) this.elapsedTime -= this.totalTime;
-        ctx.clearRect(x, y, this.width * scale, this.height * scale);
+        ctx.clearRect(x, y, this.width * this.scale, this.height * this.scale);
         const frame = this.currentFrame();
         ctx.drawImage(this.sheet,
             this.xStart + this.width * frame, this.yStart,
             this.width, this.height,
             x, y,
-            this.width * scale, this.height * scale);
+            this.width * this.scale, this.height * this.scale);
     };
 
     currentFrame() {

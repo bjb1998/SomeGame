@@ -41,7 +41,7 @@ class battleMenu extends Menu{
 
     drawAnims() {
         for (var i = 0; i < this.enemies.active.length; i++) {
-            this.enemies.active[i].animation.draw(this.ctx, 550 + (100 * i), 100, 3.5);
+            this.enemies.active[i].animation.draw(this.ctx, 550 + (100 * i), 100);
         }
     }
 
