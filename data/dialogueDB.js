@@ -14,3 +14,5 @@ const testDiag = new Dialogue( 'Mr. PG',
         'the Navy Seals, and I\'ve been involved in numerous secret raids on Alf-Quaeda, and I have over 300 confirmed',
         'Bills.I am trained in gorilla training and I\'m the top swiper in the entire US armed forces.You are something to ',
         'me besides another target. I will wipe you clean because I am a nice person']);
+
+const battleDiag = new Dialogue('', ['The Battle Begins!']);

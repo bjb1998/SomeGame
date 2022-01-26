@@ -1,7 +1,7 @@
 class DialogueBox{
-    constructor(canvas, controls, width, height, max, dialogue) {
+    constructor(ctx, controls, width, height, max, dialogue) {
         this.prevState = currentState;
-        this.ctx = canvas.getContext('2d');
+        this.ctx = ctx;
         this.width = width;
         this.height = height;
         this.dialogueText = dialogue;
@@ -11,6 +11,11 @@ class DialogueBox{
         this.rows = ['','',''];
         this.nextBuffer = true;
         this.currentWord = 0;
+    }
+
+    start() {
+        currentState = GameState.DIALOGUE;
+        console.log(this.prevState);
     }
 
     next() {
@@ -52,14 +57,14 @@ class DialogueBox{
             ctx.fillRect(50, 500, this.width, this.height);
             this.ctx.font = '55px Reactor7';
             this.drawText(this.getSpeaker(), 75, 560); //draw the options in order by index
-            this.drawDilogue(this.getText());
+            this.drawDialogue(this.getText());
             ctx.clearRect(this.width + 50, 500, 900, 900)
             this.confirmDeny();
         } else
             this.end();
     }
 
-    drawDilogue(txt) {
+    drawDialogue(txt) {
         const words = txt.split(' ');
         var currentChars = 0;
         for (var i = 0; i < this.rows.length; i++) {
@@ -103,7 +108,7 @@ class DialogueBox{
             this.ctx.clearRect(50, 500, this.width, this.height);
         this.active = false;
         this.resetRows();
-        this.dialogueText.end();
+        this.dialogueText.end(this.prevState);
     }
 
 }
@@ -131,7 +136,7 @@ class Dialogue {
         return this.txt[this.currentText];
     }
 
-    end() {
-        if (currentState === GameState.DIALOGUE) currentState = GameState.DUNGEON;
+    end(state) {
+        if (currentState === GameState.DIALOGUE) currentState = state;
     }
 }

@@ -18,21 +18,22 @@ class battleMenu extends Menu{
                 this.clear();
             }
             var currentMenu = this.menuStack[this.top - 1];
+
             this.active = true;
-            
-            currentMenu.drawElem();
             this.drawAnims();
+            if (this.dialogueBox.done) {
+                currentMenu.drawElem();
+                //Based on the menus state, push or pop the menu stack
+                if (currentMenu.state === 1 && currentMenu.nextMenu() != null) {
+                    this.pushMenu(currentMenu.nextMenu());
+                } else if (currentMenu.state === -1 && this.menuStack.length > 1) {
+                    this.popMenu();
+                }
 
-            //Based on the menus state, push or pop the menu stack
-            if (currentMenu.state === 1 && currentMenu.nextMenu() != null) {
-                this.pushMenu(currentMenu.nextMenu());
-            } else if (currentMenu.state === -1 && this.menuStack.length > 1) {
-                this.popMenu();
-            }
-
-            //todo implement exp gain, leveling up, etc.
-            if (this.battle.turn.check() === endState.WIN) {
-                this.exit();
+                //todo implement exp gain, leveling up, etc.
+                if (this.battle.turn.check() === endState.WIN) {
+                    this.exit();
+                }
             }
 
         } else
@@ -46,6 +47,8 @@ class battleMenu extends Menu{
             if (chance <= this.battleChance) {
                 currentState = GameState.BATTLE;
 
+                
+                this.dialogueBox = new BattleDialogueBox(this.ctx, this.controls, 437.5, 185, 25, battleDiag);
                 this.enemies = new EnemyParty(newEnemy(DUMMY)); //todo make maps have an enemy pool
                 this.enemies.recruit(newEnemy(Microwave));
                 this.enemies.recruit(newEnemy(Plunger));
@@ -57,7 +60,7 @@ class battleMenu extends Menu{
                 this.enemyStats = new partyStatsElem(this.ctx, this.enemies.active, //draw enemyt party stats
                     menuColorBackground, 375, 35, 135, 150);
 
-                this.battle = new Battle(this.party.active, this.enemies.active);   //start battle with the parties
+                this.battle = new Battle(this.party.active, this.enemies.active, this.dialogueBox); //start battle with the parties & dialogue
             }
         }
     }

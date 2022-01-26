@@ -18,17 +18,20 @@ window.onload = () => {
     var camera = new Camera(game, res);
     var minimap = new Minimap(UICanvas, 16, 125, 20, 20, map);
     var menu = new pauseMenu(UICanvas, controls.states, map, theParty);
-    var diag = new DialogueBox(UICanvas, controls.states, 900, 250, 33, testDiag);
+
+    //this is temporary and for testing dialogue boxes
+    var diag = new DialogueBox(UICanvas.getContext('2d'), controls.states, 900, 250, 33, testDiag);
+
     var battler = new battleMenu(battleCanvas, controls.states, theParty);
     var loop = new GameLoop();
 
     map.randomize();
 
-    currentState = GameState.DIALOGUE;
-
     document.onkeydown = function (e) {
         if(debug === false) return (e.which || e.keyCode) != 116;
     };
+
+    diag.start();
 
     loop.start(function frame() {
         playerControls.update(controls.states, map);

@@ -6,11 +6,12 @@ const endState = {
 
 //the real meat of all things combat.
 class Battle {
-    constructor(playerParty, enemyParty) {
+    constructor(playerParty, enemyParty, dialogueBox) {
         this.playerParty = playerParty;                 //player and his/her allies
         this.enemyParty = enemyParty;                   //enemies
-        this.turn = new Turn(playerParty, enemyParty);  //turn to do combat in
         this.expAmt = this.getExp();                    //total exp of all enemies
+        this.dialogueBox = dialogueBox;
+        this.turn = new Turn(playerParty, enemyParty, dialogueBox);  //turn to do combat in
     }
 
     //add each exp amount of the enemies
@@ -28,7 +29,7 @@ class Battle {
 
     //Call turns addAction function
     addAction(func, target, slot, actionCtx) {
-        this.turn.AddAction(func, target, slot, actionCtx);
+        this.turn.AddAction(func, target, slot, actionCtx, this.dialogueBox);
     };
 
     //Generate random int, if <= the runChance, run away!
@@ -43,9 +44,10 @@ class Battle {
 
 //Turn for one phase of combat
 class Turn {
-    constructor(playerParty, enemyParty) {
+    constructor(playerParty, enemyParty, dialogueBox) {
         this.playerParty = playerParty;
         this.enemyParty = enemyParty;
+        this.dialogueBox = dialogueBox;
         this.playerAction = null;
         this.enemyActions = [];
         this.currentMember = 0;
@@ -53,13 +55,12 @@ class Turn {
     }
 
     //exec each function per enemy in the eenmy party
-    exec() {
+    async exec() {
         console.log("enemy actions:");
         for (var action in this.enemyActions) {
-            this.enemyActions[action].exec();
+            await this.enemyActions[action].exec();
         }
             
-
         this.playerActions = [];
         this.enemyActions = [];
         this.currentMember = 0;
@@ -68,9 +69,11 @@ class Turn {
     }
 
     //make an action for the player, then execute it. Once all done, do the same for the enemies
-    AddAction(action, target, slot, actionCtx) {
-        this.playerAction = new Action(action, target, slot, actionCtx);
-        this.playerAction.exec();
+    async AddAction(action, target, slot, actionCtx) {
+        console.log(this.dialogueBox);
+        console.log(target);
+        this.playerAction = new Action(action, target, slot, actionCtx, this.dialogueBox);
+        await this.playerAction.exec();
         this.currentMember++;
         if (this.checkDeath(target)) {
             this.shove();
@@ -120,7 +123,7 @@ class Turn {
     genEnemyActions() {
         const testFunc = function () { console.log("action"); };
         for (var i = 0; i < this.enemyParty.length; i++)
-            this.enemyActions[i] = new Action(testFunc, null);
+            this.enemyActions[i] = new Action(testFunc, this.playerParty[i], null, null, this.dialogueBox);
     }
 
     //check if either party is defeated, return endState if either is killed
@@ -135,17 +138,26 @@ class Turn {
 
 //Action to executed during a turn. Can be players, or enemys.
 class Action {
-    constructor(func, target, slot, actionCtx) {
+    constructor(func, target, slot, actionCtx, dialogueBox) {
         this.func = func;           //actions the item/skill will do
         this.target = target;       //target to deal the damage, etc. to
         this.slot = slot;           //item/skill slot, used depending on action context
         this.actionCtx = actionCtx; //Used to determine if item, skill, or basic attack
+        this.dialogueBox = dialogueBox;
     }
 
     //execute the action based on the context
-    exec() {
+    async exec() {
+        console.log(this.target.name);
+        this.dialogueBox.init(this.target.name + ' is attacked!');
+        await this.sleep(500);
+        this.dialogueBox.done = true;
         if (this.actionCtx === "item") this.func.use(this.target, this.slot);
         else if (this.actionCtx === "skill") this.func.execSkill(this.target, this.slot);
         else this.func(this.target, this.slot);
+    }
+
+    sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
     }
 }
