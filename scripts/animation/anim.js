@@ -9,7 +9,6 @@ class Anim {
     draw(ctx, x, y) {
         this.elapsedTime += this.timer.tick();
         if (this.elapsedTime > this.totalTime) this.elapsedTime -= this.totalTime;
-        ctx.clearRect(x, y + this.offset, this.width * this.scale, this.height * this.scale);
         const frame = this.currentFrame();
         ctx.drawImage(this.sheet,
             this.xStart + this.width * frame, this.yStart,

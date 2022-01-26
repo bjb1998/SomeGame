@@ -9,6 +9,7 @@ class battleMenu extends Menu{
         if (battleCheck)
             this.initBattle();
         if (currentState === GameState.BATTLE) {
+            this.active = true;
             this.partyStats.draw();
             this.enemyStats.draw();
             //create new main menu if the stack is empty
@@ -18,8 +19,7 @@ class battleMenu extends Menu{
                 this.clear();
             }
             var currentMenu = this.menuStack[this.top - 1];
-
-            this.active = true;
+            
             this.drawAnims();
             if (this.dialogueBox.done) {
                 currentMenu.drawElem();
@@ -66,6 +66,7 @@ class battleMenu extends Menu{
     }
 
     drawAnims() {
+        this.ctx.clearRect(550, 0, 600, 200); //clear any remnants from animation frames
         for (var i = 0; i < this.enemies.active.length; i++) {
             this.enemies.active[i].animation.draw(this.ctx, 550 + (100 * i), 100);
         }

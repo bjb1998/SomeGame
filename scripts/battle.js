@@ -22,11 +22,6 @@ class Battle {
         return amt;
     }
 
-    //start the turn
-    execTurn() {
-        this.turn.exec();
-    }
-
     //Call turns addAction function
     addAction(func, target, slot, actionCtx) {
         this.turn.AddAction(func, target, slot, actionCtx, this.dialogueBox);
@@ -60,8 +55,7 @@ class Turn {
         for (var action in this.enemyActions) {
             await this.enemyActions[action].exec();
         }
-            
-        this.playerActions = [];
+
         this.enemyActions = [];
         this.currentMember = 0;
 
@@ -70,8 +64,11 @@ class Turn {
 
     //make an action for the player, then execute it. Once all done, do the same for the enemies
     async AddAction(action, target, slot, actionCtx) {
-        console.log(this.dialogueBox);
-        console.log(target);
+
+        //For reason after the end of a turn it skips a dialogue box, this "fixes" it
+        this.dialogueBox.init('');
+        this.dialogueBox.done = true;
+
         this.playerAction = new Action(action, target, slot, actionCtx, this.dialogueBox);
         await this.playerAction.exec();
         this.currentMember++;
@@ -80,8 +77,8 @@ class Turn {
         }
         //once all selections made, make enemy actions start their turn
         if (this.currentMember === this.playerParty.length) {
-            this.genEnemyActions();
-            this.exec();
+            await this.genEnemyActions();
+            await this.exec();
             this.resetGuards();
         }
     };
@@ -120,10 +117,10 @@ class Turn {
     }
 
     //temporary thing until enemy actions are a real thing
-    genEnemyActions() {
+    async genEnemyActions() {
         const testFunc = function () { console.log("action"); };
         for (var i = 0; i < this.enemyParty.length; i++)
-            this.enemyActions[i] = new Action(testFunc, this.playerParty[i], null, null, this.dialogueBox);
+            this.enemyActions[i] = new Action(testFunc, this.playerParty[0], null, null, this.dialogueBox);
     }
 
     //check if either party is defeated, return endState if either is killed
@@ -134,6 +131,7 @@ class Turn {
             return endState.WIN;
         }
     }
+
 }
 
 //Action to executed during a turn. Can be players, or enemys.
@@ -148,10 +146,10 @@ class Action {
 
     //execute the action based on the context
     async exec() {
-        console.log(this.target.name);
         this.dialogueBox.init(this.target.name + ' is attacked!');
         await this.sleep(500);
         this.dialogueBox.done = true;
+        this.dialogueBox.end();
         if (this.actionCtx === "item") this.func.use(this.target, this.slot);
         else if (this.actionCtx === "skill") this.func.execSkill(this.target, this.slot);
         else this.func(this.target, this.slot);

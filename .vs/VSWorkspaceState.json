@@ -9,8 +9,8 @@
     "\\scripts\\animation",
     "\\ui",
     "\\ui\\menus",
-    "\\world"
+    "\\ui\\menus\\battle"
   ],
-  "SelectedNode": "\\scripts\\animation\\anim.js",
+  "SelectedNode": "\\ui\\menus\\battle\\battleItemElem.js",
   "PreviewInSolutionExplorer": false
 }
