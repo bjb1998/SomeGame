@@ -92,7 +92,6 @@ class DialogueBox{
 
     confirmDeny() {
         const confirm = this.controls.confirm;
-        console.log(confirm + ', ' + this.nextBuffer);
         if (confirm && confirm != this.nextBuffer) {
             this.nextText();
         } 

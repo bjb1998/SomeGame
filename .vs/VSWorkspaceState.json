@@ -3,6 +3,7 @@
     "",
     "\\assets",
     "\\assets\\fonts",
+    "\\assets\\sprites",
     "\\data",
     "\\scripts",
     "\\scripts\\animation",
@@ -10,6 +11,6 @@
     "\\ui\\menus",
     "\\ui\\menus\\battle"
   ],
-  "SelectedNode": "\\ui\\menus\\menu.js",
+  "SelectedNode": "\\data\\animDB.js",
   "PreviewInSolutionExplorer": false
 }

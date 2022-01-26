@@ -1,3 +1,12 @@
+/* 
+ * Chances are you're here because you wanna make an enemy. Here are the steps.
+ * 1. Put its sprite sheet in /asssets/enemies/[your_enemy].png
+ * 2. Make a texture object for the enemy in textureDB.js
+ * 3. Make an animation for your enemy in animDB.js
+ * 4. Make stats, resistances, and skills in this file
+ * Work off from the Dummy, Microwave, or Plunger if you get stuck
+ */
+
 newEnemy = function (enemy) {
     const stats = newObj(enemy.stats);
     const skills = newObj(enemy.skills);
@@ -12,10 +21,19 @@ newObj = function(obj){
 }
 
 
-
 const DUMMYRes = new Resistance(1, 1, 1, 1, 1, 1, 1, 1, 1);
 const DUMMYStats = new Stats(1, 1, 99, 1, 1, 1, 1, 1, DUMMYRes);
 const DUMMYSkills = [strike, poof];
+
+const MicrowaveRes = new Resistance(1, 1, 1, 1, 1, 1, 1, 1, 1);
+const MicrowaveStats = new Stats(1, 1, 99, 1, 1, 1, 1, 1, DUMMYRes);
+const MicrowaveSkills = [strike, poof];
+
+const PlungerRes = new Resistance(1, 1, 1, 1, 1, 1, 1, 1, 1);
+const PlungerStats = new Stats(1, 1, 99, 1, 1, 1, 1, 1, PlungerRes);
+const PlungerSkills = [strike, poof];
+
 var DUMMY = new Pawn('DUMMY', DUMMYStats, 100, DUMMYSkills, DUMMYanim);
-console.log(DUMMY);
+var Microwave = new Pawn('Microwave', MicrowaveStats, 100, MicrowaveSkills, MicrowaveAnim);
+var Plunger = new Pawn('Plunger', PlungerStats, 100, PlungerSkills, PlunglerAnim);
 

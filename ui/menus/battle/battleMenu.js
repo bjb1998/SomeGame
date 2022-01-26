@@ -39,9 +39,32 @@ class battleMenu extends Menu{
             this.exit();
     }
 
+    initBattle() {
+        battleCheck = false;
+        if (currentState === GameState.DUNGEON) {
+            const chance = setChance();
+            if (chance <= this.battleChance) {
+                currentState = GameState.BATTLE;
+
+                this.enemies = new EnemyParty(newEnemy(DUMMY)); //todo make maps have an enemy pool
+                this.enemies.recruit(newEnemy(Microwave));
+                this.enemies.recruit(newEnemy(Plunger));
+                this.enemies.recruit(newEnemy(Microwave));
+
+                this.partyStats = new partyStatsElem(this.ctx, this.party.active, //draw player party stats
+                    menuColorBackground, 225, 35, 135, 150);
+
+                this.enemyStats = new partyStatsElem(this.ctx, this.enemies.active, //draw enemyt party stats
+                    menuColorBackground, 375, 35, 135, 150);
+
+                this.battle = new Battle(this.party.active, this.enemies.active);   //start battle with the parties
+            }
+        }
+    }
+
     drawAnims() {
         for (var i = 0; i < this.enemies.active.length; i++) {
-            this.enemies.active[i].animation.draw(this.ctx, 550 + (100 * i), 100, 3.5);
+            this.enemies.active[i].animation.draw(this.ctx, 550 + (100 * i), 100);
         }
     }
 

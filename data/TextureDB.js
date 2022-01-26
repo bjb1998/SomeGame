@@ -4,4 +4,6 @@ const skyboxSprite = new Texture('assets/deathvalley_panorama.jpg');
 const wallSprite = new Texture('assets/wall_texture.jpg');
 const doorSprite = new Texture('assets/door_texture.jpg');
 
-const DUMMYTexture = new Texture('assets/sprites/DUMMY.png');
+const DUMMYTexture = new Texture('assets/sprites/enemies/DUMMY.png');
+const PlungerTexture = new Texture('assets/sprites/enemies/Plunger.png');
+const MicrowaveTexture = new Texture('assets/sprites/enemies/Microwave.png');

@@ -33,29 +33,6 @@ class Menu {
         }
     };
 
-    initBattle() {
-        battleCheck = false;
-        if (currentState === GameState.DUNGEON) {
-            const chance = setChance();
-            if (chance <= this.battleChance) {
-                currentState = GameState.BATTLE;
-
-                this.enemies = new EnemyParty(newEnemy(DUMMY)); //todo make maps have an enemy pool
-                this.enemies.recruit(newEnemy(DUMMY));
-                this.enemies.recruit(newEnemy(DUMMY));
-                this.enemies.recruit(newEnemy(DUMMY));
-
-                this.partyStats = new partyStatsElem(this.ctx, this.party.active, //draw player party stats
-                    menuColorBackground, 225, 35, 135, 150);
-
-                this.enemyStats = new partyStatsElem(this.ctx, this.enemies.active, //draw enemyt party stats
-                    menuColorBackground, 375, 35, 135, 150);
-
-                this.battle = new Battle(this.party.active, this.enemies.active);   //start battle with the parties
-            }
-        }
-    }
-
     //draw all things related to the menu
     draw() {}
 
