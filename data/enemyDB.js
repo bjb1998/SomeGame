@@ -33,7 +33,12 @@ const PlungerRes = new Resistance(1, 1, 1, 1, 1, 1, 1, 1, 1);
 const PlungerStats = new Stats(1, 1, 99, 1, 1, 1, 1, 1, PlungerRes);
 const PlungerSkills = [strike, poof];
 
+const VacuumRes = new Resistance(1, 1, 1, 1, 1, 1, 1, 1, 1);
+const VacuumStats = new Stats(1, 1, 99, 1, 1, 1, 1, 1, VacuumRes);
+const VacuumSkills = [strike, poof];
+
 var DUMMY = new Pawn('DUMMY', DUMMYStats, 100, DUMMYSkills, DUMMYanim);
 var Microwave = new Pawn('Microwave', MicrowaveStats, 100, MicrowaveSkills, MicrowaveAnim);
 var Plunger = new Pawn('Plunger', PlungerStats, 100, PlungerSkills, PlunglerAnim);
+var Vacuum = new Pawn('Vacuum', VacuumStats, 100, VacuumSkills, VacuumAnim);
 
