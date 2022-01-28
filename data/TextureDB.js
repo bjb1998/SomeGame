@@ -7,3 +7,4 @@ const doorSprite = new Texture('assets/door_texture.jpg');
 const DUMMYTexture = new Texture('assets/sprites/enemies/DUMMY.png');
 const PlungerTexture = new Texture('assets/sprites/enemies/Plunger.png');
 const MicrowaveTexture = new Texture('assets/sprites/enemies/Microwave.png');
+const VacuumTexture = new Texture('assets/sprites/enemies/Vacuum.png');

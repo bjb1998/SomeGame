@@ -52,7 +52,7 @@ class battleMenu extends Menu{
                 this.enemies = new EnemyParty(newEnemy(DUMMY)); //todo make maps have an enemy pool
                 this.enemies.recruit(newEnemy(Microwave));
                 this.enemies.recruit(newEnemy(Plunger));
-                this.enemies.recruit(newEnemy(Microwave));
+                this.enemies.recruit(newEnemy(Vacuum));
 
                 this.partyStats = new partyStatsElem(this.ctx, this.party.active, //draw player party stats
                     menuColorBackground, 225, 35, 135, 150);
