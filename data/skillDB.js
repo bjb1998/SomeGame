@@ -17,8 +17,8 @@ const guardFunc = function (entity) {
 }
 const guard = new Skill('Guard', 'guard an attack for half damage', elemType.ALLM, 0, guardFunc);
 
-const poofFunc = function (entity) {
+const emberFunc = function (entity) {
     entity.stats.damage(10, elemType.FIRE);
     return entity.name +' took 10 Fire Damage';
 }
-const poof = new Skill('Ember', 'Little fire damage', elemType.FIRE, 1, poofFunc);
+const ember = new Skill('Ember', 'Little fire damage', elemType.FIRE, 1, emberFunc);

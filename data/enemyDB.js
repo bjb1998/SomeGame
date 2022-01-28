@@ -23,19 +23,19 @@ newObj = function(obj){
 
 const DUMMYRes = new Resistance(1, 1, 1, 1, 1, 1, 1, 1, 1);
 const DUMMYStats = new Stats(1, 1, 99, 1, 1, 1, 1, 1, DUMMYRes);
-const DUMMYSkills = [strike, poof];
+const DUMMYSkills = [strike, ember];
 
 const MicrowaveRes = new Resistance(1, 1, 1, 1, 1, 1, 1, 1, 1);
 const MicrowaveStats = new Stats(1, 1, 99, 1, 1, 1, 1, 1, DUMMYRes);
-const MicrowaveSkills = [strike, poof];
+const MicrowaveSkills = [strike, ember];
 
 const PlungerRes = new Resistance(1, 1, 1, 1, 1, 1, 1, 1, 1);
 const PlungerStats = new Stats(1, 1, 99, 1, 1, 1, 1, 1, PlungerRes);
-const PlungerSkills = [strike, poof];
+const PlungerSkills = [strike, ember];
 
 const VacuumRes = new Resistance(1, 1, 1, 1, 1, 1, 1, 1, 1);
 const VacuumStats = new Stats(1, 1, 99, 1, 1, 1, 1, 1, VacuumRes);
-const VacuumSkills = [strike, poof];
+const VacuumSkills = [strike, ember];
 
 var DUMMY = new Pawn('DUMMY', DUMMYStats, 100, DUMMYSkills, DUMMYanim);
 var Microwave = new Pawn('Microwave', MicrowaveStats, 100, MicrowaveSkills, MicrowaveAnim);
