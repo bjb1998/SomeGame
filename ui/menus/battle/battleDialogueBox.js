@@ -47,7 +47,7 @@ class BattleDialogueBox extends DialogueBox{
 
     end() {
         if (this.active)
-            this.ctx.clearRect(550, 250, this.width, this.height);
+            this.ctx.clearRect(550, 250, this.width + 5, this.height);
         this.active = false;
         this.resetRows();
         this.done = true;

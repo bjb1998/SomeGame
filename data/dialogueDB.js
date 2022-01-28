@@ -10,9 +10,16 @@
  */
 
 const testDiag = new Dialogue( 'Mr. PG', 
-    ['What the flip did you just fliping say about me, you little guy? I\'ll have you know I graduated top of my class in',
+    ['Hello...', 'What the flip did you just fliping say about me, you little guy? I\'ll have you know I graduated top of my class in',
         'the Navy Seals, and I\'ve been involved in numerous secret raids on Alf-Quaeda, and I have over 300 confirmed',
         'Bills.I am trained in gorilla training and I\'m the top swiper in the entire US armed forces.You are something to ',
         'me besides another target. I will wipe you clean because I am a nice person']);
+
+const plungerDiag = new Dialogue('Friendly Plunger',
+    ['Ah, a fine non-violent member of society!', 'Have you ever played...', 'Um, what was it called..?', 'Shane Maygoomi Tensay..?',
+        'Something like that. I\d much rather do that right now compared to talking to you.']);
+
+const microwaveDiag = new Dialogue('Hungry Man',
+    ['They call me Hungry Man cause i\'m hungry for some men.', 'Not you of course, it\'s just not that kind of game.']);
 
 const battleDiag = new Dialogue('', ['The Battle Begins!']);

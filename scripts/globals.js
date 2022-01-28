@@ -21,7 +21,6 @@ const res = 300;                                     //resolution of the camera
 var playerPos = [];                                  //player as an x, y coordinate
 var playerDir = 0;                                   //direction of player (radians)
 var battleChance = 100;                              //for random stuff (encounters, etc.)
-const runChance = 100;                               //Chance for running away from battle
 var battleCheck = false;
 
 var menuBuffer = 65;                                //how long to wait until the next input

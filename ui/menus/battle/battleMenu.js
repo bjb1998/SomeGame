@@ -48,7 +48,7 @@ class battleMenu extends Menu{
                 currentState = GameState.BATTLE;
 
                 
-                this.dialogueBox = new BattleDialogueBox(this.ctx, this.controls, 437.5, 185, 25, battleDiag);
+                this.dialogueBox = new BattleDialogueBox(this.ctx, this.controls, 437.5, 185, 20, battleDiag);
                 this.enemies = new EnemyParty(newEnemy(DUMMY)); //todo make maps have an enemy pool
                 this.enemies.recruit(newEnemy(Microwave));
                 this.enemies.recruit(newEnemy(Plunger));

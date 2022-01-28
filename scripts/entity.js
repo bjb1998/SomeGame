@@ -21,8 +21,8 @@ class Entity{
     };
 
     execSkill(entity, slot) {
-        this.skills[slot].exec(entity);
         this.stats.useMP(this.skills[slot].cost);
+        return this.skills[slot].exec(entity);
     }
 
     checkMp(Mp) {

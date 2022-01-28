@@ -12,9 +12,9 @@ class Inventory {
     }
 
     use(entity, slot) {
-        slot.exec(entity);
-        if (this.items != null && slot.count <= 0)
+        if (this.items != null && slot.count <= 1)
             this.items.splice(this.items.indexOf(slot), 1);
+        return slot.exec(entity);
     };
 
 };
@@ -33,8 +33,8 @@ class ItemSlot {
     }
 
     exec(entity) {
-        this.item.exec(entity);
         --this.count;
+        return this.item.exec(entity);
     };
 
 };
@@ -45,7 +45,7 @@ class Item {
     }
 
     exec(entity) {
-        this.func(entity);
+        return this.func(entity);
     };
 
 };

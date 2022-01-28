@@ -16,7 +16,7 @@ class Skill {
     };
 
     exec(entity) {
-        this.func(entity);
+        return this.func(entity);
     };
 
 };

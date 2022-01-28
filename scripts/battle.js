@@ -4,14 +4,19 @@ const endState = {
     LOSE: 'Lose'
 };
 
+sleep = function (ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 //the real meat of all things combat.
 class Battle {
     constructor(playerParty, enemyParty, dialogueBox) {
-        this.playerParty = playerParty;                 //player and his/her allies
-        this.enemyParty = enemyParty;                   //enemies
-        this.expAmt = this.getExp();                    //total exp of all enemies
+        this.playerParty = playerParty;                             //player and his/her allies
+        this.enemyParty = enemyParty;                               //enemies
+        this.expAmt = this.getExp();                                //total exp of all enemies
         this.dialogueBox = dialogueBox;
-        this.turn = new Turn(playerParty, enemyParty, dialogueBox);  //turn to do combat in
+        this.turn = new Turn(this.playerParty, this.enemyParty, this.dialogueBox);  //turn to do combat in
+        this.runChance = 50;                                          //Chance for running away from battle
     }
 
     //add each exp amount of the enemies
@@ -28,12 +33,13 @@ class Battle {
     };
 
     //Generate random int, if <= the runChance, run away!
-    run() {
+    async run() {
         const chance = setChance();
-        var bool = false;
-        console.log(chance + ", " + runChance);
-        chance <= runChance ? bool = true : bool = false;
-        return bool;
+        if (chance <= this.runChance) {
+            await this.turn.runSuccess();
+        } else {
+            await this.turn.runFailure();
+        }
     };
 }
 
@@ -49,26 +55,25 @@ class Turn {
         this.wait = false;
     }
 
-    //exec each function per enemy in the eenmy party
-    async exec() {
-        console.log("enemy actions:");
-        for (var action in this.enemyActions) {
-            await this.enemyActions[action].exec();
-        }
+    async runSuccess() {
+        this.initBox();
+        this.dialogueBox.init('Got away safely!');
+        await sleep(500);
+        currentState = GameState.DUNGEON;
+    }
 
-        this.enemyActions = [];
-        this.currentMember = 0;
-
-        console.log("End of Turn");
+    async runFailure() {
+        this.initBox();
+        await this.dialogueBox.init('Failed to run away!');
+        await sleep(500);
+        await this.dialogueBox.end();
+        await this.genEnemyActions();
+        await this.exec();  
     }
 
     //make an action for the player, then execute it. Once all done, do the same for the enemies
     async AddAction(action, target, slot, actionCtx) {
-
-        //For reason after the end of a turn it skips a dialogue box, this "fixes" it
-        this.dialogueBox.init('');
-        this.dialogueBox.done = true;
-
+        this.initBox();
         this.playerAction = new Action(action, target, slot, actionCtx, this.dialogueBox);
         await this.playerAction.exec();
         this.currentMember++;
@@ -79,10 +84,31 @@ class Turn {
         if (this.currentMember === this.playerParty.length) {
             await this.genEnemyActions();
             await this.exec();
-            this.resetGuards();
         }
     };
 
+    //temporary thing until enemy actions are a real thing
+    async genEnemyActions() {
+        const testFunc = function () { console.log("action"); return "but nothing happened!"; };
+        for (var i = 0; i < this.enemyParty.length; i++)
+            this.enemyActions[i] = new Action(testFunc, this.playerParty[0], null, null, this.dialogueBox);
+    }
+
+    //exec each function per enemy in the eenmy party
+    async exec() {
+        console.log("enemy actions:");
+        for (var action in this.enemyActions) {
+            await this.enemyActions[action].exec();
+        }
+
+        this.enemyActions = [];
+        this.currentMember = 0;
+        this.resetGuards();
+
+        console.log("End of Turn");
+    }
+
+    //reset guards at the end of a turn
     resetGuards() {
         for (var i = 0; i < this.playerParty.length; i++) {
             this.playerParty[i].guard = false;
@@ -98,8 +124,7 @@ class Turn {
         return false;
     }
 
-    //finally, a real-world of example something vaguely leetcode related
-    //shove all members to the left
+    //finally, a real-world of example something vaguely leetcode related, shove all members to the left
     shove() { 
         var party = this.enemyParty;
         var count = 0; 
@@ -116,13 +141,6 @@ class Turn {
         this.enemyParty.splice(-nullCount);
     }
 
-    //temporary thing until enemy actions are a real thing
-    async genEnemyActions() {
-        const testFunc = function () { console.log("action"); };
-        for (var i = 0; i < this.enemyParty.length; i++)
-            this.enemyActions[i] = new Action(testFunc, this.playerParty[0], null, null, this.dialogueBox);
-    }
-
     //check if either party is defeated, return endState if either is killed
     check() {
         if (this.playerParty.length === 0) {
@@ -130,6 +148,12 @@ class Turn {
         }else if (this.enemyParty.length === 0) {
             return endState.WIN;
         }
+    }
+
+    //For reason sometimes it skips a dialogue box, this "fixes" it
+    initBox() {
+        this.dialogueBox.init('');
+        this.dialogueBox.done = true;
     }
 
 }
@@ -146,13 +170,31 @@ class Action {
 
     //execute the action based on the context
     async exec() {
-        this.dialogueBox.init(this.target.name + ' is attacked!');
-        await this.sleep(500);
-        this.dialogueBox.done = true;
+        switch (this.actionCtx) {
+            case ("item"):
+                this.dialogueBox.init('an item is used on ' + this.target.name + '!');
+                await sleep(500);
+                this.dialogueBox.init(this.func.use(this.target, this.slot));
+                await sleep(500);
+                break;
+            case "skill":
+                this.dialogueBox.init('a skill is being used on ' + this.target.name + '!');
+                await sleep(500);
+                this.dialogueBox.init(this.func.execSkill(this.target, this.slot));
+                await sleep(500);
+                break;
+            case "guard":
+                this.dialogueBox.init(this.func(this.target, this.slot));
+                await sleep(500);
+                break;
+            default:
+                this.dialogueBox.init(this.target.name + ' is attacked!');
+                await sleep(500);
+                this.dialogueBox.init(this.func(this.target, this.slot));
+                await sleep(500);
+                break;
+        }
         this.dialogueBox.end();
-        if (this.actionCtx === "item") this.func.use(this.target, this.slot);
-        else if (this.actionCtx === "skill") this.func.execSkill(this.target, this.slot);
-        else this.func(this.target, this.slot);
     }
 
     sleep(ms) {
