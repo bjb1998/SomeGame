@@ -9,8 +9,8 @@
     "\\scripts\\animation",
     "\\ui",
     "\\ui\\menus",
-    "\\world"
+    "\\ui\\menus\\battle"
   ],
-  "SelectedNode": "\\data\\animDB.js",
+  "SelectedNode": "\\ui\\menus\\battle\\battleDialogueBox.js",
   "PreviewInSolutionExplorer": false
 }

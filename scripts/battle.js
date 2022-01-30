@@ -10,13 +10,14 @@ function failFunc() { return 'Couldn\'t run away!';};
 //the real meat of all things combat.
 class Battle {
     constructor(playerParty, enemyParty, dialogueBox, controls) {
-        this.playerParty = playerParty;                                                             //player and his/her allies
-        this.enemyParty = enemyParty;                                                               //enemies
-        this.expAmt = this.getExp();                                                                //total exp of all enemies
-        this.dialogueBox = dialogueBox;
-        this.controls = controls;
-        this.runChance = 50;                                                                        //Chance for running away from battle
-        this.turn = new Turn(this.playerParty, this.enemyParty, this.dialogueBox, this.controls);   //turn to do combat in
+        this.playerParty = playerParty;                         //player and his/her allies
+        this.enemyParty = enemyParty;                           //enemies
+        this.expAmt = this.getExp();                            //total exp of all enemies
+        this.dialogueBox = dialogueBox;                         //dialogue box to display battle stuff
+        this.controls = controls;                               //controls for menu controls
+        this.runChance = 50;                                    //Chance for running away from battle
+        this.turn = new Turn(this.playerParty, this.enemyParty, //turn to do combat in
+            this.dialogueBox, this.controls, this.expAmt);   
     }
 
     //add each exp amount of the enemies
@@ -45,7 +46,7 @@ class Battle {
 
 //Turn for one phase of combat
 class Turn {
-    constructor(playerParty, enemyParty, dialogueBox, controls) {
+    constructor(playerParty, enemyParty, dialogueBox, controls, exp) {
         this.playerParty = playerParty;
         this.enemyParty = enemyParty;
         this.dialogueBox = dialogueBox;
@@ -53,6 +54,7 @@ class Turn {
         this.enemyActions = [];
         this.currentMember = 0;
         this.controls = controls;
+        this.exp = exp;
     }
 
     async runSuccess() {
@@ -60,6 +62,15 @@ class Turn {
         const runAct = new Action(runFunc, null, null, 'other', this.dialogueBox, this.controls);
         await runAct.exec();
         currentState = GameState.DUNGEON;
+    }
+
+    async gainExp() {
+
+        for (var i = 0; i < this.playerParty.length; i++) {
+            console.log(this.playerParty[i]);
+        if (this.playerParty[i].stats.status != 'Dead')
+            this.playerParty[i].checkLevel(this.exp);
+        }
     }
 
     async runFailure() {
@@ -144,7 +155,8 @@ class Turn {
     check() {
         if (this.playerParty.length === 0) {
             return endState.LOSE;
-        }else if (this.enemyParty.length === 0) {
+        } else if (this.enemyParty.length === 0) {
+            this.gainExp(this.exp);
             return endState.WIN;
         }
     }
