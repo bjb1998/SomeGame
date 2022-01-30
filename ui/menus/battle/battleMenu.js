@@ -57,10 +57,10 @@ class battleMenu extends Menu{
                 this.partyStats = new partyStatsElem(this.ctx, this.party.active, //draw player party stats
                     menuColorBackground, 225, 35, 135, 150);
 
-                this.enemyStats = new partyStatsElem(this.ctx, this.enemies.active, //draw enemyt party stats
+                this.enemyStats = new partyStatsElem(this.ctx, this.enemies.active, //draw enemy party stats
                     menuColorBackground, 375, 35, 135, 150);
 
-                this.battle = new Battle(this.party.active, this.enemies.active, this.dialogueBox); //start battle with the parties & dialogue
+                this.battle = new Battle(this.party.active, this.enemies.active, this.dialogueBox, this.controls); //start battle with the parties & dialogue
             }
         }
     }

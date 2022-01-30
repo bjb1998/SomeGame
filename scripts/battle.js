@@ -4,19 +4,19 @@ const endState = {
     LOSE: 'Lose'
 };
 
-sleep = function (ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
+function runFunc() { return 'Got away safely';};
+function failFunc() { return 'Couldn\'t run away!';};
 
 //the real meat of all things combat.
 class Battle {
-    constructor(playerParty, enemyParty, dialogueBox) {
-        this.playerParty = playerParty;                             //player and his/her allies
-        this.enemyParty = enemyParty;                               //enemies
-        this.expAmt = this.getExp();                                //total exp of all enemies
+    constructor(playerParty, enemyParty, dialogueBox, controls) {
+        this.playerParty = playerParty;                                                             //player and his/her allies
+        this.enemyParty = enemyParty;                                                               //enemies
+        this.expAmt = this.getExp();                                                                //total exp of all enemies
         this.dialogueBox = dialogueBox;
-        this.turn = new Turn(this.playerParty, this.enemyParty, this.dialogueBox);  //turn to do combat in
-        this.runChance = 50;                                          //Chance for running away from battle
+        this.controls = controls;
+        this.runChance = 50;                                                                        //Chance for running away from battle
+        this.turn = new Turn(this.playerParty, this.enemyParty, this.dialogueBox, this.controls);   //turn to do combat in
     }
 
     //add each exp amount of the enemies
@@ -45,28 +45,27 @@ class Battle {
 
 //Turn for one phase of combat
 class Turn {
-    constructor(playerParty, enemyParty, dialogueBox) {
+    constructor(playerParty, enemyParty, dialogueBox, controls) {
         this.playerParty = playerParty;
         this.enemyParty = enemyParty;
         this.dialogueBox = dialogueBox;
         this.playerAction = null;
         this.enemyActions = [];
         this.currentMember = 0;
-        this.wait = false;
+        this.controls = controls;
     }
 
     async runSuccess() {
         this.initBox();
-        this.dialogueBox.init('Got away safely!');
-        await sleep(500);
+        const runAct = new Action(runFunc, null, null, 'other', this.dialogueBox, this.controls);
+        await runAct.exec();
         currentState = GameState.DUNGEON;
     }
 
     async runFailure() {
         this.initBox();
-        await this.dialogueBox.init('Failed to run away!');
-        await sleep(500);
-        await this.dialogueBox.end();
+        const failAct = new Action(failFunc, null, null, 'other', this.dialogueBox, this.controls);
+        await failAct.exec();
         await this.genEnemyActions();
         await this.exec();  
     }
@@ -74,7 +73,7 @@ class Turn {
     //make an action for the player, then execute it. Once all done, do the same for the enemies
     async AddAction(action, target, slot, actionCtx) {
         this.initBox();
-        this.playerAction = new Action(action, target, slot, actionCtx, this.dialogueBox);
+        this.playerAction = new Action(action, target, slot, actionCtx, this.dialogueBox, this.controls);
         await this.playerAction.exec();
         this.currentMember++;
         if (this.checkDeath(target)) {
@@ -89,9 +88,9 @@ class Turn {
 
     //temporary thing until enemy actions are a real thing
     async genEnemyActions() {
-        const testFunc = function () { console.log("action"); return "but nothing happened!"; };
+        const testFunc = function () { console.log("Nothing should happen here"); return "but nothing happened!"; };
         for (var i = 0; i < this.enemyParty.length; i++)
-            this.enemyActions[i] = new Action(testFunc, this.playerParty[0], null, null, this.dialogueBox);
+            this.enemyActions[i] = new Action(testFunc, this.playerParty[0], null, null, this.dialogueBox, this.controls);
     }
 
     //exec each function per enemy in the eenmy party
@@ -160,12 +159,15 @@ class Turn {
 
 //Action to executed during a turn. Can be players, or enemys.
 class Action {
-    constructor(func, target, slot, actionCtx, dialogueBox) {
+    constructor(func, target, slot, actionCtx, dialogueBox, controls) {
         this.func = func;           //actions the item/skill will do
         this.target = target;       //target to deal the damage, etc. to
         this.slot = slot;           //item/skill slot, used depending on action context
         this.actionCtx = actionCtx; //Used to determine if item, skill, or basic attack
         this.dialogueBox = dialogueBox;
+        this.next = false;
+        this.controls = controls;
+        this.buffer = true;
     }
 
     //execute the action based on the context
@@ -173,31 +175,40 @@ class Action {
         switch (this.actionCtx) {
             case ("item"):
                 this.dialogueBox.init('an item is used on ' + this.target.name + '!');
-                await sleep(500);
+                await this.awaitInput();
                 this.dialogueBox.init(this.func.use(this.target, this.slot));
-                await sleep(500);
+                await this.awaitInput();
                 break;
             case "skill":
                 this.dialogueBox.init('a skill is being used on ' + this.target.name + '!');
-                await sleep(500);
+                this.awaitInput();
                 this.dialogueBox.init(this.func.execSkill(this.target, this.slot));
-                await sleep(500);
+                await this.awaitInput();
                 break;
-            case "guard":
+            case "other":
                 this.dialogueBox.init(this.func(this.target, this.slot));
-                await sleep(500);
+                await this.awaitInput();
                 break;
             default:
                 this.dialogueBox.init(this.target.name + ' is attacked!');
-                await sleep(500);
+                await this.awaitInput();
                 this.dialogueBox.init(this.func(this.target, this.slot));
-                await sleep(500);
+                await this.awaitInput();
                 break;
         }
         this.dialogueBox.end();
     }
 
-    sleep(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
+    async timeout(ms) { return new Promise(res => setTimeout(res, ms)); }
+
+    async awaitInput() {
+        var next = false;
+        while (next === false) {
+            await this.timeout(50); // pauses script
+            const confirm = this.controls.confirm;
+            if (confirm && confirm != this.buffer) next = true;
+            else this.state = 0;
+            this.buffer = confirm;
+        }
     }
 }

@@ -12,6 +12,10 @@ function setChance() {
     return Math.floor(Math.random() * 100) + 1;
 };                             //Set chance for random stuff
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 var debug = true;
 var currentState = GameState.DUNGEON;                //current state the game is in
 const CIRCLE = Math.PI * 2; 					     //2pi in radians (all angles are in radians)
