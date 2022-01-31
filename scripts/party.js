@@ -29,10 +29,12 @@ class Party {
         let i1 = this.active.indexOf(entity1);
         let i2 = this.active.indexOf(entity2);
 
-        if (i2 === this.playerIndex) this.playerIndex = i1;
-        if (i1 === this.playerIndex) this.playerIndex = i2;
-
         [this.active[i1], this.active[i2]] = [this.active[i2], this.active[i1]];
+
+        if (i2 === this.playerIndex) this.playerIndex = i1;
+        else if (i1 === this.playerIndex) this.playerIndex = i2;
+
+        console.log(this.playerIndex);
     }
 
     swapReserve(entity1, entity2) {

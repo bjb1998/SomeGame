@@ -1,17 +1,12 @@
 {
   "ExpandedNodes": [
     "",
-    "\\assets",
-    "\\assets\\fonts",
-    "\\assets\\sprites",
     "\\data",
-    "\\scripts",
     "\\scripts\\animation",
     "\\ui",
     "\\ui\\menus",
-    "\\ui\\menus\\battle",
-    "\\world"
+    "\\ui\\menus\\battle"
   ],
-  "SelectedNode": "\\ui\\menus\\menuElem.js",
+  "SelectedNode": "\\data\\textureDB.js",
   "PreviewInSolutionExplorer": false
 }
