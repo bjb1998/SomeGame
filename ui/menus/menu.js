@@ -1,7 +1,6 @@
 class Menu {
     constructor(canvas, controls, party) {
         this.ctx = canvas.getContext('2d'); //canavs context
-        this.battleChance = 50;             //chance of a battle happening
         this.selction = 0;                  //spot the plaeyer selects
         this.width = canvas.width;          //width of menu
         this.height = canvas.height;        //height of menu

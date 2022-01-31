@@ -5,7 +5,8 @@ class Party {
     constructor(player) {
         this.active = [];
         this.reserve = [];
-        this.active.push(player);
+        if(player != null)
+            this.active.push(player);
         this.playerIndex = 0;
     };
 

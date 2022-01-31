@@ -5,6 +5,7 @@
  * 3. Make an animation for your enemy in animDB.js
  * 4. Make stats, resistances, and skills in this file
  * Work off from the Dummy, Microwave, or Plunger if you get stuck
+ * 5. Add the enemy to the maps enemy pool in MapDB.js
  */
 
 newEnemy = function (enemy) {

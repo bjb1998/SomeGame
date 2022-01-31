@@ -1,8 +1,9 @@
 //map of any respective dungeon
-class RandomMap {
-	constructor(size) {
-		this.size = size;                             //size of map (n^2)
-        this.wallGrid = new Uint8Array(size * size);  //Random array of walls, 0 is floor, 1 is wall
+class Map {
+    constructor(map, pool) {
+        this.size = Math.sqrt(map.length);            //size of map (n^2)
+        this.wallGrid = map;                          //Random array of walls, 0 is floor, 1 is wall
+        this.enemyPool = pool;
         this.skybox = skyboxSprite;                   //skybox texture
         this.textures = [wallSprite, doorSprite];     //array of textures to put in
         this.colors = ["green", "red", "orange"];     //colors per cooresponding texture (no wall = index 0)
@@ -18,12 +19,6 @@ class RandomMap {
         if (x < 0 || x > this.size - 1 || y < 0 || y > this.size - 1) return -1;    //error checking for negatives
         //the grid is a square so we can do this to get a coordinate
 		return this.wallGrid[y * this.size + x];                                    //get the position
-	};
-
-	randomize(){
-		for (var i = 0; i < this.size * this.size; i++) {
-            this.wallGrid[i] = Math.floor(Math.random() * this.states);
-		}
 	};
 
 	//Cast rays to project 'fake' 3D onto screen

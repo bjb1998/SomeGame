@@ -15,7 +15,6 @@ class Battle {
         this.expAmt = this.getExp();                            //total exp of all enemies
         this.dialogueBox = dialogueBox;                         //dialogue box to display battle stuff
         this.controls = controls;                               //controls for menu controls
-        this.runChance = 50;                                    //Chance for running away from battle
         this.turn = new Turn(this.playerParty, this.enemyParty, //turn to do combat in
             this.dialogueBox, this.controls, this.expAmt);   
     }
@@ -36,7 +35,7 @@ class Battle {
     //Generate random int, if <= the runChance, run away!
     async run() {
         const chance = setChance();
-        if (chance <= this.runChance) {
+        if (chance <= runChance) {
             await this.turn.runSuccess();
         } else {
             await this.turn.runFailure();

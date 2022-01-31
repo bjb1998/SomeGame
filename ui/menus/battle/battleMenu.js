@@ -1,7 +1,9 @@
 class battleMenu extends Menu{
-    constructor(canvas, controls, party) {
+    constructor(canvas, controls, party, map) {
         super(canvas, controls, party);
+        this.battleChance = battleChance;             //chance of a battle happening
         this.enemies = [];
+        this.currentPool = map.enemyPool;
     }
 
     //draw all things battling
@@ -49,10 +51,8 @@ class battleMenu extends Menu{
 
                 
                 this.dialogueBox = new BattleDialogueBox(this.ctx, this.controls, 437.5, 185, 20, battleDiag);
-                this.enemies = new EnemyParty(newEnemy(DUMMY)); //todo make maps have an enemy pool
-                this.enemies.recruit(newEnemy(Microwave));
-                this.enemies.recruit(newEnemy(Plunger));
-                this.enemies.recruit(newEnemy(Vacuum));
+                this.enemies = new EnemyParty();
+                this.randoizeEnemies();
 
                 this.partyStats = new partyStatsElem(this.ctx, this.party.active, //draw player party stats
                     menuColorBackground, 225, 35, 135, 150);
@@ -62,6 +62,14 @@ class battleMenu extends Menu{
 
                 this.battle = new Battle(this.party.active, this.enemies.active, this.dialogueBox, this.controls); //start battle with the parties & dialogue
             }
+        }
+    }
+
+    randoizeEnemies() {
+        const enemyAmt = Math.floor(Math.random() * 5)
+        for (var i = 0; i < enemyAmt; i++) {
+            const randomEnemy = Math.floor(Math.random() * this.currentPool.length)
+            this.enemies.recruit(newEnemy(this.currentPool[randomEnemy]));
         }
     }
 
@@ -81,7 +89,7 @@ class battleMenu extends Menu{
         this.battle = null;
         this.top = 0;
         this.selection = 0;
-        battleChance = 101;
+        this.battleChance = battleChance;
         if (currentState === GameState.BATTLE) currentState = GameState.DUNGEON;
         
     }

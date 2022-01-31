@@ -10,8 +10,8 @@ window.onload = () => {
     var UICanvas = document.getElementById('ui');
     var battleCanvas = document.getElementById('battle');
 
-    var map = new RandomMap(32);
-    var playerControls = new ControlsWorld(0.5, 0.5, rightAngle);
+    var map = new Map(mapOne, mapOnePool);
+    var playerControls = new ControlsWorld(8.5, 1.5, rightAngle);
 
     var controls = new Controls();
     
@@ -22,10 +22,8 @@ window.onload = () => {
     //this is temporary and for testing dialogue boxes
     var diag = new DialogueBox(UICanvas.getContext('2d'), controls.states, 900, 250, 33, testDiag);
 
-    var battler = new battleMenu(battleCanvas, controls.states, theParty);
+    var battler = new battleMenu(battleCanvas, controls.states, theParty, map);
     var loop = new GameLoop();
-
-    map.randomize();
 
     document.onkeydown = function (e) {
         if(debug === false) return (e.which || e.keyCode) != 116;
