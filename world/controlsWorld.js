@@ -38,7 +38,8 @@ class ControlsWorld{
 			let timer = setInterval(function (camera, map) {
 				let timePassed = Date.now() - start;
 
-				if (timePassed >= 215) {
+                if (timePassed >= 215) {
+                    step.play();
                     clearInterval(timer);
                     const prevX = camera.x;
                     const prevY = camera.y;
@@ -73,6 +74,7 @@ class ControlsWorld{
             let timer = setInterval(function(){
                 let timePassed = Date.now() - start;
                 if (timePassed >= 250) {
+                    sfx_open.play();
                     clearInterval(timer);
                     if(currentState === GameState.PAUSE) currentState = GameState.DUNGEON;
                     else if(currentState === GameState.DUNGEON) currentState = GameState.PAUSE;

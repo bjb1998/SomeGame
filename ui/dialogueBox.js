@@ -126,6 +126,7 @@ class Dialogue {
 
     nextText() {
         this.currentText++;
+        sfx_confirm.play();
     }
 
     addText(text) {

@@ -15,7 +15,6 @@ class itemMenuElem extends pauseMenuElem {
     }
 
     drawMenuText() {
-        console.log(this.options.length);
         if (this.options.length <= 0) { //If inventory is empty, go back
             this.done = true;
             return;

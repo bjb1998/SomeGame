@@ -66,7 +66,6 @@ class Turn {
     async gainExp() {
 
         for (var i = 0; i < this.playerParty.length; i++) {
-            console.log(this.playerParty[i]);
         if (this.playerParty[i].stats.status != 'Dead')
             this.playerParty[i].checkLevel(this.exp);
         }
@@ -203,6 +202,7 @@ class Action {
             default:
                 this.dialogueBox.init(this.target.name + ' is attacked!');
                 await this.awaitInput();
+                attack_phys.play();
                 this.dialogueBox.init(this.func(this.target, this.slot));
                 await this.awaitInput();
                 break;

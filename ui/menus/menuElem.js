@@ -65,8 +65,14 @@ class MenuElem {
         const back = this.controls.backward;
 
         //move up/down the menu
-        if (forward && forward != this.forwardBuffer) this.selection--;
-        if (back && back != this.backBuffer) this.selection++;
+        if (forward && forward != this.forwardBuffer) {
+            sfx_select.play();
+            this.selection--;
+        }
+        if (back && back != this.backBuffer) {
+            sfx_select.play();
+            this.selection++;
+        }
         this.backBuffer = back
         this.forwardBuffer = forward;
 
@@ -80,8 +86,13 @@ class MenuElem {
     confirmDeny() {
         const confirm = this.controls.confirm;
         const decline = this.controls.decline;
-        if (confirm && confirm != this.confirmBuffer) this.state = 1;
-        else if ((decline && decline != this.denyBuffer) || this.done) this.state = -1;
+        if (confirm && confirm != this.confirmBuffer) {
+            this.state = 1;
+            sfx_confirm.play();
+        } else if ((decline && decline != this.denyBuffer) || this.done) {
+            this.state = -1;
+            sfx_confirm.play();
+        }
         else this.state = 0;
         this.confirmBuffer = confirm;
         this.denyBuffer = decline;

@@ -25,10 +25,6 @@ window.onload = () => {
     var battler = new battleMenu(battleCanvas, controls.states, theParty, map);
     var loop = new GameLoop();
 
-    document.onkeydown = function (e) {
-        if(debug === false) return (e.which || e.keyCode) != 116;
-    };
-
     diag.start();
 
     loop.start(function frame() {
