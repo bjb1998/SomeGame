@@ -13,7 +13,7 @@ window.onload = () => {
     var map = new Map(mapOne, mapOnePool, mapOneNPCs);
     var controls = new Controls();
     
-    var camera = new Camera(game, res);
+    var camera = new Camera(game);
     var minimap = new Minimap(UICanvas, 16, 125, 20, 20, map);
     var menu = new pauseMenu(UICanvas, controls.states, map, theParty);
 

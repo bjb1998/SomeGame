@@ -1,10 +1,9 @@
 class Camera {
-    constructor(canvas, resolution, focalLength) {
+    constructor(canvas) {
         this.ctx = canvas.getContext('2d');             //technically 3D but not reall,y Ala-doom
         this.width = canvas.width = canvas.width;       //X-resolution of canvas
         this.height = canvas.height = canvas.height;    //Y-Resolution of canvas
-        this.resolution = resolution;                   //amount of columns to draw per frame
-        this.spacing = this.width / resolution;         //space between each columnn
+        this.spacing = this.width / res;         //space between each columnn
         this.focalLength = 0.8;                         //FOV of the camera
         this.range = 14;                                //draw distance of the vectors
         this.lightRange = 5;                            //range of light
@@ -42,8 +41,8 @@ class Camera {
 
     drawColumns(player, map) {
         this.ctx.save();
-        for (var column = 0; column < this.resolution; column++) {
-            var x = column / this.resolution - 0.5;                             //x position of column to draw
+        for (var column = 0; column < res; column++) {
+            var x = column / res - 0.5;                             //x position of column to draw
             var angle = Math.atan2(x, this.focalLength);                        //angle between the x and the focalLength
             var ray = map.cast(player, player.direction + angle, this.range);   //cast ray to get what to draw for the column
             this.drawColumn(column, ray, angle, map);                           //draw the column
@@ -52,6 +51,7 @@ class Camera {
     };
 
     drawColumn(column, ray, angle, map) {
+        this.spacing = this.width / res;
         var ctx = this.ctx;                             //context of the camera
         var texture;                                    //given texture for a space
         var left = Math.ceil(column * this.spacing);    //left side of each column
