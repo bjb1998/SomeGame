@@ -24,9 +24,13 @@ class Minimap{
                             size, size);
                         this.drawPlayerSpr(i, j);
                         continue;
-                    }else if (coord < 0)
+                    } else if (coord <= -2) {
+                        this.ctx.drawImage(npcMap.image, this.startX + i * size, this.startY + j * size,
+                            size, size);
+                        continue;
+                    } else if (coord < 0) {
                         this.ctx.fillStyle = "black";
-                    else
+                    }else
                         this.ctx.fillStyle = this.map.colors[coord];
 
                     this.ctx.fillRect(this.startX + i * size, this.startY + j * size,

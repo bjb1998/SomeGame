@@ -15,7 +15,6 @@ class DialogueBox{
 
     start() {
         currentState = GameState.DIALOGUE;
-        console.log(this.prevState);
     }
 
     next() {
@@ -29,14 +28,14 @@ class DialogueBox{
     nextText() {
         if (this.dialogueText.currentText + 1 < this.dialogueText.txt.length) {
             this.dialogueText.nextText();
-            this.resetRows();
+            this.reset();
         } else {
             this.end();
         }
 
     }
 
-    resetRows() {
+    reset() {
         this.rows = ['', '', ''];
         this.currentWord = 0;
     }
@@ -107,17 +106,18 @@ class DialogueBox{
         if (this.active)
             this.ctx.clearRect(50, 500, this.width, this.height);
         this.active = false;
-        this.resetRows();
+        this.reset();
         this.dialogueText.end(this.prevState);
     }
 
 }
 
 class Dialogue {
-    constructor(speaker, txt) {
+    constructor(speaker, anim, txt) {
         this.speaker = speaker;
         this.txt = txt;
         this.currentText = 0;
+        this.anim = anim;
     }
 
     getSpeaker() {
@@ -138,6 +138,7 @@ class Dialogue {
     }
 
     end(state) {
+        this.currentText = 0;
         if (currentState === GameState.DIALOGUE) currentState = state;
     }
 }

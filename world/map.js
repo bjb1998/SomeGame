@@ -1,6 +1,6 @@
 //map of any respective dungeon
 class Map {
-    constructor(map, pool) {
+    constructor(map, pool, npcs) {
         this.size = Math.sqrt(map.length);            //size of map (n^2)
         this.wallGrid = map;                          //Random array of walls, 0 is floor, 1 is wall
         this.enemyPool = pool;
@@ -9,7 +9,7 @@ class Map {
         this.colors = ["green", "red", "orange"];     //colors per cooresponding texture (no wall = index 0)
         this.wallHeight = 1;
         this.light = 1;
-        this.states = 3;                              //possible sattes a wall can be (max = n - 1)
+        this.npcs = npcs;
 	};
 
     //get x,y coordinate of map
@@ -19,7 +19,12 @@ class Map {
         if (x < 0 || x > this.size - 1 || y < 0 || y > this.size - 1) return -1;    //error checking for negatives
         //the grid is a square so we can do this to get a coordinate
 		return this.wallGrid[y * this.size + x];                                    //get the position
-	};
+    };
+
+    getNPC(npcNum) {
+        const npcIndex = (npcNum * -1) - 2;
+        return this.npcs[npcIndex];
+    }
 
 	//Cast rays to project 'fake' 3D onto screen
 	//DOOM for MS-DOS does similar but in C

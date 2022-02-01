@@ -1,9 +1,11 @@
 class ControlsWorld{
-	constructor(x, y, direction){
+	constructor(x, y, direction, dialogueBox){
 		Object.assign(this, {x, y, direction});
         this.paces = 0;
         playerPos = [x - 0.5, y - 0.5];         //inialize playerPos global
         playerDir = direction;
+        this.buffer = false;
+        this.dialogueBox = dialogueBox;
 	};
 
     rotate(dir) {
@@ -56,16 +58,35 @@ class ControlsWorld{
 				}
 
 				// get change in camera distance, check distance, then move when needed
-				const dx = Math.cos(camera.direction) * 0.1;
-				const dy = Math.sin(camera.direction) * 0.1;
-				const destX = camera.x + (0.6 * Math.sign(dx)) + 0.05;
-				const destY = camera.y + (0.6 * Math.sign(dy)) + 0.05;
-				if (map.get(destX, camera.y) <= 0) camera.x += dx;
-                if (map.get(camera.x, destY) <= 0) camera.y += dy;
+                const dx = Math.cos(camera.direction) * 0.1;
+                const dy = Math.sin(camera.direction) * 0.1;
+                const destX = camera.x + (0.6 * Math.sign(dx)) + 0.05;
+                const destY = camera.y + (0.6 * Math.sign(dy)) + 0.05;
+                if (map.get(destX, camera.y) === 0) camera.x += dx;
+                if (map.get(camera.x, destY) === 0) camera.y += dy;
+
+                const xRes = map.get(destX, camera.y);
+                const yRes = map.get(camera.x, destY);
+                if (xRes <= -2 || yRes <= -2) {
+                    if (map.getNPC(yRes) === null) 
+                        npc = map.getNPC(xRes);
+                    else 
+                        npc = map.getNPC(yRes);
+                    
+                } else
+                    npc = null;
 
 			}, 20, this, map);
 		};
     };
+
+    talk() {
+        if (npc != null) {
+            this.dialogueBox.dialogueText = npc;
+            this.dialogueBox.reset();
+            this.dialogueBox.start();
+        }
+    }
 
     pause() {
         let start = Date.now()
@@ -78,7 +99,6 @@ class ControlsWorld{
                     clearInterval(timer);
                     if(currentState === GameState.PAUSE) currentState = GameState.DUNGEON;
                     else if(currentState === GameState.DUNGEON) currentState = GameState.PAUSE;
-                    console.log("Game State: " + currentState);
                     moving = false;
                     return;
                 }
@@ -91,6 +111,8 @@ class ControlsWorld{
             if (controls.left) this.rotate(-1);
             if (controls.right) this.rotate(1);
             if (controls.forward) this.walk(map);
+            if (controls.confirm && this.buffer != controls.confirm) this.talk();
+            this.buffer = controls.confirm;
         };
             if (controls.pause) this.pause();
 	};

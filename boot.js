@@ -10,9 +10,7 @@ window.onload = () => {
     var UICanvas = document.getElementById('ui');
     var battleCanvas = document.getElementById('battle');
 
-    var map = new Map(mapOne, mapOnePool);
-    var playerControls = new ControlsWorld(8.5, 1.5, rightAngle);
-
+    var map = new Map(mapOne, mapOnePool, mapOneNPCs);
     var controls = new Controls();
     
     var camera = new Camera(game, res);
@@ -21,11 +19,10 @@ window.onload = () => {
 
     //this is temporary and for testing dialogue boxes
     var diag = new DialogueBox(UICanvas.getContext('2d'), controls.states, 900, 250, 33, testDiag);
+    var playerControls = new ControlsWorld(8.5, 1.5, rightAngle, diag);
 
     var battler = new battleMenu(battleCanvas, controls.states, theParty, map);
     var loop = new GameLoop();
-
-    diag.start();
 
     loop.start(function frame() {
         playerControls.update(controls.states, map);

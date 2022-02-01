@@ -5,8 +5,8 @@ class BattleDialogueBox extends DialogueBox{
     }
 
     async init(txt) {
-        this.resetRows();
-        this.dialogueText = new Dialogue('', [txt]);
+        this.reset();
+        this.dialogueText = new Dialogue('', null, [txt]);
         this.done = false;
         this.draw();
     }
@@ -49,7 +49,7 @@ class BattleDialogueBox extends DialogueBox{
         if (this.active)
             this.ctx.clearRect(550, 250, this.width + 5, this.height);
         this.active = false;
-        this.resetRows();
+        this.reset();
         this.done = true;
     }
 

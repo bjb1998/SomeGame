@@ -40,6 +40,6 @@ const VacuumSkills = [strike, ember];
 
 var DUMMY = new Pawn('DUMMY', DUMMYStats, 100, DUMMYSkills, DUMMYanim);
 var Microwave = new Pawn('Microwave', MicrowaveStats, 100, MicrowaveSkills, MicrowaveAnim);
-var Plunger = new Pawn('Plunger', PlungerStats, 100, PlungerSkills, PlunglerAnim);
+var Plunger = new Pawn('Plunger', PlungerStats, 100, PlungerSkills, PlungerAnim);
 var Vacuum = new Pawn('Vacuum', VacuumStats, 100, VacuumSkills, VacuumAnim);
 

@@ -24,6 +24,8 @@ class Camera {
     render(player, map) {
         this.drawSky(player.direction, map.skybox, map.light);
         this.drawColumns(player, map);
+        if (npc != null && currentState != GameState.BATTLE)
+        npc.anim.draw(this.ctx, this.width / 2, this.height / 2);
     }
 
     drawSky(direction, sky) {

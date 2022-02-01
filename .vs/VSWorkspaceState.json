@@ -1,12 +1,12 @@
 {
   "ExpandedNodes": [
     "",
-    "\\data",
-    "\\scripts\\animation",
+    "\\scripts",
     "\\ui",
     "\\ui\\menus",
-    "\\ui\\menus\\battle"
+    "\\ui\\menus\\battle",
+    "\\world"
   ],
-  "SelectedNode": "\\data\\textureDB.js",
+  "SelectedNode": "\\world\\camera.js",
   "PreviewInSolutionExplorer": false
 }
