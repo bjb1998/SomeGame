@@ -8,6 +8,6 @@
     "\\ui\\menus\\battle",
     "\\world"
   ],
-  "SelectedNode": "\\boot.js",
+  "SelectedNode": "\\world\\controlsWorld.js",
   "PreviewInSolutionExplorer": false
 }

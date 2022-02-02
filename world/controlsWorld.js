@@ -44,7 +44,7 @@ class ControlsWorld{
 		if (!moving) {
 			moving = true;
             let timer = setInterval(function (camera, map) {
-                if (frameNum - startFrame >= 12) {
+                if (frameNum - startFrame >= 14) {
                     step.play();
                     clearInterval(timer);
                     const prevX = camera.x;
