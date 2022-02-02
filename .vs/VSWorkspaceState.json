@@ -1,12 +1,13 @@
 {
   "ExpandedNodes": [
     "",
+    "\\data",
     "\\scripts",
     "\\ui",
     "\\ui\\menus",
     "\\ui\\menus\\battle",
     "\\world"
   ],
-  "SelectedNode": "\\world\\camera.js",
+  "SelectedNode": "\\boot.js",
   "PreviewInSolutionExplorer": false
 }

@@ -8,16 +8,21 @@ class ControlsWorld{
         this.dialogueBox = dialogueBox;
 	};
 
+    //rotate the camera 90 degrees left or right
     rotate(dir) {
         const angles = [0, 0 + rightAngle, 2 * rightAngle, 3 * rightAngle, CIRCLE]; //the 4 right angles (radians)
-		let start = Date.now();
+        let ogDirection = null;
 		if (!moving) {
 			moving = true;
-			let timer = setInterval(function (camera) {
-				let timePassed = Date.now() - start;
+            let timer = setInterval(function (camera) {
+                if (ogDirection == null) ogDirection = camera.direction; //get original direction when starting
 
-				if (timePassed >= 250) {
-					clearInterval(timer);
+                let dif = Math.abs(camera.direction - ogDirection); //get the difference between the two angles
+                if (dif >= Math.PI) dif = CIRCLE - dif;
+
+                //set camera equal to the nearest angle
+                if (dif >= rightAngle - 0.01) {
+                    clearInterval(timer);
 					camera.direction = angles.reduce(function (prev, curr) { //get the closest value to the angles array
 						return (Math.abs(curr - camera.direction) < Math.abs(prev - camera.direction) ? curr : prev);
                     });
@@ -33,22 +38,21 @@ class ControlsWorld{
 		};
 	};
 
-	walk(map) {
-		let start = Date.now();
+    //walk forward one space
+    walk(map) {
+        let startFrame = frameNum;
 		if (!moving) {
 			moving = true;
-			let timer = setInterval(function (camera, map) {
-				let timePassed = Date.now() - start;
-
-                if (timePassed >= 215) {
+            let timer = setInterval(function (camera, map) {
+                if (frameNum - startFrame >= 12) {
                     step.play();
                     clearInterval(timer);
                     const prevX = camera.x;
                     const prevY = camera.y;
 					//round vlaues for x, and y as needed
-					camera.x = Math.round(camera.x * 10) / 10;
-					camera.x = (camera.x < Math.floor(camera.x) + 0.5) ? Math.floor(camera.x) + 0.5 : camera.x;
-					camera.y = Math.round(camera.y * 10) / 10;
+                    camera.x = Math.round(camera.x / 0.5) * 0.5;
+                    camera.x = (camera.x < Math.floor(camera.x) + 0.5) ? Math.floor(camera.x) + 0.5 : camera.x;
+                    camera.y = Math.round(camera.y / 0.5) * 0.5;
 					camera.y = (camera.y < Math.floor(camera.y) + 0.5) ? Math.floor(camera.y) + 0.5 : camera.y;
                     playerPos = [camera.x - 0.5, camera.y - 0.5]; //store to globals for minimap drawing
                     moving = false;
@@ -62,11 +66,11 @@ class ControlsWorld{
                 const dy = Math.sin(camera.direction) * 0.1;
                 const destX = camera.x + (0.6 * Math.sign(dx)) + 0.05;
                 const destY = camera.y + (0.6 * Math.sign(dy)) + 0.05;
-                if (map.get(destX, camera.y) === 0) camera.x += dx;
-                if (map.get(camera.x, destY) === 0) camera.y += dy;
-
                 const xRes = map.get(destX, camera.y);
                 const yRes = map.get(camera.x, destY);
+                if (xRes === 0) camera.x += dx;
+                if (yRes === 0) camera.y += dy;
+
                 if (xRes <= -2 || yRes <= -2) {
                     if (map.getNPC(yRes) === null) 
                         npc = map.getNPC(xRes);
@@ -80,6 +84,7 @@ class ControlsWorld{
 		};
     };
 
+    //talk to npc if one is nearby on the map
     talk() {
         if (npc != null) {
             this.dialogueBox.dialogueText = npc;
@@ -88,6 +93,7 @@ class ControlsWorld{
         }
     }
 
+    //pause to do inventory stuff, etc.
     pause() {
         let start = Date.now()
         if (!moving) {
