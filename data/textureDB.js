@@ -9,3 +9,5 @@ const DUMMYTexture = new Texture('./assets/sprites/enemies/DUMMY.png');
 const PlungerTexture = new Texture('./assets/sprites/enemies/Plunger.png');
 const MicrowaveTexture = new Texture('./assets/sprites/enemies/Microwave.png');
 const VacuumTexture = new Texture('./assets/sprites/enemies/Vacuum.png');
+const PhoneTexture = new Texture('./assets/sprites/enemies/Phone.png');
+const WashingMachineTexture = new Texture('./assets/sprites/enemies/WashingMachine.png');

@@ -15,5 +15,7 @@ const mapOne = [1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1,
                 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1,
                 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,];
 
-const mapOnePool = [DUMMY, Microwave, Plunger, Vacuum];
+const mapOnePool = [DUMMY, Microwave, Plunger, Vacuum, Phone, WashingMachine];
+//const mapOnePool = [WashingMachine];            
+
 const mapOneNPCs = [plungerNpc];

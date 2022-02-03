@@ -38,8 +38,18 @@ const VacuumRes = new Resistance(1, 1, 1, 1, 1, 1, 1, 1, 1);
 const VacuumStats = new Stats(1, 1, 99, 1, 1, 1, 1, 1, VacuumRes);
 const VacuumSkills = [strike, ember];
 
+const PhoneRes = new Resistance(1, 1, 1, 1, 1, 1, 1, 1, 1);
+const PhoneStats = new Stats(1, 1, 99, 1, 1, 1, 1, 1, PhoneRes);
+const PhoneSkills = [strike, ember];
+
+const WashingMachineRes = new Resistance(1, 1, 1, 1, 1, 1, 1, 1, 1);
+const WashingMachineStats = new Stats(1, 1, 99, 1, 1, 1, 1, 1, WashingMachineRes);
+const WashingMachineSkills = [strike, ember];
+
 var DUMMY = new Pawn('DUMMY', DUMMYStats, 100, DUMMYSkills, DUMMYanim);
 var Microwave = new Pawn('Microwave', MicrowaveStats, 100, MicrowaveSkills, MicrowaveAnim);
 var Plunger = new Pawn('Plunger', PlungerStats, 100, PlungerSkills, PlungerAnim);
 var Vacuum = new Pawn('Vacuum', VacuumStats, 100, VacuumSkills, VacuumAnim);
+var Phone = new Pawn('Phone', PhoneStats, 100, PhoneSkills, PhoneAnim);
+var WashingMachine = new Pawn('Washer', WashingMachineStats, 100, WashingMachineSkills, WashingMachineAnim);
 

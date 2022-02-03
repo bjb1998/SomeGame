@@ -47,7 +47,8 @@ class battleMenu extends Menu{
     initBattle() {
         battleCheck = false;
         if (currentState === GameState.DUNGEON) {
-            const chance = setChance();
+            //const chance = setChance();
+            const chance = 1;
             if (chance <= this.battleChance) {
                 currentState = GameState.BATTLE;
 
