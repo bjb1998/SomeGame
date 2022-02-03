@@ -40,11 +40,11 @@ class ControlsWorld{
 
     //walk forward one space
     walk(map) {
-        let startFrame = frameNum;
+        let startTime = Date.now();
 		if (!moving) {
 			moving = true;
             let timer = setInterval(function (camera, map) {
-                if (frameNum - startFrame >= 14) {
+                if (Date.now() - startTime >= 215) {
                     step.play();
                     clearInterval(timer);
                     const prevX = camera.x;
@@ -55,9 +55,9 @@ class ControlsWorld{
                     camera.y = Math.round(camera.y / 0.5) * 0.5;
 					camera.y = (camera.y < Math.floor(camera.y) + 0.5) ? Math.floor(camera.y) + 0.5 : camera.y;
                     playerPos = [camera.x - 0.5, camera.y - 0.5]; //store to globals for minimap drawing
-                    moving = false;
                     if (camera.x != prevX || camera.y != prevY) //check for a battle if the player actually moved
                         battleCheck = true;
+                    moving = false;
 					return;
 				}
 

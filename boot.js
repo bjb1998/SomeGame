@@ -30,7 +30,6 @@ window.onload = () => {
         menu.draw();
         battler.draw();
         diag.draw();
-        frameNum++;
     });
 };
 
