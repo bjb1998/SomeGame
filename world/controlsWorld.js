@@ -40,35 +40,25 @@ class ControlsWorld{
 
     //walk forward one space
     walk(map) {
-        let start = Date.now();
+        var destX, destY, xRes, yRes, dx, dy;
+        destX = destY = xRes = yRes = dx = dy = null;
 		if (!moving) {
-			moving = true;
+            moving = true;
             let timer = setInterval(function (camera, map) {
-                let timePassed = Date.now() - start;
-                if (timePassed >= 215) {
-                    step.play();
-                    clearInterval(timer);
-                    const prevX = camera.x;
-                    const prevY = camera.y;
-					//round vlaues for x, and y as needed
-                    camera.x = Math.round(camera.x * 10) / 10;
-                    camera.x = (camera.x < Math.floor(camera.x) + 0.5) ? Math.floor(camera.x) + 0.5 : camera.x;
-                    camera.y = Math.round(camera.y * 10)  / 10;
-					camera.y = (camera.y < Math.floor(camera.y) + 0.5) ? Math.floor(camera.y) + 0.5 : camera.y;
-                    playerPos = [camera.x - 0.5, camera.y - 0.5]; //store to globals for minimap drawing
-                    if (camera.x != prevX || camera.y != prevY) //check for a battle if the player actually moved
-                        battleCheck = true;
-                    moving = false;
-					return;
-				}
+                if (destX === null) {
+                    dx = Math.cos(camera.direction) * 0.1;
+                    dy = Math.sin(camera.direction) * 0.1;
+                    destX = camera.x + (0.5 * Math.sign(dx)) + (Math.sign(dx) * 0.5);
+                    destY = camera.y + (0.5 * Math.sign(dy)) + (Math.sign(dy) * 0.5);
+                    if (destY === camera.y) destY = camera.y - 1; //screw you work already
+                    xRes = map.get(destX, camera.y);
+                    yRes = map.get(camera.x, destY);
+                }
+                //store previous positions of camera
+                const prevX = camera.x;
+                const prevY = camera.y;
 
 				// get change in camera distance, check distance, then move when needed
-                const dx = Math.cos(camera.direction) * 0.1;
-                const dy = Math.sin(camera.direction) * 0.1;
-                const destX = camera.x + (0.6 * Math.sign(dx)) + 0.05;
-                const destY = camera.y + (0.6 * Math.sign(dy)) + 0.05;
-                const xRes = map.get(destX, camera.y);
-                const yRes = map.get(camera.x, destY);
                 if (xRes === 0) camera.x += dx;
                 if (yRes === 0) camera.y += dy;
 
@@ -78,8 +68,22 @@ class ControlsWorld{
                     else 
                         npc = map.getNPC(yRes);
                     
-                } else
-                    npc = null;
+                } else npc = null;
+
+                if ((Math.abs(destX - camera.x) <= 0.01 || Math.abs(destY - camera.y) <= 0.01) || (camera.x === prevX && camera.y === prevY)) {
+                    step.play();
+                    clearInterval(timer);
+                    //round vlaues for x, and y as needed
+                    camera.x = Math.round(camera.x / 0.5) * 0.5;
+                    camera.x = (camera.x < Math.floor(camera.x) + 0.5) ? Math.floor(camera.x) + 0.5 : camera.x;
+                    camera.y = Math.round(camera.y / 0.5) * 0.5;
+                    camera.y = (camera.y < Math.floor(camera.y) + 0.5) ? Math.floor(camera.y) + 0.5 : camera.y;
+                    playerPos = [camera.x - 0.5, camera.y - 0.5]; //store to globals for minimap drawing
+                    if (camera.x != prevX || camera.y != prevY) //check for a battle if the player actually moved
+                        battleCheck = true;
+                    moving = false;
+                    return;
+                }
 
 			}, 20, this, map);
 		};
