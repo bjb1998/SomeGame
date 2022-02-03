@@ -1,7 +1,6 @@
 class pauseMenu extends Menu{
     constructor(canvas, controls, map, party) {
         super(canvas, controls, party);
-        this.map = map;                 //current map
     }
 
     draw() {

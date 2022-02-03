@@ -38,10 +38,12 @@ class battleMenu extends Menu{
                 }
             }
 
-        } else
+        }
+        else if (this.active)
             this.exit();
     }
 
+    //begin a battle, get enemies from the maps enemy pool
     initBattle() {
         battleCheck = false;
         if (currentState === GameState.DUNGEON) {
@@ -52,7 +54,7 @@ class battleMenu extends Menu{
                 
                 this.dialogueBox = new BattleDialogueBox(this.ctx, this.controls, 437.5, 185, 20, battleDiag);
                 this.enemies = new EnemyParty();
-                this.randoizeEnemies();
+                this.randomizeEnemies();
 
                 this.partyStats = new partyStatsElem(this.ctx, this.party.active, //draw player party stats
                     menuColorBackground, 225, 35, 135, 150);
@@ -65,7 +67,7 @@ class battleMenu extends Menu{
         }
     }
 
-    randoizeEnemies() {
+    randomizeEnemies() {
         const enemyAmt = Math.floor(Math.random() * 5)
         for (var i = 0; i < enemyAmt; i++) {
             const randomEnemy = Math.floor(Math.random() * this.currentPool.length)

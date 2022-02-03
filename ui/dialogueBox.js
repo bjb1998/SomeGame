@@ -59,7 +59,7 @@ class DialogueBox{
             this.drawDialogue(this.getText());
             ctx.clearRect(this.width + 50, 500, 900, 900)
             this.confirmDeny();
-        } else
+        } else if(this.active)
             this.end();
     }
 
