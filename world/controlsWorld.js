@@ -40,19 +40,20 @@ class ControlsWorld{
 
     //walk forward one space
     walk(map) {
-        let startTime = Date.now();
+        let start = Date.now();
 		if (!moving) {
 			moving = true;
             let timer = setInterval(function (camera, map) {
-                if (Date.now() - startTime >= 215) {
+                let timePassed = Date.now() - start;
+                if (timePassed >= 215) {
                     step.play();
                     clearInterval(timer);
                     const prevX = camera.x;
                     const prevY = camera.y;
 					//round vlaues for x, and y as needed
-                    camera.x = Math.round(camera.x / 0.5) * 0.5;
+                    camera.x = Math.round(camera.x * 10) / 10;
                     camera.x = (camera.x < Math.floor(camera.x) + 0.5) ? Math.floor(camera.x) + 0.5 : camera.x;
-                    camera.y = Math.round(camera.y / 0.5) * 0.5;
+                    camera.y = Math.round(camera.y * 10)  / 10;
 					camera.y = (camera.y < Math.floor(camera.y) + 0.5) ? Math.floor(camera.y) + 0.5 : camera.y;
                     playerPos = [camera.x - 0.5, camera.y - 0.5]; //store to globals for minimap drawing
                     if (camera.x != prevX || camera.y != prevY) //check for a battle if the player actually moved
