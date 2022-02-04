@@ -2,12 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\data",
-    "\\scripts",
-    "\\ui",
     "\\ui\\menus",
-    "\\ui\\menus\\battle",
-    "\\world"
+    "\\ui\\menus\\battle"
   ],
-  "SelectedNode": "\\ui\\menus\\battle\\battleMenu.js",
+  "SelectedNode": "\\data\\mapDB.js",
   "PreviewInSolutionExplorer": false
 }
