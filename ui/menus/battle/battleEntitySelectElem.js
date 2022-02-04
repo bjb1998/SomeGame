@@ -18,8 +18,10 @@ class battleEntitySelectElem extends battleMenuElem {
     }
 
     nextMenu() {
-        if (this.actionCtx != null) this.battle.addAction(this.func, this.options[this.selection], this.slot, this.actionCtx);
-        else this.battle.addAction(this.func, this.options[this.selection]);
+        const currentMember = this.battle.playerParty[this.battle.turn.currentMember];
+        const target = this.options[this.selection];
+        if (this.actionCtx != null) this.battle.addAction(this.func, currentMember, target, this.slot, this.actionCtx);
+        else this.battle.addAction(this.func, currentMember, target);
         this.done = true;
     }
 }

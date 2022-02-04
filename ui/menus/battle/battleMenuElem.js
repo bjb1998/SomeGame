@@ -29,7 +29,7 @@ class battleMenuElem extends MenuElem{
                 break;
             case 1: menu = new battleSkillElem(this, currentMember); break;                        //use a skill
             case 2: menu = new battleItemElem(this, party[this.playerIndex].inv); break;           //use an item
-            case 3: menu = this.battle.addAction(guard.func, currentMember, null, "other"); break; //guard current member
+            case 3: menu = this.battle.addAction(guard.func, currentMember, currentMember, null, "other"); break; //guard current member
             case 4: this.battle.run();                                              //run away from battle
             default: return;
         }

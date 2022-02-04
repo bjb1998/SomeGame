@@ -20,9 +20,9 @@ class Entity{
             skillsToAdd.forEach(current => this.skills.push(current));
     };
 
-    execSkill(entity, slot) {
+    execSkill(source, entity, slot) {
         this.stats.useMP(this.skills[slot].cost);
-        return this.skills[slot].exec(entity);
+        return this.skills[slot].exec(source, entity);
     }
 
     checkLevel(exp) {
@@ -38,7 +38,7 @@ class Entity{
 class Stats {
     constructor(lvl, hp, mp, atk, def, mag, acc, luck, res) {
         // we use this to refer to the current object
-        Object.assign(this, { name, lvl, hp, mp, atk, def, mag, acc, luck, res })
+        Object.assign(this, {lvl, hp, mp, atk, def, mag, acc, luck, res })
         this.maxHP = hp;
         this.maxMP = mp;
         this.currentExp = 0;

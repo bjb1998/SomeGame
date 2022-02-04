@@ -29,8 +29,8 @@ class Battle {
     }
 
     //Call turns addAction function
-    addAction(func, target, slot, actionCtx) {
-        this.turn.AddAction(func, target, slot, actionCtx, this.dialogueBox);
+    addAction(func, source, target, slot, actionCtx) {
+        this.turn.AddAction(func, source, target, slot, actionCtx, this.dialogueBox);
     };
 
     //Generate random int, if <= the runChance, run away!
@@ -70,7 +70,7 @@ class Turn {
             if (this.playerParty[i].stats.status != 'Dead')
                 if (this.playerParty[i].checkLevel(this.exp)) {
                     this.initBox();
-                    const levelUpAct = new Action(levelUpFunc, this.playerParty[i], null, 'other', this.dialogueBox, this.controls);
+                    const levelUpAct = new Action(levelUpFunc, this.playerParty[i], null, null, 'other', this.dialogueBox, this.controls);
                     await levelUpAct.exec();
                 }
         }
@@ -85,9 +85,9 @@ class Turn {
     }
 
     //make an action for the player, then execute it. Once all done, do the same for the enemies
-    async AddAction(action, target, slot, actionCtx) {
+    async AddAction(action, source, target, slot, actionCtx) {
         this.initBox();
-        this.playerAction = new Action(action, target, slot, actionCtx, this.dialogueBox, this.controls);
+        this.playerAction = new Action(action, source, target, slot, actionCtx, this.dialogueBox, this.controls);
         await this.playerAction.exec();
         this.currentMember++;
         if (this.checkDeath(target)) {
@@ -103,8 +103,9 @@ class Turn {
     //temporary thing until enemy actions are a real thing
     async genEnemyActions() {
         const testFunc = function () { console.log("Nothing should happen here"); return "but nothing happened!"; };
+        console.log(this.enemyParty);
         for (var i = 0; i < this.enemyParty.length; i++)
-            this.enemyActions[i] = new Action(testFunc, this.playerParty[0], null, null, this.dialogueBox, this.controls);
+            this.enemyActions[i] = new Action(testFunc, this.enemyParty[i], this.playerParty[0], null, null, this.dialogueBox, this.controls);
     }
 
     //exec each function per enemy in the eenmy party
@@ -174,8 +175,9 @@ class Turn {
 
 //Action to executed during a turn. Can be players, or enemys.
 class Action {
-    constructor(func, target, slot, actionCtx, dialogueBox, controls) {
+    constructor(func, source, target, slot, actionCtx, dialogueBox, controls) {
         this.func = func;           //actions the item/skill will do
+        this.source = source;       //where the attack is coming from (AKA, the attacker)
         this.target = target;       //target to deal the damage, etc. to
         this.slot = slot;           //item/skill slot, used depending on action context
         this.actionCtx = actionCtx; //Used to determine if item, skill, or basic attack
@@ -183,32 +185,33 @@ class Action {
         this.next = false;
         this.controls = controls;
         this.buffer = true;
+        console.log(this);
     }
 
     //execute the action based on the context
     async exec() {
         switch (this.actionCtx) {
             case ("item"):
-                this.dialogueBox.init('an item is used on ' + this.target.name + '!');
+                this.dialogueBox.init(this.source.name + ' uses an item!');
                 await this.awaitInput();
-                this.dialogueBox.init(this.func.use(this.target, this.slot));
+                this.dialogueBox.init(this.func.use(this.source, this.slot));
                 await this.awaitInput();
                 break;
             case "skill":
-                this.dialogueBox.init('a skill is being used on ' + this.target.name + '!');
+                this.dialogueBox.init(this.source.name  + ' uses a skill!');
                 this.awaitInput();
-                this.dialogueBox.init(this.func.execSkill(this.target, this.slot));
+                this.dialogueBox.init(this.func.execSkill(this.source, this.target, this.slot));
                 await this.awaitInput();
                 break;
             case "other":
-                this.dialogueBox.init(this.func(this.target, this.slot));
+                this.dialogueBox.init(this.func(this.source, this.target, this.slot));
                 await this.awaitInput();
                 break;
             default:
-                this.dialogueBox.init(this.target.name + ' is attacked!');
+                this.dialogueBox.init(this.source.name + ' attacks ' + this.target.name + '!');
                 await this.awaitInput();
                 attack_phys.play();
-                this.dialogueBox.init(this.func(this.target, this.slot));
+                this.dialogueBox.init(this.func(this.source, this.target, this.slot));
                 await this.awaitInput();
                 break;
         }

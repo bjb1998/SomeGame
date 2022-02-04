@@ -5,19 +5,21 @@
  * 3. have the function return a string explaining what the target did toi update the games dialogue box
  */
 
-const StrikeFunc = function (entity) {
+const StrikeFunc = function (source, entity) {
+    console.log(source.stats);
+    console.log(entity.stats);
     entity.stats.damage(10, elemType.PHYS);
     return entity.name + ' took 10 Phys Damage';
 }
 const strike = new Skill('Strike', 'Do a basic hit', elemType.PHYS, 1, StrikeFunc);
 
-const guardFunc = function (entity) {
+const guardFunc = function (source, entity) {
     entity.guard = true;
     return entity.name + ' is guarding...';
 }
 const guard = new Skill('Guard', 'guard an attack for half damage', elemType.ALLM, 0, guardFunc);
 
-const emberFunc = function (entity) {
+const emberFunc = function (source, entity) {
     entity.stats.damage(10, elemType.FIRE);
     return entity.name +' took 10 Fire Damage';
 }
