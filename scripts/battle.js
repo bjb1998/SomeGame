@@ -59,7 +59,7 @@ class Turn {
 
     async runSuccess() {
         this.initBox();
-        const runAct = new Action(runFunc, null, null, 'other', this.dialogueBox, this.controls);
+        const runAct = new Action(runFunc, null, null, null, 'other', this.dialogueBox, this.controls);
         await runAct.exec();
         currentState = GameState.DUNGEON;
     }
@@ -78,7 +78,7 @@ class Turn {
 
     async runFailure() {
         this.initBox();
-        const failAct = new Action(failFunc, null, null, 'other', this.dialogueBox, this.controls);
+        const failAct = new Action(failFunc, null, null, null, 'other', this.dialogueBox, this.controls);
         await failAct.exec();
         await this.genEnemyActions();
         await this.exec();  

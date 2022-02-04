@@ -5,10 +5,19 @@
  * 3. have the function return a string explaining what the target did toi update the games dialogue box
  */
 
+const checkRes = function (elem, entity) {
+    const mult = entity.stats.res.getRes(elem);
+    if (mult === 0) return (entity.name + 'is immune to ' + elem + '!');
+    else return mult;
+}
+
 const StrikeFunc = function (source, entity) {
+    const elem = elemType.PHYS;
+    const damageMult = checkRes(elem, entity);
+    if (damageMult instanceof String) return damageMult;
     console.log(source.stats);
     console.log(entity.stats);
-    entity.stats.damage(10, elemType.PHYS);
+    entity.stats.damage(10, elem);
     return entity.name + ' took 10 Phys Damage';
 }
 const strike = new Skill('Strike', 'Do a basic hit', elemType.PHYS, 1, StrikeFunc);
