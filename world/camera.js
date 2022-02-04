@@ -47,8 +47,17 @@ class Camera {
             var ray = map.cast(player, player.direction + angle, this.range);   //cast ray to get what to draw for the column
             this.drawColumn(column, ray, angle, map);                           //draw the column
         }
+        var npcRay = map.cast(player, player.direction, 1);
+        this.findNpc(npcRay, map);
         this.ctx.restore();
     };
+
+    findNpc(ray, map) {
+        if (npc === null && ray[1].height < -1)
+            npc = map.getNPC(ray[1].height);
+        else if (npc != null && ray[1].height >= -1)
+            npc = null
+    }
 
     drawColumn(column, ray, angle, map) {
         this.spacing = this.width / res;

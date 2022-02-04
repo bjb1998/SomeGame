@@ -7,9 +7,9 @@ class battleMenu extends Menu{
     }
 
     //draw all things battling
-    draw() {
+    async draw() {
         if (battleCheck)
-            this.initBattle();
+            await this.initBattle();
         if (currentState === GameState.BATTLE) {
             this.active = true;
             this.partyStats.draw();
@@ -44,15 +44,14 @@ class battleMenu extends Menu{
     }
 
     //begin a battle, get enemies from the maps enemy pool
-    initBattle() {
+    async initBattle() {
         battleCheck = false;
         if (currentState === GameState.DUNGEON) {
             //const chance = setChance();
-            const chance = 1;
+            const chance = setChance();
             if (chance <= this.battleChance) {
                 currentState = GameState.BATTLE;
 
-                
                 this.dialogueBox = new BattleDialogueBox(this.ctx, this.controls, 437.5, 185, 20, battleDiag);
                 this.enemies = new EnemyParty();
                 this.randomizeEnemies();

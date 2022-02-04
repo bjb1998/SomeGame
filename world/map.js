@@ -35,13 +35,13 @@ class Map {
 		var noWall = { length2: Infinity };
 
         //basic ray
-		return ray({ x: point.x, y: point.y, height: 0, distance: 0, value: 0});
+		return ray({ x: point.x, y: point.y, height: 0, distance: 0, value: 0, npc: null});
 
 
 		function ray(origin) {
 			var stepX = step(sin, cos, origin.x, origin.y);       //step in the x direction
 			var stepY = step(cos, sin, origin.y, origin.x, true); //step in the y direction
-			var nextStep = stepX.length2 < stepY.length2          //the length of the next step
+            var nextStep = stepX.length2 < stepY.length2          //the length of the next step
 			? inspect(stepX, 1, 0, origin.distance, stepX.y)
 			: inspect(stepY, 0, 1, origin.distance, stepY.x);
 
@@ -66,6 +66,7 @@ class Map {
 			var dx = cos < 0 ? shiftX : 0;                      //take into account negatvies for x
             var dy = sin < 0 ? shiftY : 0;                      //take into account negatvies for y
             const pos = self.get(step.x - dx, step.y - dy);     //calculate new height relative to distance and space number
+            //if (pos < -1) console.log(distance);
 
             (pos >= 1) ? step.height = (pos - (pos - 1)) * self.wallHeight : step.height = pos;
 			step.distance = distance + Math.sqrt(step.length2); //calculate distance of wall/vector

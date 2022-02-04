@@ -26,11 +26,11 @@ var currentState = GameState.DUNGEON;                //current state the game is
 const CIRCLE = Math.PI * 2; 					     //2pi in radians (all angles are in radians)
 const rightAngle = CIRCLE / 4;						 //right angle, frequently used for rotations
 var moving = false;								     //boolean to determine if camera animation is happening or not
-var res = 200;                                       //resolution of the camera
+var res = 175;                                       //resolution of the camera
 var playerPos = [];                                  //player as an x, y coordinate
 var playerDir = 0;                                   //direction of player (radians)
-var battleChance = 5;                               //for random stuff (encounters, etc.)
-var runChance = 50;                                  //chance of running away from battles
+var battleChance = 5;                                //for random stuff (encounters, etc.)
+var runChance = 75;                                 //chance of running away from battles
 var battleCheck = false;
 
 var menuBuffer = 65;                                //how long to wait until the next input

@@ -17,7 +17,7 @@ const plungerNpc = new Dialogue('Friendly Plunger', PlungerAnim,
     ['Ah, a fine non-violent member of society!', 'Have you ever played...', 'Um, what was it called..?', 'Shane Maygoomi Tensay..?',
         'Something like that. I\d much rather do that right now compared to talking to you.']);
 
-const microwaveNpc = new Dialogue('Hungry Man',
-    ['They call me Hungry Man cause i\'m hungry for some men.', 'Not you of course, it\'s just not that kind of game.']);
+const washerNpc = new Dialogue('Wishy-Washy', WashingMachineAnim, 
+    ['Welcome to Hell, loser.', 'As a welcoming gift, you get...', 'Absolutely nothing.']);
 
 const battleDiag = new Dialogue('', null, ['The Battle Begins!']);

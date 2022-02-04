@@ -62,14 +62,6 @@ class ControlsWorld{
                 if (xRes === 0) camera.x += dx;
                 if (yRes === 0) camera.y += dy;
 
-                if (xRes <= -2 || yRes <= -2) {
-                    if (map.getNPC(yRes) === null) 
-                        npc = map.getNPC(xRes);
-                    else 
-                        npc = map.getNPC(yRes);
-                    
-                } else npc = null;
-
                 if ((Math.abs(destX - camera.x) <= 0.01 || Math.abs(destY - camera.y) <= 0.01) || (camera.x === prevX && camera.y === prevY)) {
                     step.play();
                     clearInterval(timer);

@@ -14,6 +14,7 @@ class DialogueBox{
     }
 
     start() {
+        sfx_confirm.play();
         currentState = GameState.DIALOGUE;
     }
 
@@ -103,6 +104,7 @@ class DialogueBox{
     }
 
     end() {
+        sfx_confirm.play();
         if (this.active)
             this.ctx.clearRect(50, 500, this.width, this.height);
         this.active = false;
