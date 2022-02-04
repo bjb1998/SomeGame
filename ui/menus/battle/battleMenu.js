@@ -33,7 +33,7 @@ class battleMenu extends Menu{
                 }
 
                 //todo implement exp gain, leveling up, etc.
-                if (this.battle.turn.check() === endState.WIN) {
+                if (await this.battle.turn.check() === endState.WIN) {
                     this.exit();
                 }
             }

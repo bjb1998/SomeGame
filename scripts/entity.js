@@ -56,8 +56,10 @@ class Stats {
 
             const currStats = ['maxHP', 'maxMP', 'atk', 'def', 'mag', 'acc', 'luck']; //raise a random stat by 1.1x, yes its unbalanced and dumb but theres deadlines
             const randomStat = Math.floor(Math.random() * currStats.length);
-            this[currStats[randomStat]] = Math.ceil(this[currStats[randomStat]] * 1.1); 
-        }
+            this[currStats[randomStat]] = Math.ceil(this[currStats[randomStat]] * 1.1);
+            return true;
+        } else
+            return false;
     }
 
     damage(dmg, type) {

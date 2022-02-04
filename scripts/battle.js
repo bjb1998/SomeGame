@@ -6,6 +6,7 @@ const endState = {
 
 function runFunc() { return 'Got away safely';};
 function failFunc() { return 'Couldn\'t run away!';};
+function levelUpFunc(entity) { return entity.name + ' Leveled Up!';};
 
 //the real meat of all things combat.
 class Battle {
@@ -66,8 +67,12 @@ class Turn {
     async gainExp() {
 
         for (var i = 0; i < this.playerParty.length; i++) {
-        if (this.playerParty[i].stats.status != 'Dead')
-            this.playerParty[i].checkLevel(this.exp);
+            if (this.playerParty[i].stats.status != 'Dead')
+                if (this.playerParty[i].checkLevel(this.exp)) {
+                    this.initBox();
+                    const levelUpAct = new Action(levelUpFunc, this.playerParty[i], null, 'other', this.dialogueBox, this.controls);
+                    await levelUpAct.exec();
+                }
         }
     }
 
@@ -150,11 +155,11 @@ class Turn {
     }
 
     //check if either party is defeated, return endState if either is killed
-    check() {
+    async check() {
         if (this.playerParty.length === 0) {
             return endState.LOSE;
         } else if (this.enemyParty.length === 0) {
-            this.gainExp(this.exp);
+            await this.gainExp(this.exp);
             return endState.WIN;
         }
     }
