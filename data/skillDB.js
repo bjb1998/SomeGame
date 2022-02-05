@@ -1,35 +1,51 @@
 /*--Notes to add your own Skill:
  * 
- * 1. All skill functions take a single parameter, that being the target you plan to effect.
- * 2. Use the examples below to create a function to either do damage toa  target, heal a target, etc.
- * 3. have the function return a string explaining what the target did toi update the games dialogue box
+ * 1. All skill functions take two paramters, the source (the attacker) and entity (the attack-e)
+ * 2. Refer to StrikeFunc below to craft a skill all your own, with its own elements and stats
+ * 3. refer to the doucmentation fo each function for details
  */
 
+//returns the elemental resistance of the entity
 const checkRes = function (elem, entity) {
-    const mult = entity.stats.res.getRes(elem);
-    if (mult === 0) return (entity.name + 'is immune to ' + elem + '!');
-    else return mult;
+    return entity.stats.res.getRes(elem);
 }
 
+//Calculate and return damage with given stats and damage multiplier
+//I took this formula from pokemon so Nintendo if you take this down then you acknowledge this game is canon to Pokemon :)
+const calcDamage = function (attackerLvl, attackerStat, defenderStat, baseDamage, damageMult) {
+    const lvlModifier = (2 * attackerLvl + 10) / 250;
+    const mult = ((attackerStat / defenderStat) * baseDamage * damageMult) + 1;
+    return Math.ceil(lvlModifier * mult);
+}
+
+//Execute a skill with the given stats from the attacker, target, element, and base damage of the move
+const execSkill = function (source, attackerStat, entity, defenderStat, baseDamage, elem) {
+    const damageMult = checkRes(elem, entity);
+    if (damageMult === 0) return (entity.name + ' is immune to ' + elem + '!');
+
+    return entity.name + ' took ' +
+        entity.stats.damage(calcDamage(source.stats.lvl, attackerStat, defenderStat, baseDamage, damageMult) / (entity.guard + 1))
+        + ' ' + elem + ' damage!';
+}
+
+//Simple physical attack with base 10 attack power
 const StrikeFunc = function (source, entity) {
     const elem = elemType.PHYS;
-    const damageMult = checkRes(elem, entity);
-    if (damageMult instanceof String) return damageMult;
-    console.log(source.stats);
-    console.log(entity.stats);
-    entity.stats.damage(10, elem);
-    return entity.name + ' took 10 Phys Damage';
+    return execSkill(source, source.stats.atk, entity, entity.stats.def, 10, elem);
 }
-const strike = new Skill('Strike', 'Do a basic hit', elemType.PHYS, 1, StrikeFunc);
 
+//set an entities guard variable to true. reduces damage from incoming attacks
 const guardFunc = function (source, entity) {
     entity.guard = true;
     return entity.name + ' is guarding...';
 }
-const guard = new Skill('Guard', 'guard an attack for half damage', elemType.ALLM, 0, guardFunc);
 
+//Do light fire damage to an enemy
 const emberFunc = function (source, entity) {
-    entity.stats.damage(10, elemType.FIRE);
-    return entity.name +' took 10 Fire Damage';
+    const elem = elemType.FIRE;
+    return execSkill(source, source.stats.mag, entity, entity.stats.def, 10, elem);
 }
-const ember = new Skill('Ember', 'Little fire damage', elemType.FIRE, 1, emberFunc);
+
+const strike = new Skill('Strike', 'Light physical damage', elemType.PHYS, 1, StrikeFunc);
+const guard = new Skill('Guard', 'Guard an attack for half damage', elemType.ALLM, 0, guardFunc);
+const ember = new Skill('Ember', 'Light fire damage', elemType.FIRE, 1, emberFunc);

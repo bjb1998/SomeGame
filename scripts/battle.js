@@ -102,15 +102,13 @@ class Turn {
 
     //temporary thing until enemy actions are a real thing
     async genEnemyActions() {
-        const testFunc = function () { console.log("Nothing should happen here"); return "but nothing happened!"; };
-        console.log(this.enemyParty);
+        const testFunc = function () { return "but nothing happened!"; };
         for (var i = 0; i < this.enemyParty.length; i++)
             this.enemyActions[i] = new Action(testFunc, this.enemyParty[i], this.playerParty[0], null, null, this.dialogueBox, this.controls);
     }
 
     //exec each function per enemy in the eenmy party
     async exec() {
-        console.log("enemy actions:");
         for (var action in this.enemyActions) {
             await this.enemyActions[action].exec();
         }
@@ -118,8 +116,6 @@ class Turn {
         this.enemyActions = [];
         this.currentMember = 0;
         this.resetGuards();
-
-        console.log("End of Turn");
     }
 
     //reset guards at the end of a turn
@@ -185,7 +181,6 @@ class Action {
         this.next = false;
         this.controls = controls;
         this.buffer = true;
-        console.log(this);
     }
 
     //execute the action based on the context

@@ -49,7 +49,6 @@ class Stats {
     checkLevel(exp) {
         this.currentExp += exp;
         if (this.currentExp >= this.nextExp) {
-            console.log('Level up!');
             this.lvl++;
             this.currentExp = 0;
             this.nextExp = Math.floor(Math.pow(this.lvl, 1.5));
@@ -62,11 +61,11 @@ class Stats {
             return false;
     }
 
-    damage(dmg, type) {
-        const damageMult = this.res.getRes(type); //get Resistance multipler from damage type
-        this.hp -= dmg * damageMult;
+    damage(dmg) {
+        this.hp -= dmg;
         this.hp = Math.min(Math.max(this.hp, 0), this.maxHP); //clamp the HP between 0 and max HP
         if (this.hp <= 0) { this.status = statusType.DEAD; } 
+        return dmg;
     }
 
     checkMp(Mp) {
