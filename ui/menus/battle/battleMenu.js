@@ -49,6 +49,7 @@ class battleMenu extends Menu{
         if (currentState === GameState.DUNGEON) {
             const chance = setChance();
             if (chance <= this.battleChance) {
+                changeSong(musicBattle);
                 currentState = GameState.BATTLE;
 
                 this.dialogueBox = new BattleDialogueBox(this.ctx, this.controls, 437.5, 185, 20, battleDiag);
@@ -66,14 +67,16 @@ class battleMenu extends Menu{
         }
     }
 
+    //generate random enemies based on the enemies map pool
     randomizeEnemies() {
-        const enemyAmt = Math.floor(Math.random() * 5)
+        const enemyAmt = Math.floor(Math.random() * 4) + 1;
         for (var i = 0; i < enemyAmt; i++) {
             const randomEnemy = Math.floor(Math.random() * this.currentPool.length)
             this.enemies.recruit(newEnemy(this.currentPool[randomEnemy]));
         }
     }
 
+    //draw animations for each enemy
     drawAnims() {
         this.ctx.clearRect(550, 0, 600, 200); //clear any remnants from animation frames
         for (var i = 0; i < this.enemies.active.length; i++) {
@@ -81,9 +84,10 @@ class battleMenu extends Menu{
         }
     }
 
+    //leave batle, go back to dungeoning
     exit() {
-        if (this.active)    
-            this.clear();
+        changeSong(musicWorld);
+        this.clear();
         this.menuStack = [];
         this.active = false;
         this.enemies = [];

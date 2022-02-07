@@ -14,7 +14,7 @@ class DialogueBox{
     }
 
     start() {
-        sfx_confirm.play();
+        playSfx(sfx_confirm);
         currentState = GameState.DIALOGUE;
     }
 
@@ -49,7 +49,7 @@ class DialogueBox{
         return this.dialogueText.getSpeaker();
     }
 
-    draw() {
+    async draw() {
         if (currentState === GameState.DIALOGUE) {
             this.active = true;
             var ctx = this.ctx;
@@ -104,7 +104,7 @@ class DialogueBox{
     }
 
     end() {
-        sfx_confirm.play();
+        playSfx(sfx_confirm);
         if (this.active)
             this.ctx.clearRect(50, 500, this.width, this.height);
         this.active = false;
@@ -128,7 +128,7 @@ class Dialogue {
 
     nextText() {
         this.currentText++;
-        sfx_confirm.play();
+        playSfx(sfx_confirm);
     }
 
     addText(text) {

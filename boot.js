@@ -16,7 +16,6 @@ window.onload = () => {
     var minimap = new Minimap(game, 16, 125, 20, 20, map);
     var menu = new pauseMenu(uiCanvas, controls.states, map, theParty);
 
-    //this is temporary and for testing dialogue boxes
     var diag = new DialogueBox(ui.getContext('2d'), controls.states, 900, 250, 33, testDiag);
     var playerControls = new ControlsWorld(8.5, 1.5, rightAngle, diag);
 
@@ -32,3 +31,7 @@ window.onload = () => {
         diag.draw();
     });
 };
+
+window.onclick = () => {
+    changeSong(musicWorld);
+}

@@ -63,7 +63,7 @@ class ControlsWorld{
                 if (yRes === 0) camera.y += dy;
 
                 if ((Math.abs(destX - camera.x) <= 0.01 || Math.abs(destY - camera.y) <= 0.01) || (camera.x === prevX && camera.y === prevY)) {
-                    step.play();
+                    playSfx(step);
                     clearInterval(timer);
                     //round vlaues for x, and y as needed
                     camera.x = Math.round(camera.x / 0.5) * 0.5;
@@ -83,8 +83,8 @@ class ControlsWorld{
 
     //talk to npc if one is nearby on the map
     talk() {
-        if (npc != null) {
-            this.dialogueBox.dialogueText = npc;
+        if (currentNPC != null) {
+            this.dialogueBox.dialogueText = currentNPC;
             this.dialogueBox.reset();
             this.dialogueBox.start();
         }
@@ -98,7 +98,7 @@ class ControlsWorld{
             let timer = setInterval(function(){
                 let timePassed = Date.now() - start;
                 if (timePassed >= 250) {
-                    sfx_open.play();
+                    playSfx(sfx_open);
                     clearInterval(timer);
                     if(currentState === GameState.PAUSE) currentState = GameState.DUNGEON;
                     else if(currentState === GameState.DUNGEON) currentState = GameState.PAUSE;

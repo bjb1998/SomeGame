@@ -2,7 +2,6 @@
 var canvas = document.getElementById('ui');
 const mainMenuBackground = "rgb(43,49,61)";
 var gameFont = new FontFace('Reactor7', 'url(assets/fonts/Reactor7.ttf)');      //font to load
-document.fonts.add(gameFont);
 
 const mainMenuOptions = [
     'Item',

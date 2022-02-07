@@ -58,6 +58,7 @@
     <script src="./boot.js"></script>
 </head>
 <body>
+
     <canvas id="game" tabindex="1" width="1024" height="768"
             style="border: 1px solid brown; position: absolute; left: 0; top: 0; z-index: 0;"></canvas>
     <canvas id="ui" tabindex="1" width="1024" height="768"
@@ -67,6 +68,18 @@
         <p> Resolution </p>
         <input id="resSlider" type="range" min="50" max="300" value="200"
                onchange="changeResolution(this.value)">
+    </div>
+
+    <div class="slidecontainer" style="position:relative; left:10px; top:820px;">
+        <p> Music Volume </p>
+        <input id="resSlider" type="range" min="0" max="1" step="0.1" value="1"
+               onchange="changeMusicVolume(this.value)">
+    </div>
+
+    <div class="slidecontainer" style="position:relative; left:10px; top:840px;">
+        <p> Sound Effect Volume </p>
+        <input id="resSlider" type="range" min="0" max="1" step="0.1" value="1"
+               onchange="changeSfxVolume(this.value)">
     </div>
 
 </body>

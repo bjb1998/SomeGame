@@ -23,8 +23,8 @@ class Camera {
     render(player, map) {
         this.drawSky(player.direction, map.skybox, map.light);
         this.drawColumns(player, map);
-        if (npc != null && currentState != GameState.BATTLE)
-        npc.anim.draw(this.ctx, this.width / 2, this.height / 2);
+        if (currentNPC != null && currentState != GameState.BATTLE)
+        currentNPC.anim.draw(this.ctx, this.width / 2, this.height / 2);
     }
 
     drawSky(direction, sky) {
@@ -53,10 +53,10 @@ class Camera {
     };
 
     findNpc(ray, map) {
-        if (npc === null && ray[1].height < -1)
-            npc = map.getNPC(ray[1].height);
-        else if (npc != null && ray[1].height >= -1)
-            npc = null
+        if (currentNPC === null && ray[1].height < -1)
+            currentNPC = map.getNPC(ray[1].height);
+        else if (currentNPC != null && ray[1].height >= -1)
+            currentNPC = null
     }
 
     drawColumn(column, ray, angle, map) {

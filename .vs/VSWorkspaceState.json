@@ -1,13 +1,14 @@
 {
   "ExpandedNodes": [
     "",
+    "\\assets",
+    "\\assets\\audio",
+    "\\assets\\fonts",
     "\\data",
-    "\\scripts",
     "\\ui",
-    "\\ui\\menus",
     "\\ui\\menus\\battle",
     "\\ui\\menus\\pause"
   ],
-  "SelectedNode": "\\ui\\menus\\pause\\itemSelectElem.js",
+  "SelectedNode": "\\boot.js",
   "PreviewInSolutionExplorer": false
 }
