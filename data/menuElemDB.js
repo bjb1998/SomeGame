@@ -3,6 +3,12 @@ var canvas = document.getElementById('ui');
 const mainMenuBackground = "rgb(43,49,61)";
 var gameFont = new FontFace('Reactor7', 'url(assets/fonts/Reactor7.ttf)');      //font to load
 
+gameFont.load().then(function (loaded_face) {
+    document.fonts.add(loaded_face);
+}).catch(function (error) {
+    console.log('Fail to laod font, pls let Brandon know. thanks.');
+});
+
 const mainMenuOptions = [
     'Item',
     'Party',
