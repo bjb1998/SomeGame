@@ -58,7 +58,6 @@ class Turn {
     }
 
     async runSuccess() {
-        this.initBox();
         const runAct = new Action(runFunc, null, null, null, 'other', this.dialogueBox, this.controls);
         await runAct.exec();
         currentState = GameState.DUNGEON;
@@ -69,7 +68,6 @@ class Turn {
         for (var i = 0; i < this.playerParty.length; i++) {
             if (this.playerParty[i].stats.status != 'Dead')
                 if (this.playerParty[i].checkLevel(this.exp)) {
-                    this.initBox();
                     const levelUpAct = new Action(levelUpFunc, this.playerParty[i], null, null, 'other', this.dialogueBox, this.controls);
                     await levelUpAct.exec();
                 }
@@ -77,7 +75,6 @@ class Turn {
     }
 
     async runFailure() {
-        this.initBox();
         const failAct = new Action(failFunc, null, null, null, 'other', this.dialogueBox, this.controls);
         await failAct.exec();
         await this.genEnemyActions();
@@ -86,7 +83,6 @@ class Turn {
 
     //make an action for the player, then execute it. Once all done, do the same for the enemies
     async AddAction(action, source, target, slot, actionCtx) {
-        this.initBox();
         this.playerAction = new Action(action, source, target, slot, actionCtx, this.dialogueBox, this.controls);
         await this.playerAction.exec();
         this.currentMember++;
@@ -159,12 +155,6 @@ class Turn {
             await this.gainExp(this.exp);
             return endState.WIN;
         }
-    }
-
-    //For reason sometimes it skips a dialogue box, this "fixes" it
-    initBox() {
-        this.dialogueBox.init('');
-        this.dialogueBox.done = true;
     }
 
 }

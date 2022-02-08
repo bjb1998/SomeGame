@@ -1,5 +1,4 @@
 
-//todo get rid of duplicate code shred between menus
 
 window.onload = () => {
     var player = playerPreset;
@@ -20,6 +19,7 @@ window.onload = () => {
     var playerControls = new ControlsWorld(8.5, 1.5, rightAngle, diag);
 
     var battler = new battleMenu(uiCanvas, controls.states, theParty, map);
+    var healer = new healRoomMenu(uiCanvas, controls.states, theParty, diag);
     var loop = new GameLoop();
 
     loop.start(function frame() {
@@ -29,6 +29,7 @@ window.onload = () => {
         menu.draw();
         battler.draw();
         diag.draw();
+        healer.draw();
     });
 };
 

@@ -7,6 +7,7 @@ class Camera {
         this.focalLength = 0.8;                         //FOV of the camera
         this.range = 14;                                //draw distance of the vectors
         this.lightRange = 5;                            //range of light
+        this.background = null;
     }
 
     project(height, angle, distance) {
@@ -21,10 +22,20 @@ class Camera {
     };
 
     render(player, map) {
+        if (currentState === GameState.DUNGEON)
+            this.background = null;
+        else if (currentState === GameState.HEAL)
+            this.background = backgroundHeal.image;
+
+        if (this.background != null) {
+            this.ctx.drawImage(this.background, 0, 0, 1024, 768);
+            return;
+        }
+
         this.drawSky(player.direction, map.skybox, map.light);
         this.drawColumns(player, map);
-        if (currentNPC != null && currentState != GameState.BATTLE)
-        currentNPC.anim.draw(this.ctx, this.width / 2, this.height / 2);
+        if (worldObject != null && worldObject instanceof Dialogue && currentState != GameState.BATTLE)
+            worldObject.anim.draw(this.ctx, this.width / 2, this.height / 2);
     }
 
     drawSky(direction, sky) {
@@ -48,15 +59,17 @@ class Camera {
             this.drawColumn(column, ray, angle, map);                           //draw the column
         }
         var npcRay = map.cast(player, player.direction, 1);
-        this.findNpc(npcRay, map);
+        this.findWorldObject(npcRay, map);
         this.ctx.restore();
     };
 
-    findNpc(ray, map) {
-        if (currentNPC === null && ray[1].height < -1)
-            currentNPC = map.getNPC(ray[1].height);
-        else if (currentNPC != null && ray[1].height >= -1)
-            currentNPC = null
+    //Find an interactable obejct (Npc, door, etc.) in front of player
+    findWorldObject(ray, map) {
+        if (ray[1].height < -1)
+            worldObject = map.getNPC(ray[1].height);
+        else if (ray[1].height >= 1)
+            worldObject = map.get(ray[1].x - 0.5, ray[1].y - 1);
+        else worldObject = null;
     }
 
     drawColumn(column, ray, angle, map) {

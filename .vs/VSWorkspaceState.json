@@ -1,14 +1,13 @@
 {
   "ExpandedNodes": [
     "",
-    "\\assets",
     "\\assets\\audio",
-    "\\assets\\fonts",
     "\\data",
     "\\ui",
-    "\\ui\\menus\\battle",
-    "\\ui\\menus\\pause"
+    "\\ui\\menus",
+    "\\ui\\menus\\heal",
+    "\\world"
   ],
-  "SelectedNode": "\\boot.js",
+  "SelectedNode": "\\world\\camera.js",
   "PreviewInSolutionExplorer": false
 }

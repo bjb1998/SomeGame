@@ -13,18 +13,15 @@ class Party {
     recruit(entity) {
         const entName = entity.name;
         if (this.containsMember(entName))
-            //todo implement already in party dialog
             console.log("Already in party");
         else if (this.active.length < activeMax)
             this.active.push(entity);
         else if (this.reserve.length < reserveMax)
             this.reserve.push(entity);
         else
-            //todo implement party full dialog
             console.log("Full party :(");
     }
 
-    //todo support empty slot swappage
     swapActive(entity1, entity2) {
         let i1 = this.active.indexOf(entity1);
         let i2 = this.active.indexOf(entity2);
@@ -65,7 +62,6 @@ class EnemyParty extends Party{
         if (this.active.length < activeMax)
             this.active.push(entity);
         else
-            //todo implement party full dialog
             console.log("Full party :(");
     }
 };

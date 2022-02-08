@@ -3,10 +3,11 @@ const GameState = {                                 //possible states the game c
     DUNGEON: 'Dungeon',
     MENU: 'Menu',
     SHOP: 'Shop',
+    HEAL: 'Heal',
     BATTLE: 'Battle',
     DIALOGUE: 'Dialogue',
     PAUSE: 'Pause'
-};                                //sates the game can be in
+};
 
 function setChance() {
     return Math.floor(Math.random() * 100) + 1;
@@ -19,7 +20,7 @@ function changeResolution(val) {
 var currentSong = null;                              //song game is playing at the moment
 var sfxVol = 1;
 var musicVol = 1;
-var currentNPC = null;                               //current npc on screen
+var worldObject = null;                               //current npc on screen
 var debug = true;                                    //debug stuff
 var currentState = GameState.DUNGEON;                //current state the game is in
 const CIRCLE = Math.PI * 2; 					     //2pi in radians (all angles are in radians)

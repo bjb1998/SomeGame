@@ -1,15 +1,18 @@
-class pauseMenu extends Menu{
-    constructor(canvas, controls, map, party) {
+class healRoomMenu extends Menu {
+    constructor(canvas, controls, party, diag) {
         super(canvas, controls, party);
+        this.diag = diag;
     }
 
     draw() {
-        if (currentState === GameState.PAUSE) {
+        if (currentState === GameState.HEAL) {
+            //todo implement background
+            this.ctx.drawImage(backgroundHeal.image, 0, 0, 1024, 768);
             this.partyStats = new partyStatsElem(this.ctx, this.party.active,
                 menuColorBackground, 225, 35, 135, 150);
             //create new main menu if the stack is empty
             if (this.top === 0) {
-                this.mainMenu = new pauseMenuElem(mainMenuBackground, mainMenuOptions, 35, 50, 40, 175, 600);
+                this.mainMenu = new healRoomMenuElem(mainMenuBackground, healOptions, 35, 50, 40, 175, 600);
                 this.pushMenu(this.mainMenu);
                 this.clear();
             }
@@ -25,10 +28,9 @@ class pauseMenu extends Menu{
                 this.popMenu();
             }
 
-        } else if(this.active)
+        } else if (this.active)
             this.exit();
 
-        
     }
 
     exit() {
@@ -38,6 +40,7 @@ class pauseMenu extends Menu{
         this.top = 0;
         this.selection = 0;
         this.active = false;
-        if (currentState === GameState.PAUSE) currentState = GameState.DUNGEON;
+
+        if (currentState === GameState.HEAL) currentState = GameState.DUNGEON;
     }
 }

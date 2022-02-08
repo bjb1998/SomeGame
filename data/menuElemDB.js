@@ -16,6 +16,11 @@ const battleMenuOptions = [
     'Guard',
     'Run'
 ];
+const healOptions = [
+    'Heal',
+    'Talk',
+    'Exit'
+];
 fontColorBottom = "rgb(8,39,101)";
 fontColorTop = "rgb(226,226,226)";
 menuColorBackground = "rgb(43,49,61)";

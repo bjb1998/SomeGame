@@ -82,11 +82,13 @@ class ControlsWorld{
     };
 
     //talk to npc if one is nearby on the map
-    talk() {
-        if (currentNPC != null) {
-            this.dialogueBox.dialogueText = currentNPC;
+    interact() {
+        if (worldObject instanceof Dialogue) {
+            this.dialogueBox.dialogueText = worldObject;
             this.dialogueBox.reset();
             this.dialogueBox.start();
+        } else if (worldObject === 3) {
+            currentState = GameState.HEAL;
         }
     }
 
@@ -114,7 +116,7 @@ class ControlsWorld{
             if (controls.left) this.rotate(-1);
             if (controls.right) this.rotate(1);
             if (controls.forward) this.walk(map);
-            if (controls.confirm && this.buffer != controls.confirm) this.talk();
+            if (controls.confirm && this.buffer != controls.confirm) this.interact();
             this.buffer = controls.confirm;
         };
             if (controls.pause) this.pause();

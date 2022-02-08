@@ -15,6 +15,7 @@ class DialogueBox{
 
     start() {
         playSfx(sfx_confirm);
+        this.prevState = currentState;
         currentState = GameState.DIALOGUE;
     }
 
@@ -58,7 +59,6 @@ class DialogueBox{
             this.ctx.font = '55px Reactor7';
             this.drawText(this.getSpeaker(), 75, 560); //draw the options in order by index
             this.drawDialogue(this.getText());
-            ctx.clearRect(this.width + 50, 500, 900, 900)
             this.confirmDeny();
         } else if(this.active)
             this.end();
