@@ -67,9 +67,9 @@ class Camera {
     findWorldObject(ray, map) {
         if (ray[1].height < -1)
             worldObject = map.getNPC(ray[1].height);
-        else if (ray[1].height >= 1)
-            worldObject = map.get(ray[1].x - 0.5, ray[1].y - 1);
-        else worldObject = null;
+        else if (ray[1].height >= 1) {
+            worldObject = ray[1].value;
+        }else worldObject = null;
     }
 
     drawColumn(column, ray, angle, map) {

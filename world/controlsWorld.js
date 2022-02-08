@@ -89,6 +89,8 @@ class ControlsWorld{
             this.dialogueBox.start();
         } else if (worldObject === 3) {
             currentState = GameState.HEAL;
+        } else if (worldObject === 4) {
+            currentState = GameState.SHOP;
         }
     }
 

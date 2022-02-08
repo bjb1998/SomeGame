@@ -1,12 +1,13 @@
 //map of any respective dungeon
 class Map {
     constructor(map, pool, npcs) {
-        this.size = Math.sqrt(map.length);                            //size of map (n^2)
-        this.wallGrid = map;                                          //Random array of walls, 0 is floor, 1 is wall
+        this.size = Math.sqrt(map.length);        //size of map (n^2)
+        this.wallGrid = map;                      //Random array of walls, 0 is floor, 1 is wall
         this.enemyPool = pool;
-        this.skybox = skyboxSprite;                                   //skybox texture
-        this.textures = [wallSprite, doorSprite, healDoorSprite];     //array of textures to put in
-        this.colors = ["green", "red", "orange"];                     //colors per cooresponding texture (no wall = index 0)
+        this.skybox = skyboxSprite;               //skybox texture
+        this.textures = [wallSprite, doorSprite,
+            healDoorSprite, storeDoorSprite];     //array of textures to put in
+        this.colors = ["green", "red", "orange", "blue", "yellow"]; //colors per cooresponding texture (no wall = index 0)
         this.wallHeight = 1;
         this.light = 1;
         this.npcs = npcs;

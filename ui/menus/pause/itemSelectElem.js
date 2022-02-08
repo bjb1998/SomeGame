@@ -10,7 +10,6 @@ class itemMenuElem extends pauseMenuElem {
     init(menu) {
         this.ctx = menu.ctx;
         this.controls = menu.controls; 
-        //this.menus = null;
         this.party = menu.party;
     }
 

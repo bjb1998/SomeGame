@@ -40,8 +40,8 @@ class ItemSlot {
 };
 
 class Item {
-    constructor(name, desc, type, func) {
-        Object.assign(this, { name, desc, type, func });
+    constructor(name, desc, type, func, cost) {
+        Object.assign(this, { name, desc, type, func, cost });
     }
 
     exec(entity) {

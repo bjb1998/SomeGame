@@ -27,6 +27,11 @@ const healOptions = [
     'Talk',
     'Exit'
 ];
+const storeOptions = [
+    'Shop',
+    'Talk',
+    'Exit'
+];
 fontColorBottom = "rgb(8,39,101)";
 fontColorTop = "rgb(226,226,226)";
 menuColorBackground = "rgb(43,49,61)";

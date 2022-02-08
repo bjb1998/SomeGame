@@ -10,8 +10,11 @@
  * 
  */
 
-const testDiag = new Dialogue('Mr. Bug', null,
-    ['If you\'re seeing this text in-game, this is a bug.', 'Pls let Brandon know. thanks :)']);
+const healerDiag = new Dialogue('Healer Dude', null,
+    ['Do not fret human, I can heal you in these trying times.', 'all you must do is ask and it shall be given.']);
+
+const storeDiag = new Dialogue('Store Dude', null,
+    ['Buy something, will ya?']);
 
 const plungerNpc = new Dialogue('Friendly Plunger', PlungerAnim,
     ['Ah, a fine non-violent member of society!', 'Have you ever played...', 'Um, what was it called..?', 'Shane Maygoomi Tensay..?',

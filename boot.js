@@ -15,11 +15,14 @@ window.onload = () => {
     var minimap = new Minimap(game, 16, 125, 20, 20, map);
     var menu = new pauseMenu(uiCanvas, controls.states, map, theParty);
 
-    var diag = new DialogueBox(ui.getContext('2d'), controls.states, 900, 250, 33, testDiag);
+    var diag = new DialogueBox(ui.getContext('2d'), controls.states, 900, 250, 33, healerDiag);
     var playerControls = new ControlsWorld(8.5, 1.5, rightAngle, diag);
 
     var battler = new battleMenu(uiCanvas, controls.states, theParty, map);
+
     var healer = new healRoomMenu(uiCanvas, controls.states, theParty, diag);
+    var store = new storeMenu(uiCanvas, controls.states, theParty, diag);
+
     var loop = new GameLoop();
 
     loop.start(function frame() {
@@ -30,6 +33,7 @@ window.onload = () => {
         battler.draw();
         diag.draw();
         healer.draw();
+        store.draw();
     });
 };
 
