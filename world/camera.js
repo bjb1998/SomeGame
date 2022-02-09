@@ -22,10 +22,19 @@ class Camera {
     };
 
     render(player, map) {
-        if (currentState === GameState.DUNGEON)
-            this.background = null;
-        else if (currentState === GameState.HEAL)
-            this.background = backgroundHeal.image;
+        //set background based on current gamestate
+        switch (currentState) {
+            case GameState.HEAL:
+                this.background = backgroundHeal.image;
+                break;
+            case GameState.SHOP:
+                this.background = backgroundStore.image;
+                break;
+            case GameState.DIALOGUE:
+                break;
+            default:
+                this.background = null;
+        }
 
         if (this.background != null) {
             this.ctx.drawImage(this.background, 0, 0, 1024, 768);

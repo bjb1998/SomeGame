@@ -8,7 +8,7 @@ class storeMenuElem extends MenuElem {
         this.controls = menu.controls;
         this.party = menu.party;
         this.healed = false;
-        this.dialogueBox = menu.diag;
+        this.diag = menu.diag;
     }
 
     drawMenuText() {
@@ -22,9 +22,9 @@ class storeMenuElem extends MenuElem {
         switch (this.selection) {
             case 0: menu = new storeItemMenuElem(this.party, this); break;
             case 1:
-                this.dialogueBox.dialogueText = storeDiag;
-                this.dialogueBox.reset();
-                this.dialogueBox.start();
+                this.diag.dialogueText = storeDiag;
+                this.diag.reset();
+                this.diag.start();
                 break;
             case 2: currentState = GameState.DUNGEON; break;
             default: return;

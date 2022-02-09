@@ -17,6 +17,17 @@ class Inventory {
         return slot.exec(entity);
     };
 
+    give(itemToGive, count) {
+        for (var i = 0; i < this.items.length; i++) {
+            var currentSlot = this.items[i];
+            if (currentSlot.item.name === itemToGive.name) {
+                currentSlot.add(count);
+                return;
+            }
+        }
+        this.items.push(new ItemSlot(itemToGive, count));
+    }
+
 };
 
 class ItemSlot {

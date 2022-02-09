@@ -10,9 +10,11 @@ class pauseMenuElem extends MenuElem{
     }
 
     drawMenuText() {
+        const player = this.party.active[this.party.playerIndex];
         this.drawText('  Pause ', this.width - 100, (50 * (1)) + (this.height / 8.5))
         for (var i = 0; i < this.options.length; i++)
             this.drawText(this.options[i], this.width - 100, (50 * (i + 2)) + (this.height / 8.5)); //draw the options in order by index
+        this.drawDesc('$' + player.money);
     };
 
     nextMenu() {

@@ -1,6 +1,6 @@
 class storeItemMenuElem extends MenuElem{
     constructor(party, prevMenu) {
-        var items = [potion];
+        var items = [potion];   //temporary store stock
         super(prevMenu.background, items,
             prevMenu.posX, prevMenu.posY,
             prevMenu.fontSize,
@@ -12,20 +12,28 @@ class storeItemMenuElem extends MenuElem{
         this.ctx = menu.ctx;
         this.controls = menu.controls;
         this.party = menu.party;
+        this.diag = menu.diag;
     }
 
     drawMenuText() {
+        const player = this.party.active[this.party.playerIndex];
+        const item = this.options[this.selection];
         for (var i = 0; i < this.options.length; i++) {
             this.drawText(this.options[i].name, this.width - 100, (50 * (i + 2)) + (this.height / 8.5)); //draw the options in order by index
-        } this.drawDesc('$' + this.options[this.selection].cost + '   ' + this.options[this.selection].desc);
-
+        } this.drawDesc('$' + player.money + ' | ' +  '$' + item.cost + ' | ' + item.desc);
     }
 
     nextMenu() {
-        var count = this.itemSlot.count;
-        this.inv.use(this.party.active[this.selection], this.itemSlot);
-        if (count - 1 <= 0)
-            this.done = true;
-
+        var player = this.party.active[this.party.playerIndex];
+        var playerInv = player.inv;
+        const itemSelected = this.options[this.selection];
+        if (player.money >= itemSelected.cost) {
+            playerInv.give(itemSelected, 1);
+            player.money -= itemSelected.cost;
+        } else {
+            this.diag.dialogueText = notEnoughDiag;
+            this.diag.reset();
+            this.diag.start();
+        }
     }
 }

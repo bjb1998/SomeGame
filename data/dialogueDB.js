@@ -16,6 +16,9 @@ const healerDiag = new Dialogue('Healer Dude', null,
 const storeDiag = new Dialogue('Store Dude', null,
     ['Buy something, will ya?']);
 
+const notEnoughDiag = new Dialogue('Store Dude', null,
+    ['Stop fooling around and buying things you can\'t.']);
+
 const plungerNpc = new Dialogue('Friendly Plunger', PlungerAnim,
     ['Ah, a fine non-violent member of society!', 'Have you ever played...', 'Um, what was it called..?', 'Shane Maygoomi Tensay..?',
         'Something like that. I\d much rather do that right now compared to talking to you.']);
