@@ -7,9 +7,8 @@
     "\\ui\\menus",
     "\\ui\\menus\\heal",
     "\\ui\\menus\\pause",
-    "\\ui\\menus\\store",
     "\\world"
   ],
-  "SelectedNode": "\\ui\\menus\\menuElem.js",
+  "SelectedNode": "\\scripts\\globals.js",
   "PreviewInSolutionExplorer": false
 }

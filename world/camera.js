@@ -30,6 +30,9 @@ class Camera {
             case GameState.SHOP:
                 this.background = backgroundStore.image;
                 break;
+            case GameState.TITLE:
+                this.background = backgroundTitle.image;
+                break;
             case GameState.DIALOGUE:
                 break;
             default:

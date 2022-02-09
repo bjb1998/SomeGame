@@ -25,6 +25,8 @@ window.onload = () => {
 
     var loop = new GameLoop();
 
+    currentState = GameState.TITLE;
+
     loop.start(function frame() {
         playerControls.update(controls.states, map);
         camera.render(playerControls, map);
@@ -38,5 +40,8 @@ window.onload = () => {
 };
 
 window.onclick = () => {
-    changeSong(musicWorld);
+    if (currentState === GameState.TITLE) {
+        changeSong(musicWorld);
+        currentState = GameState.DUNGEON;
+    }
 }

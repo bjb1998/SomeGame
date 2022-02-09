@@ -2,12 +2,13 @@ const selectionSprite = new Texture('./assets/selector.png');
 const playerMap = new Texture('./assets/arrow.PNG');
 const npcMap = new Texture('./assets/npc.png');
 
-const skyboxSprite = new Texture('./assets/deathvalley_panorama.jpg');
+const skyboxSprite = new Texture('./assets/interior_panorama.jpg');
 const wallSprite = new Texture('./assets/wall_texture.jpg');
 const doorSprite = new Texture('./assets/door_texture.jpg');
 const healDoorSprite = new Texture('./assets/door_heal_texture.jpg');
 const storeDoorSprite = new Texture('./assets/door_store_texture.jpg');
 
+const backgroundTitle = new Texture('./assets/background-title.png');
 const backgroundHeal = new Texture('./assets/background-temp.png');
 const backgroundStore = new Texture('./assets/background-temp.png');
 

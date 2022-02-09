@@ -17,6 +17,7 @@ function changeSfxVolume(val) {
 
 function changeMusicVolume(val) {
     musicVol = val;
+    currentSong.song.volume = musicVol;
 }
 
 function changeSong(song) {
