@@ -45,3 +45,9 @@ const attack_phys = new SFX('./assets/audio/sfx/attack_phys.mp3');
 const sfx_confirm = new SFX('./assets/audio/sfx/confirm.mp3');
 const sfx_open = new SFX('./assets/audio/sfx/menuOpen.mp3');
 const sfx_select = new SFX('./assets/audio/sfx/select.mp3');
+
+const sfx_phone = new SFX('./assets/audio/sfx/phone.mp3');
+const sfx_microwave = new SFX('./assets/audio/sfx/Microwave.mp3');
+const sfx_vacuum = new SFX('./assets/audio/sfx/Vacuum.mp3');
+const sfx_Plunger = new SFX('./assets/audio/sfx/Plunger.mp3');
+const sfx_washer = new SFX('./assets/audio/sfx/washer.mp3');

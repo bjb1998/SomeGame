@@ -195,7 +195,7 @@ class Action {
             default:
                 this.dialogueBox.init(this.source.name + ' attacks ' + this.target.name + '!');
                 await this.awaitInput();
-                playSfx(attack_phys);
+                playSfx(this.source.currAttackSfx);
                 this.dialogueBox.init(this.func(this.source, this.target, this.slot));
                 await this.awaitInput();
                 break;

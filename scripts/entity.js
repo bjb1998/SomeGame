@@ -9,15 +9,21 @@ const statusType = {
     DEAD: 'Dead'
 };
 const maxSkills = 4;
+const maxSfxs = 4
 
 class Entity{
-    constructor(name, stats, skillsToAdd) {
+    constructor(name, stats, skillsToAdd, sfxsToAdd) {
         // we use this to refer to the current object
-        Object.assign(this, { name, stats });
+        Object.assign(this, { name, stats, });
         this.skills = [];
+        this.sfxs = [];
         this.guard = false;
         if (this.skills.length <= maxSkills)
             skillsToAdd.forEach(current => this.skills.push(current));
+        
+        if (this.sfxs.length <= maxSfxs)
+            sfxsToAdd.forEach(current => this.sfxs.push(current));
+        this.currAttackSfx = this.sfxs[0];
     };
 
     execSkill(source, entity, slot) {
@@ -79,16 +85,16 @@ class Stats {
 };
 
 class MC extends Entity {
-    constructor(name, stats, money, items, skillsToAdd) {
-        super(name, stats, skillsToAdd);
+    constructor(name, stats, money, items, skillsToAdd, sfxsToAdd) {
+        super(name, stats, skillsToAdd, sfxsToAdd);
         this.money = money;
         this.inv = new Inventory(items);
     };
 };
 
 class Pawn extends Entity {
-    constructor(name, stats, exp, skillsToAdd, animation) {
-        super(name, stats, skillsToAdd);
+    constructor(name, stats, exp, skillsToAdd, animation, sfxsToAdd) {
+        super(name, stats, skillsToAdd, sfxsToAdd);
         this.exp = exp;
         this.animation = animation;
     };

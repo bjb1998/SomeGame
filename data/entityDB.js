@@ -11,7 +11,7 @@
 newEnemy = function (enemy) {
     const stats = newObj(enemy.stats);
     const skills = newObj(enemy.skills);
-    return new Pawn(enemy.name, stats, enemy.exp, skills, enemy.animation);
+    return new Pawn(enemy.name, stats, enemy.exp, skills, enemy.animation, enemy.sfxs);
 } //make new instance of Enemy
 
 newObj = function(obj){
@@ -26,7 +26,7 @@ const playerRes = new Resistance(1, 1, 2, 1, 1, 1, 1, 1, 1);
 const playerStats = new Stats(5, 5, 4, 4, 4, 3, 5, 3, playerRes);
 const inv = [potion];
 const skills = [strike];
-var playerPreset = new MC("Bob", playerStats, 100, inv, skills);
+var playerPreset = new MC("Bob", playerStats, 100, inv, skills, [attack_phys]);
 //--Player--//
 
 
@@ -54,10 +54,10 @@ const WashingMachineRes = new Resistance(1, 1, 1, 1, 1, 1, 1, 1, 1);
 const WashingMachineStats = new Stats(1, 1, 99, 1, 1, 1, 1, 1, WashingMachineRes);
 const WashingMachineSkills = [strike, ember];
 
-var DUMMY = new Pawn('DUMMY', DUMMYStats, 100, DUMMYSkills, DUMMYanim);
-var Microwave = new Pawn('Microwave', MicrowaveStats, 100, MicrowaveSkills, MicrowaveAnim);
-var Plunger = new Pawn('Plunger', PlungerStats, 100, PlungerSkills, PlungerAnim);
-var Vacuum = new Pawn('Vacuum', VacuumStats, 100, VacuumSkills, VacuumAnim);
-var Phone = new Pawn('Phone', PhoneStats, 100, PhoneSkills, PhoneAnim);
-var WashingMachine = new Pawn('Washer', WashingMachineStats, 100, WashingMachineSkills, WashingMachineAnim);
+var DUMMY = new Pawn('DUMMY', DUMMYStats, 100, DUMMYSkills, DUMMYanim, [attack_phys]);
+var Microwave = new Pawn('Microwave', MicrowaveStats, 100, MicrowaveSkills, MicrowaveAnim, [sfx_microwave]);
+var Plunger = new Pawn('Plunger', PlungerStats, 100, PlungerSkills, PlungerAnim, [sfx_Plunger]);
+var Vacuum = new Pawn('Vacuum', VacuumStats, 100, VacuumSkills, VacuumAnim, [sfx_vacuum]);
+var Phone = new Pawn('Phone', PhoneStats, 100, PhoneSkills, PhoneAnim, [sfx_phone]);
+var WashingMachine = new Pawn('Washer', WashingMachineStats, 100, WashingMachineSkills, WashingMachineAnim, [sfx_washer]);
 
