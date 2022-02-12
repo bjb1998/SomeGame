@@ -35,13 +35,14 @@ function playSfx(sound) {
     sound.sfx.play();
 }
 
-const musicWorld = new Song('./assets/audio/music/song_test_1.mp3');
-const musicBattle = new Song('./assets/audio/music/song_test_2.mp3');
+const musicWorld = new Song('./assets/audio/music/music_dungeon.mp3');
+const musicBattle = new Song('./assets/audio/music/music_battle.mp3');
 
 const test = new SFX('./assets/audio/sfx/test.mp3');
 const step = new SFX('./assets/audio/sfx/step.mp3');
 const no_option = new SFX('./assets/audio/sfx/no_option.mp3');
 const attack_phys = new SFX('./assets/audio/sfx/attack_phys.mp3');
+const game_over = new SFX('./assets/audio/sfx/game_over.mp3');
 const sfx_confirm = new SFX('./assets/audio/sfx/confirm.mp3');
 const sfx_open = new SFX('./assets/audio/sfx/menuOpen.mp3');
 const sfx_select = new SFX('./assets/audio/sfx/select.mp3');
