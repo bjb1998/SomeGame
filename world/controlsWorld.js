@@ -39,15 +39,15 @@ class ControlsWorld{
 	};
 
     //walk forward one space
-    walk(map) {
+    walk(map, dir) {
         var destX, destY, xRes, yRes, dx, dy;
         destX = destY = xRes = yRes = dx = dy = null;
 		if (!moving) {
             moving = true;
             let timer = setInterval(function (camera, map) {
                 if (destX === null) {
-                    dx = Math.cos(camera.direction) * 0.1;
-                    dy = Math.sin(camera.direction) * 0.1;
+                    dx = dir * Math.cos(camera.direction) * 0.1;
+                    dy = dir * Math.sin(camera.direction) * 0.1;
                     destX = camera.x + (0.5 * Math.sign(dx)) + (Math.sign(dx) * 0.5);
                     destY = camera.y + (0.5 * Math.sign(dy)) + (Math.sign(dy) * 0.5);
                     if (destY === camera.y) destY = camera.y - 1; //screw you work already
@@ -115,9 +115,11 @@ class ControlsWorld{
 
     update(controls, map) {
         if (currentState === GameState.DUNGEON) {
+            //i know these if statements are low-key ugly but switch statements dont wanna work :(
             if (controls.left) this.rotate(-1);
             if (controls.right) this.rotate(1);
-            if (controls.forward) this.walk(map);
+            if (controls.forward) this.walk(map, 1);
+            if (controls.backward) this.walk(map, -1);
             if (controls.confirm && this.buffer != controls.confirm) this.interact();
             this.buffer = controls.confirm;
         };
