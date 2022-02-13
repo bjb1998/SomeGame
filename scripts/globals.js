@@ -6,7 +6,8 @@ const GameState = {                                 //possible states the game c
     HEAL: 'Heal',
     BATTLE: 'Battle',
     DIALOGUE: 'Dialogue',
-    PAUSE: 'Pause'
+    PAUSE: 'Pause',
+    END: 'End'
 };
 
 function setChance() {
