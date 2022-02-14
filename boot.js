@@ -4,6 +4,7 @@ window.onload = () => {
     var player = playerPreset;
     var theParty = new Party(player);
     theParty.recruit(newEnemy(DUMMY));
+    var battler;
 
     var game = document.getElementById('game');
     var uiCanvas = document.getElementById('ui');
@@ -14,11 +15,10 @@ window.onload = () => {
     var camera = new Camera(game);
     var minimap = new Minimap(game, 16, 125, 20, 20, map);
     var menu = new pauseMenu(uiCanvas, controls.states, map, theParty);
-
-    var diag = new DialogueBox(ui.getContext('2d'), controls.states, 900, 250, 33, healerDiag);
-    var playerControls = new ControlsWorld(8.5, 1.5, rightAngle, diag);
-
     var battler = new battleMenu(uiCanvas, controls.states, theParty, map);
+
+    var diag = new DialogueBox(ui.getContext('2d'), controls.states, 900, 250, 33, healerDiag, battler);
+    var playerControls = new ControlsWorld(8.5, 1.5, rightAngle, diag);
 
     var healer = new healRoomMenu(uiCanvas, controls.states, theParty, diag);
     var store = new storeMenu(uiCanvas, controls.states, theParty, diag);

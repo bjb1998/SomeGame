@@ -24,6 +24,10 @@ class Minimap{
                             size, size);
                         this.drawPlayerSpr(i, j);
                         continue;
+                    }else if (coord === -4) {
+                        this.ctx.drawImage(bossMap.image, this.startX + i * size, this.startY + j * size,
+                            size, size);
+                        continue;
                     } else if (coord <= -2) {
                         this.ctx.drawImage(npcMap.image, this.startX + i * size, this.startY + j * size,
                             size, size);

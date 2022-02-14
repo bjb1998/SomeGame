@@ -34,15 +34,6 @@ class Party {
         console.log(this.playerIndex);
     }
 
-    swapReserve(entity1, entity2) {
-        let i1 = this.active.indexOf(entity1);
-        let i2 = this.reserve.indexOf(entity2);
-        if (i1 != this.playerIndex && i2 != this.playerIndex)
-            [this.active[i1], this.reserve[i2]] = [this.reserve[i2], this.active[i1]];
-        else
-            console.log('You can\'t swap out yourself!');
-    }
-
     containsMember(name) {
         //Return true or false is bad but returning a var with the exact same result is okay???
         let bool = false;

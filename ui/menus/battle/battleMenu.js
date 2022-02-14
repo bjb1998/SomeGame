@@ -43,17 +43,18 @@ class battleMenu extends Menu{
     }
 
     //begin a battle, get enemies from the maps enemy pool
-    async initBattle() {
+    async initBattle(boss) {
+        var hasBoss = (boss != null);
         battleCheck = false;
         if (currentState === GameState.DUNGEON) {
             const chance = setChance();
-            if (chance <= this.battleChance) {
+            if (chance <= this.battleChance || hasBoss) {
                 changeSong(musicBattle);
                 currentState = GameState.BATTLE;
 
                 this.dialogueBox = new BattleDialogueBox(this.ctx, this.controls, 437.5, 185, 20, battleDiag);
                 this.enemies = new EnemyParty();
-                this.randomizeEnemies();
+                this.randomizeEnemies(boss);
 
                 this.partyStats = new partyStatsElem(this.ctx, this.party.active, //draw player party stats
                     menuColorBackground, 225, 35, 135, 150);
@@ -61,13 +62,17 @@ class battleMenu extends Menu{
                 this.enemyStats = new partyStatsElem(this.ctx, this.enemies.active, //draw enemy party stats
                     menuColorBackground, 375, 35, 135, 150);
 
-                this.battle = new Battle(this.party.active, this.enemies.active, this.dialogueBox, this.controls); //start battle with the parties & dialogue
+                this.battle = new Battle(this.party.active, this.enemies.active, this.dialogueBox, this.controls, hasBoss); //start battle with the parties & dialogue
             }
         }
     }
 
     //generate random enemies based on the enemies map pool
-    randomizeEnemies() {
+    randomizeEnemies(boss) {
+        if (boss != null) {
+            this.enemies.recruit(boss);
+            return;
+        }
         const enemyAmt = Math.floor(Math.random() * 4) + 1;
         for (var i = 0; i < enemyAmt; i++) {
             const randomEnemy = Math.floor(Math.random() * this.currentPool.length)

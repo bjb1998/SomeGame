@@ -11,10 +11,10 @@ const mapOne = [1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1,
                 1, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1,-2, 1,
                 1, 1, 4, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1,
                 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-                1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1,
+                1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0,-4, 1,
                 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1,
                 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,];
 
 const mapOnePool = [Microwave, Plunger, Vacuum, Phone, WashingMachine];
 
-const mapOneNPCs = [plungerNpc, washerNpc];
+const mapOneNPCs = [plungerNpc, washerNpc, bossNpc];

@@ -1,5 +1,5 @@
 class DialogueBox{
-    constructor(ctx, controls, width, height, max, dialogue) {
+    constructor(ctx, controls, width, height, max, dialogue, battler) {
         this.prevState = currentState;
         this.ctx = ctx;
         this.width = width;
@@ -11,6 +11,7 @@ class DialogueBox{
         this.rows = ['','',''];
         this.nextBuffer = true;
         this.currentWord = 0;
+        this.battler = battler;
     }
 
     start() {
@@ -110,6 +111,10 @@ class DialogueBox{
         this.active = false;
         this.reset();
         this.dialogueText.end(this.prevState);
+        if (this.dialogueText.anim === bossAnim) {
+            console.log(currentState);
+            this.battler.initBattle(boss);
+        }
     }
 
 }

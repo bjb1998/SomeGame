@@ -26,4 +26,8 @@ const plungerNpc = new Dialogue('Friendly Plunger', PlungerAnim,
 const washerNpc = new Dialogue('Wishy-Washy', WashingMachineAnim, 
     ['Welcome to Hell, loser.', 'As a welcoming gift, you get...', 'Absolutely nothing.']);
 
+const bossNpc = new Dialogue('Very Hyperactive Mage', bossAnim,
+    ['So it is you who has been fooling around with my creations.', 'Oh, so you live here?',
+        'Very well then, guess i\ll kill you.']);
+
 const battleDiag = new Dialogue('', null, ['The Battle Begins!']);

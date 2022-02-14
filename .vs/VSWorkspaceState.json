@@ -5,10 +5,11 @@
     "\\scripts",
     "\\ui",
     "\\ui\\menus",
+    "\\ui\\menus\\battle",
     "\\ui\\menus\\heal",
     "\\ui\\menus\\pause",
     "\\world"
   ],
-  "SelectedNode": "\\data\\audioDB.js",
+  "SelectedNode": "\\scripts\\battle.js",
   "PreviewInSolutionExplorer": false
 }

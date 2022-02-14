@@ -10,14 +10,14 @@ function levelUpFunc(entity) { return entity.name + ' Leveled Up!';};
 
 //the real meat of all things combat.
 class Battle {
-    constructor(playerParty, enemyParty, dialogueBox, controls) {
+    constructor(playerParty, enemyParty, dialogueBox, controls, hasBoss) {
         this.playerParty = playerParty;                         //player and his/her allies
         this.enemyParty = enemyParty;                           //enemies
         this.expAmt = this.getExp();                            //total exp of all enemies
         this.dialogueBox = dialogueBox;                         //dialogue box to display battle stuff
         this.controls = controls;                               //controls for menu controls
         this.turn = new Turn(this.playerParty, this.enemyParty, //turn to do combat in
-            this.dialogueBox, this.controls, this.expAmt);   
+            this.dialogueBox, this.controls, this.expAmt, hasBoss);   
     }
 
     //add each exp amount of the enemies
@@ -46,7 +46,7 @@ class Battle {
 
 //Turn for one phase of combat
 class Turn {
-    constructor(playerParty, enemyParty, dialogueBox, controls, exp) {
+    constructor(playerParty, enemyParty, dialogueBox, controls, exp, hasBoss) {
         this.playerParty = playerParty;
         this.enemyParty = enemyParty;
         this.dialogueBox = dialogueBox;
@@ -55,6 +55,7 @@ class Turn {
         this.currentMember = 0;
         this.controls = controls;
         this.exp = exp;
+        this.hasBoss = hasBoss;
     }
 
     async runSuccess() {
@@ -64,7 +65,6 @@ class Turn {
     }
 
     async gainExp() {
-
         for (var i = 0; i < this.playerParty.length; i++) {
             if (this.playerParty[i].stats.status != 'Dead')
                 if (this.playerParty[i].checkLevel(this.exp)) {
@@ -153,6 +153,10 @@ class Turn {
             return endState.LOSE;
         } else if (this.enemyParty.length === 0) {
             await this.gainExp(this.exp);
+            if (this.hasBoss) {
+                currentState = GameState.END;
+                changeSong(null);
+            }
             return endState.WIN;
         }
     }

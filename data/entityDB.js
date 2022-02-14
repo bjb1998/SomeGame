@@ -54,10 +54,15 @@ const WashingMachineRes = new Resistance(1, 1, 1, 1, 1, 1, 1, 1, 1);
 const WashingMachineStats = new Stats(1, 1, 99, 1, 1, 1, 1, 1, WashingMachineRes);
 const WashingMachineSkills = [strike, ember];
 
+const bossRes = new Resistance(1, 1, 1, 1, 1, 1, 1, 1, 1);
+const bossStats = new Stats(1, 1, 99, 1, 1, 1, 1, 1, bossRes);
+const bossSkills = [strike, ember];
+
 var DUMMY = new Pawn('DUMMY', DUMMYStats, 100, DUMMYSkills, DUMMYanim, [attack_phys]);
 var Microwave = new Pawn('Microwave', MicrowaveStats, 100, MicrowaveSkills, MicrowaveAnim, [sfx_microwave]);
 var Plunger = new Pawn('Plunger', PlungerStats, 100, PlungerSkills, PlungerAnim, [sfx_Plunger]);
 var Vacuum = new Pawn('Vacuum', VacuumStats, 100, VacuumSkills, VacuumAnim, [sfx_vacuum]);
 var Phone = new Pawn('Phone', PhoneStats, 100, PhoneSkills, PhoneAnim, [sfx_phone]);
 var WashingMachine = new Pawn('Washer', WashingMachineStats, 100, WashingMachineSkills, WashingMachineAnim, [sfx_washer]);
+var boss = new Pawn('Mage', bossStats, 100, bossSkills, bossAnim, [sfx_washer]);
 
