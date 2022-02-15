@@ -13,7 +13,11 @@ class battleMenuElem extends MenuElem{
     }
 
     drawMenuText() {
-        const currentMember = this.battle.playerParty[this.battle.turn.currentMember];
+        var currentMember = this.battle.playerParty[this.battle.turn.currentMember];
+        //If the current member is dead, do a nothing action and move to the next guy
+        if (currentMember.stats.status === statusType.DEAD) {
+            this.battle.addAction(null);
+        }
         this.drawText(currentMember.name, this.width - 100, (50) + (this.height / 8.5)); //draw the options in order by index
         for (var i = 0; i < this.options.length; i++)
             this.drawText(this.options[i], this.width - 100, (50 * (i + 2)) + (this.height / 8.5)); //draw the options in order by index

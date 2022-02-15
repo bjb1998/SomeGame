@@ -84,13 +84,15 @@ class Turn {
     //make an action for the player, then execute it. Once all done, do the same for the enemies
     async AddAction(action, source, target, slot, actionCtx) {
         this.playerAction = new Action(action, source, target, slot, actionCtx, this.dialogueBox, this.controls);
-        await this.playerAction.exec();
         this.currentMember++;
-        if (this.checkDeath(target)) {
-            this.shove();
+        if (action != null) {
+            await this.playerAction.exec();
+            if (this.checkDeath(target)) {
+                this.shove();
+            }
         }
         //once all selections made, make enemy actions start their turn
-        if (this.currentMember === this.playerParty.length) {
+        if (this.currentMember >= this.playerParty.length) {
             await this.genEnemyActions();
             await this.exec();
         }
@@ -98,9 +100,14 @@ class Turn {
 
     //temporary thing until enemy actions are a real thing
     async genEnemyActions() {
-        const testFunc = function () { return "but nothing happened!"; };
+        var target;
+
+        if (this.playerParty[0].stats.status === statusType.DEAD)
+            target = this.playerParty[1]
+        else target = this.playerParty[0]
+
         for (var i = 0; i < this.enemyParty.length; i++)
-            this.enemyActions[i] = new Action(testFunc, this.enemyParty[i], this.playerParty[0], null, null, this.dialogueBox, this.controls);
+            this.enemyActions[i] = new Action(StrikeFunc, this.enemyParty[i], target, null, null, this.dialogueBox, this.controls);
     }
 
     //exec each function per enemy in the eenmy party
@@ -147,10 +154,20 @@ class Turn {
         this.enemyParty.splice(-nullCount);
     }
 
+    //check if the player party is defeated
+    isDefeated() {
+        for (var i = 0; i < this.playerParty.length; i++) {
+            if (this.playerParty[i].stats.status != statusType.DEAD)
+                return false;
+        }
+        return true;
+    }
+
     //check if either party is defeated, return endState if either is killed
     async check() {
-        if (this.playerParty.length === 0) {
-            return endState.LOSE;
+        if (this.isDefeated()) {
+            currentState = GameState.LOSE;
+            changeSong(null);
         } else if (this.enemyParty.length === 0) {
             await this.gainExp(this.exp);
             if (this.hasBoss) {
@@ -187,9 +204,11 @@ class Action {
                 await this.awaitInput();
                 break;
             case "skill":
-                this.dialogueBox.init(this.source.name  + ' uses a skill!');
-                this.awaitInput();
-                this.dialogueBox.init(this.func.execSkill(this.source, this.target, this.slot));
+                console.log(this.slot);
+                this.dialogueBox.init(this.source.name + ' uses ' + this.func[this.slot].name);
+                await this.awaitInput();
+                playSfx(this.source.currAttackSfx);
+                this.dialogueBox.init(this.source.execSkill(this.source, this.target, this.slot));
                 await this.awaitInput();
                 break;
             case "other":

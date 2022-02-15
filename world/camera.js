@@ -33,6 +33,9 @@ class Camera {
             case GameState.TITLE:
                 this.background = backgroundTitle.image;
                 break;
+            case GameState.LOSE:
+                this.background = backgroundLose.image;
+                break;
             case GameState.END:
                 this.background = backgroundWin.image;
                 break;

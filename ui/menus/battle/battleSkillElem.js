@@ -30,9 +30,8 @@ class battleSkillElem extends battleMenuElem {
 
     nextMenu() {
         const cost = this.options[this.selection].cost;
-        const func = this.options[this.selection].func;
         if (this.member.checkMp(cost) && this.options.length > 0)
-            var menu = new battleEntitySelectElem(this, this.battle.enemyParty, func, this.member, this.selection, "skill");
+            var menu = new battleEntitySelectElem(this, this.battle.enemyParty, this.member.skills, this.selection, "skill");
         this.done = true;
         return menu;
     }

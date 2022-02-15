@@ -21,17 +21,24 @@ const calcDamage = function (attackerLvl, attackerStat, defenderStat, baseDamage
 //Execute a skill with the given stats from the attacker, target, element, and base damage of the move
 const execSkill = function (source, attackerStat, entity, defenderStat, baseDamage, elem) {
     const damageMult = checkRes(elem, entity);
-    if (damageMult === 0) return (entity.name + ' is immune to ' + elem + '!');
+    if (checkHealth(entity)) return 'But ' + entity.name + ' is already dead!';
+    else if (damageMult === 0) return (entity.name + ' is immune to ' + elem + '!');
+
 
     return entity.name + ' took ' +
-        entity.stats.damage(calcDamage(source.stats.lvl, attackerStat, defenderStat, baseDamage, damageMult) / (entity.guard + 1))
+        entity.stats.damage(Math.ceil(calcDamage(source.stats.lvl, attackerStat, defenderStat, baseDamage, damageMult) / (entity.guard + 1)))
         + ' ' + elem + ' damage!';
+}
+
+const checkHealth = function (entity) {
+    if (entity.stats.hp <= 0) {
+        return true;
+    }
 }
 
 //Simple physical attack with base 10 attack power
 const StrikeFunc = function (source, entity) {
-    const elem = elemType.PHYS;
-    return execSkill(source, source.stats.atk, entity, entity.stats.def, 10, elem);
+    return execSkill(source, source.stats.atk, entity, entity.stats.def, 10, elemType.PHYS);
 }
 
 //set an entities guard variable to true. reduces damage from incoming attacks
@@ -42,8 +49,7 @@ const guardFunc = function (source, entity) {
 
 //Do light fire damage to an enemy
 const emberFunc = function (source, entity) {
-    const elem = elemType.FIRE;
-    return execSkill(source, source.stats.mag, entity, entity.stats.def, 10, elem);
+    return execSkill(source, source.stats.mag, entity, entity.stats.def, 10, elemType.FIRE);
 }
 
 const strike = new Skill('Strike', 'Light physical damage', elemType.PHYS, 1, StrikeFunc);

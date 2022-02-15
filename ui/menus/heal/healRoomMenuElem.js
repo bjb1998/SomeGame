@@ -38,6 +38,7 @@ class healRoomMenuElem extends MenuElem {
             const currentMemberStats = this.party.active[i].stats;
             currentMemberStats.hp = currentMemberStats.maxHP;
             currentMemberStats.mp = currentMemberStats.maxMP;
+            currentMemberStats.status = statusType.HEALTHY;
         }
         this.healed = true;
     }

@@ -13,6 +13,7 @@ const backgroundTitle = new Texture('./assets/background-title.png');
 const backgroundHeal = new Texture('./assets/background-temp.png');
 const backgroundStore = new Texture('./assets/background-temp.png');
 const backgroundWin = new Texture('./assets/background-win.png');
+const backgroundLose = new Texture('./assets/background-lose.png');
 
 const DUMMYTexture = new Texture('./assets/sprites/enemies/DUMMY.png');
 const PlungerTexture = new Texture('./assets/sprites/enemies/Plunger.png');
