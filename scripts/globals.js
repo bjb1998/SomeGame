@@ -30,7 +30,7 @@ var moving = false;								     //boolean to determine if camera animation is ha
 var res = 175;                                       //resolution of the camera
 var playerPos = [];                                  //player as an x, y coordinate
 var playerDir = 0;                                   //direction of player (radians)
-var battleChance = 100;                                //for random stuff (encounters, etc.)
+var battleChance = 5;                                //for random stuff (encounters, etc.)
 var runChance = 75;                                  //chance of running away from battles
 var battleCheck = false;
 
