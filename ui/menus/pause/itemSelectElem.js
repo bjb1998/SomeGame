@@ -20,7 +20,8 @@ class itemMenuElem extends pauseMenuElem {
         }
 
         for (var i = 0; i < this.options.length; i++) {
-            this.drawText(this.options[i].item.name + ' x' + this.options[i].count, this.width - 100, (50 * (i + 2)) + (this.height / 8.5)); //draw the options in order by index
+            this.ctx.font = '20px Reactor7';
+            this.drawText(this.options[i].item.name + ' x' + this.options[i].count, this.width - 100, (50 * (i + 2)) - 9 + (this.height / 8.5)); //draw the options in order by index
         }
 
         this.drawDesc(this.options[this.selection].item.desc);

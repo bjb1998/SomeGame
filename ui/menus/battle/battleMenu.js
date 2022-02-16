@@ -32,7 +32,8 @@ class battleMenu extends Menu{
                     this.popMenu();
                 }
 
-                if (await this.battle.turn.check() === endState.WIN) {
+                if (this.battle.turn.done != null) {
+                    this.party.active[this.party.playerIndex].money += this.battle.money;
                     this.exit();
                 }
             }
@@ -84,7 +85,8 @@ class battleMenu extends Menu{
     drawAnims() {
         this.ctx.clearRect(550, 0, 600, 200); //clear any remnants from animation frames
         for (var i = 0; i < this.enemies.active.length; i++) {
-            this.enemies.active[i].animation.draw(this.ctx, 550 + (100 * i), 100);
+            if(this.enemies.active[i] != null)
+                this.enemies.active[i].animation.draw(this.ctx, 550 + (100 * i), 100);
         }
     }
 

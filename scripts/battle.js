@@ -1,8 +1,3 @@
-//results of the end of battle
-const endState = {
-    WIN: 'Win',
-    LOSE: 'Lose'
-};
 
 function runFunc() { return 'Got away safely';};
 function failFunc() { return 'Couldn\'t run away!';};
@@ -14,6 +9,7 @@ class Battle {
         this.playerParty = playerParty;                         //player and his/her allies
         this.enemyParty = enemyParty;                           //enemies
         this.expAmt = this.getExp();                            //total exp of all enemies
+        this.money = enemyParty.length * 50;                    //total money from battle
         this.dialogueBox = dialogueBox;                         //dialogue box to display battle stuff
         this.controls = controls;                               //controls for menu controls
         this.turn = new Turn(this.playerParty, this.enemyParty, //turn to do combat in
@@ -90,6 +86,7 @@ class Turn {
             if (this.checkDeath(target)) {
                 this.shove();
             }
+            await this.check();
         }
         //once all selections made, make enemy actions start their turn
         if (this.currentMember >= this.playerParty.length) {
@@ -114,6 +111,7 @@ class Turn {
     async exec() {
         for (var action in this.enemyActions) {
             await this.enemyActions[action].exec();
+            await this.check();
         }
 
         this.enemyActions = [];
@@ -130,7 +128,8 @@ class Turn {
 
     //check if the given target died from an attck
     checkDeath(target) {
-        if (target.stats != null && target.stats.status === "Dead") {
+        if (this.enemyParty[this.enemyParty.indexOf(target)] != null &&
+            target.stats != null && target.stats.status === "Dead") {
             this.enemyParty[this.enemyParty.indexOf(target)] = null;
             return true;
         }
@@ -155,7 +154,7 @@ class Turn {
     }
 
     //check if the player party is defeated
-    isDefeated() {
+    async isDefeated() {
         for (var i = 0; i < this.playerParty.length; i++) {
             if (this.playerParty[i].stats.status != statusType.DEAD)
                 return false;
@@ -165,16 +164,15 @@ class Turn {
 
     //check if either party is defeated, return endState if either is killed
     async check() {
-        if (this.isDefeated()) {
+        if (await this.isDefeated()) {
             currentState = GameState.LOSE;
             changeSong(null);
         } else if (this.enemyParty.length === 0) {
             await this.gainExp(this.exp);
+            this.done = true;
             if (this.hasBoss) {
                 currentState = GameState.END;
-                changeSong(null);
             }
-            return endState.WIN;
         }
     }
 
@@ -200,7 +198,7 @@ class Action {
             case ("item"):
                 this.dialogueBox.init(this.source.name + ' uses an item!');
                 await this.awaitInput();
-                this.dialogueBox.init(this.func.use(this.source, this.slot));
+                this.dialogueBox.init(this.func.use(this.target, this.slot));
                 await this.awaitInput();
                 break;
             case "skill":

@@ -1,6 +1,8 @@
 class storeItemMenuElem extends MenuElem{
     constructor(party, prevMenu) {
-        var items = [potion];   //temporary store stock
+        var items = [potion, superPotion, megaPotion,
+            magicite, superMagicite, megaMagicite,
+            cyanidePill, mysteryWater];   //temporary store stock
         super(prevMenu.background, items,
             prevMenu.posX, prevMenu.posY,
             prevMenu.fontSize,
@@ -19,7 +21,8 @@ class storeItemMenuElem extends MenuElem{
         const player = this.party.active[this.party.playerIndex];
         const item = this.options[this.selection];
         for (var i = 0; i < this.options.length; i++) {
-            this.drawText(this.options[i].name, this.width - 100, (50 * (i + 2)) + (this.height / 8.5)); //draw the options in order by index
+            this.ctx.font = '20px Reactor7';
+            this.drawText(this.options[i].name, this.width - 100, (50 * (i + 2)) - 9 + (this.height / 8.5)); //draw the options in order by index
         } this.drawDesc('$' + player.money + ' | ' +  '$' + item.cost + ' | ' + item.desc);
     }
 

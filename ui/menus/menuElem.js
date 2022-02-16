@@ -29,7 +29,7 @@ class MenuElem {
 
     drawDesc(desc) {
         this.ctx.fillStyle = this.background;
-        this.ctx.fillRect(200, 700, 400, 50);
+        this.ctx.fillRect(200, 700, 750, 50);
         this.setFontCtx();
         this.drawText(desc, 200 + 25, 700 + 40);
     }

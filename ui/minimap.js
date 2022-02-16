@@ -15,7 +15,7 @@ class Minimap{
     drawMap() {
         const size = this.squareSize;
         const units = this.gridSize;
-        if (currentState != GameState.PAUSE)
+        if (currentState === GameState.DUNGEON)
             for (var i = 0; i < units; i++)
                 for (var j = 0; j < units; j++) {
                     const coord = this.getCoordinate(i, j);

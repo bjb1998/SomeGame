@@ -80,7 +80,8 @@ class Stats {
     }
 
     useMP(Mp) {
-        this.mp - Mp <= 0 ? this.mp = 0 : this.mp -= Mp;
+        this.mp -= Mp;
+        this.mp = Math.min(Math.max(this.mp, 0), this.maxMP); //clamp the MP between 0 and max MP
     }
 };
 
