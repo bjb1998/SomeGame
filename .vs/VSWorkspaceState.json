@@ -5,8 +5,9 @@
     "\\scripts",
     "\\ui",
     "\\ui\\menus",
+    "\\ui\\menus\\pause",
     "\\world"
   ],
-  "SelectedNode": "\\scripts\\battle.js",
+  "SelectedNode": "\\ui\\menus\\pause\\partySelectElem.js",
   "PreviewInSolutionExplorer": false
 }

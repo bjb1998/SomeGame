@@ -47,11 +47,31 @@ const guardFunc = function (source, entity) {
     return entity.name + ' is guarding...';
 }
 
-//Do light fire damage to an enemy
+//regular attacks
 const emberFunc = function (source, entity) {
     return execSkill(source, source.stats.mag, entity, entity.stats.def, 10, elemType.FIRE);
+}
+const blazeFunc = function (source, entity) {
+    return execSkill(source, source.stats.mag, entity, entity.stats.def, 20, elemType.FIRE);
+}
+const staticFunc = function (source, entity) {
+    return execSkill(source, source.stats.mag, entity, entity.stats.def, 10, elemType.ELEC);
+}
+const boltFunc = function (source, entity) {
+    return execSkill(source, source.stats.mag, entity, entity.stats.def, 20, elemType.ELEC);
+}
+const iceFunc = function (source, entity) {
+    return execSkill(source, source.stats.mag, entity, entity.stats.def, 10, elemType.ICE);
+}
+const freezeFunc = function (source, entity) {
+    return execSkill(source, source.stats.mag, entity, entity.stats.def, 20, elemType.ICE);
 }
 
 const strike = new Skill('Strike', 'Light physical damage', elemType.PHYS, 1, StrikeFunc);
 const guard = new Skill('Guard', 'Guard an attack for half damage', elemType.ALLM, 0, guardFunc);
 const ember = new Skill('Ember', 'Light fire damage', elemType.FIRE, 1, emberFunc);
+const blaze = new Skill('Blaze', 'Medium fire damage', elemType.FIRE, 1, blazeFunc);
+const static = new Skill('Static', 'Light electric damage', elemType.ELEC, 1, staticFunc);
+const bolt = new Skill('Bolt', 'Medium electric damage', elemType.ELEC, 1, boltFunc);
+const ice = new Skill('Ice', 'Light ice damage', elemType.ICE, 1, iceFunc);
+const freeze = new Skill('Freeze', 'Medium ice damage', elemType.ICE, 1, freezeFunc);
