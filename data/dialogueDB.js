@@ -10,13 +10,13 @@
  * 
  */
 
-const healerDiag = new Dialogue('Healer Dude', null,
+const healerDiag = new Dialogue('First-Aid Kit', null,
     ['Do not fret human, I can heal you in these trying times.', 'all you must do is ask and it shall be given.']);
 
-const storeDiag = new Dialogue('Store Dude', null,
+const storeDiag = new Dialogue('Vending Machine', null,
     ['Buy something, will ya?']);
 
-const notEnoughDiag = new Dialogue('Store Dude', null,
+const notEnoughDiag = new Dialogue('Vending Machine', null,
     ['Stop fooling around and buying things you can\'t.']);
 
 const plungerNpc = new Dialogue('Friendly Plunger', PlungerAnim,
