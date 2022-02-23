@@ -13,21 +13,24 @@ const checkRes = function (elem, entity) {
 //Calculate and return damage with given stats and damage multiplier
 //I took this formula from pokemon so Nintendo if you take this down then you acknowledge this game is canon to Pokemon :)
 const calcDamage = function (attackerLvl, attackerStat, defenderStat, baseDamage, damageMult) {
-    const lvlModifier = (2 * attackerLvl + 10) / 250;
+    const lvlModifier = (2 * attackerLvl + 10) / 50;
     const mult = ((attackerStat / defenderStat) * baseDamage * damageMult) + 1;
-    return Math.ceil(lvlModifier * mult);
+    return Math.ceil(lvlModifier * mult) + 1;
 }
 
 //Execute a skill with the given stats from the attacker, target, element, and base damage of the move
 const execSkill = function (source, attackerStat, entity, defenderStat, baseDamage, elem) {
     const damageMult = checkRes(elem, entity);
+    var weaknessString = '';
     if (checkHealth(entity)) return 'But ' + entity.name + ' is already dead!';
-    else if (damageMult === 0) return (entity.name + ' is immune to ' + elem + '!');
 
+    if (damageMult === 0) return (entity.name + ' is immune to ' + elem + '!');
+    else if (damageMult === 2) weaknessString = ' was weak to ' + elem + ' and'
 
-    return entity.name + ' took ' +
-        entity.stats.damage(Math.ceil(calcDamage(source.stats.lvl, attackerStat, defenderStat, baseDamage, damageMult) / (entity.guard + 1)))
-        + ' ' + elem + ' damage!';
+    const dmg = entity.stats.damage(Math.ceil(calcDamage(source.stats.lvl, attackerStat, defenderStat, baseDamage, damageMult) / (entity.guard + 1)));
+
+    if (dmg < 0) return entity.name + ' drained the attack and healed ' + -1 * dmg + ' HP!';
+    return entity.name + weaknessString + ' took ' + dmg + ' ' + elem + ' damage!';
 }
 
 const checkHealth = function (entity) {

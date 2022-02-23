@@ -5,8 +5,9 @@
  *  2 - Weak
  */
 class Resistance {
-    constructor(phys, gun, fire, ice, force, elec, light, dark, allm) {
-        Object.assign(this, { phys, gun, fire, ice, force, elec, light, dark, allm });
+    constructor(phys, gun, fire, ice, force, elec, light, dark) {
+        Object.assign(this, { phys, gun, fire, ice, force, elec, light, dark });
+        this.allm = 1;
     };
 
     getRes(type) {
