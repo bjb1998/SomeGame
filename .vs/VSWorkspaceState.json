@@ -2,11 +2,11 @@
   "ExpandedNodes": [
     "",
     "\\data",
-    "\\ui",
+    "\\scripts",
     "\\ui\\menus",
     "\\ui\\menus\\pause",
     "\\world"
   ],
-  "SelectedNode": "\\data\\dialogueDB.js",
+  "SelectedNode": "\\data\\skillDB.js",
   "PreviewInSolutionExplorer": false
 }

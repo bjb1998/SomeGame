@@ -97,14 +97,26 @@ class Turn {
 
     //temporary thing until enemy actions are a real thing
     async genEnemyActions() {
-        var target;
+        var randomTarget = Math.floor(Math.random() * this.playerParty.length);
+        var target = this.playerParty[randomTarget];
 
-        if (this.playerParty[0].stats.status === statusType.DEAD)
-            target = this.playerParty[1]
-        else target = this.playerParty[0]
+        while (this.playerParty[randomTarget].stats.status === statusType.DEAD) {
+            randomTarget = Math.floor(Math.random() * this.playerParty.length);
+            target = this.playerParty[randomTarget];
+        }
 
-        for (var i = 0; i < this.enemyParty.length; i++)
-            this.enemyActions[i] = new Action(StrikeFunc, this.enemyParty[i], target, null, null, this.dialogueBox, this.controls);
+        for (var i = 0; i < this.enemyParty.length; i++) {
+            const currentEnemy = this.enemyParty[i];
+            const physOrMagic = Math.floor(Math.random() * 2);
+            if (physOrMagic >= 1 && currentEnemy.stats.mp >= 1) {
+                const skills = currentEnemy.skills;
+                const skillsSize = skills.length - 1;
+                const randomSkillSlot = Math.floor(Math.random() * skillsSize) + 1;
+                this.enemyActions[i] = new Action(skills, currentEnemy, target, randomSkillSlot, "skill", this.dialogueBox, this.controls);
+            } else
+                this.enemyActions[i] = new Action(StrikeFunc, currentEnemy, target, null, null, this.dialogueBox, this.controls);
+            
+        }
     }
 
     //exec each function per enemy in the eenmy party
@@ -202,7 +214,6 @@ class Action {
                 await this.awaitInput();
                 break;
             case "skill":
-                console.log(this.slot);
                 this.dialogueBox.init(this.source.name + ' uses ' + this.func[this.slot].name);
                 await this.awaitInput();
                 playSfx(this.source.currAttackSfx);

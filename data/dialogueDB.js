@@ -24,7 +24,8 @@ const plungerNpc = new Dialogue('Friendly Plunger', PlungerAnim,
         'Something like that. I\d much rather do that right now compared to talking to you.']);
 
 const washerNpc = new Dialogue('Wishy-Washy', WashingMachineAnim, 
-    ['Welcome to Hell, loser.', 'As a welcoming gift, you get...', 'Absolutely nothing.']);
+    ['Welcome to Hell, loser.', 'Receptionist is down the hall and to the left.', 'Which one you ask..?',
+    'Like hell I\'m telling you.']);
 
 const bossNpc = new Dialogue('Very Hyperactive Mage', bossAnim,
     ['So it is you who has been fooling around with my creations.', 'Oh, so you live here?',
