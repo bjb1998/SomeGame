@@ -7,7 +7,7 @@
 
 const potionFunc = function (entity) {
     if (checkHealth(entity)) return 'But ' + entity.name + ' is already dead!';
-    entity.stats.damage(-10);
+    entity.stats.damage(-15);
     return entity.name + ' was healed!';
 };
 const superPotionFunc = function (entity) {

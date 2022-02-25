@@ -63,6 +63,12 @@ const staticFunc = function (source, entity) {
 const boltFunc = function (source, entity) {
     return execSkill(source, source.stats.mag, entity, entity.stats.def, 20, elemType.ELEC);
 }
+const forceFunc = function (source, entity) {
+    return execSkill(source, source.stats.mag, entity, entity.stats.def, 10, elemType.FORCE);
+}
+const gustFunc = function (source, entity) {
+    return execSkill(source, source.stats.mag, entity, entity.stats.def, 20, elemType.FORCE);
+}
 const iceFunc = function (source, entity) {
     return execSkill(source, source.stats.mag, entity, entity.stats.def, 10, elemType.ICE);
 }
@@ -70,11 +76,13 @@ const freezeFunc = function (source, entity) {
     return execSkill(source, source.stats.mag, entity, entity.stats.def, 20, elemType.ICE);
 }
 
-const strike = new Skill('Strike', 'Light physical damage', elemType.PHYS, 1, StrikeFunc);
+const strike = new Skill('Strike', 'Light physical damage', elemType.PHYS, 0, StrikeFunc);
 const guard = new Skill('Guard', 'Guard an attack for half damage', elemType.ALLM, 0, guardFunc);
-const ember = new Skill('Ember', 'Light fire damage', elemType.FIRE, 1, emberFunc);
-const blaze = new Skill('Blaze', 'Medium fire damage', elemType.FIRE, 1, blazeFunc);
-const static = new Skill('Static', 'Light electric damage', elemType.ELEC, 1, staticFunc);
-const bolt = new Skill('Bolt', 'Medium electric damage', elemType.ELEC, 1, boltFunc);
-const ice = new Skill('Ice', 'Light ice damage', elemType.ICE, 1, iceFunc);
-const freeze = new Skill('Freeze', 'Medium ice damage', elemType.ICE, 1, freezeFunc);
+const ember = new Skill('Ember', 'Light fire damage', elemType.FIRE, 3, emberFunc);
+const blaze = new Skill('Blaze', 'Medium fire damage', elemType.FIRE, 7, blazeFunc);
+const force = new Skill('Force', 'Light force damage', elemType.FORCE, 3, forceFunc);
+const gust = new Skill('Gust', 'Medium force damage', elemType.FORCE, 7, gustFunc);
+const static = new Skill('Static', 'Light electric damage', elemType.ELEC, 3, staticFunc);
+const bolt = new Skill('Bolt', 'Medium electric damage', elemType.ELEC, 7, boltFunc);
+const ice = new Skill('Ice', 'Light ice damage', elemType.ICE, 3, iceFunc);
+const freeze = new Skill('Freeze', 'Medium ice damage', elemType.ICE, 7, freezeFunc);

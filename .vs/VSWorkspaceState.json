@@ -3,10 +3,11 @@
     "",
     "\\data",
     "\\scripts",
+    "\\ui",
     "\\ui\\menus",
-    "\\ui\\menus\\pause",
+    "\\ui\\menus\\battle",
     "\\world"
   ],
-  "SelectedNode": "\\data\\skillDB.js",
+  "SelectedNode": "\\data\\itemDB.js",
   "PreviewInSolutionExplorer": false
 }

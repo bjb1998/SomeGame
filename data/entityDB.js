@@ -23,40 +23,40 @@ newObj = function(obj){
 
 //--Player--//
 const playerRes = new Resistance(1, 1, 2, 1, 1, 1, 1, 1, 1);
-const playerStats = new Stats(5, 25, 25, 4, 4, 3, 5, 3, playerRes);
+const playerStats = new Stats(5, 35, 25, 4, 4, 3, 5, 3, playerRes);
 const inv = [potion];
-const skills = [strike, ember, blaze, static, bolt, ice, freeze];
+const skills = [strike, ember, static, ice, force];
 var playerPreset = new MC("Bob", playerStats, 100, inv, skills, [attack_phys]);
 //--Player--//
 
 
 const buddyRes = new Resistance(1, 1, 1, 1, 1, 1, 1, 1);
-const buddyStats = new Stats(5, 35, 15, 10, 5, 5, 5, 5, buddyRes);
-const buddySkills = [strike, ember];
+const buddyStats = new Stats(5, 45, 15, 10, 5, 5, 5, 5, buddyRes);
+const buddySkills = [strike, blaze, bolt, freeze, gust];
 
 const MicrowaveRes = new Resistance(1, 1, 0, 2, 1, -1, 1, 1);
 const MicrowaveStats = new Stats(2, 22, 99, 5, 5, 5, 5, 5, MicrowaveRes);
-const MicrowaveSkills = [strike, ember];
+const MicrowaveSkills = [strike, ember, blaze];
 
 const PlungerRes = new Resistance(1, 1, 2, 1, 1, 2, 1, 1);
 const PlungerStats = new Stats(3, 17, 99, 5, 5, 5, 5, 5, PlungerRes);
-const PlungerSkills = [strike, ember];
+const PlungerSkills = [strike, ice];
 
 const VacuumRes = new Resistance(1, 2, 1, 2, -1, 0, 1, 1);
 const VacuumStats = new Stats(5, 30, 99, 5, 5, 5, 5, 5, VacuumRes);
-const VacuumSkills = [strike, ember];
+const VacuumSkills = [strike, static, gust];
 
 const PhoneRes = new Resistance(1, 1, 1, 1, 2, 0, 1, 1);
 const PhoneStats = new Stats(7, 15, 99, 5, 5, 5, 5, 5, PhoneRes);
-const PhoneSkills = [strike, ember];
+const PhoneSkills = [strike, force];
 
 const WashingMachineRes = new Resistance(0, 1, 2, 2, 1, -1, 1, 1);
 const WashingMachineStats = new Stats(5, 25, 99, 5, 5, 5, 5, 5, WashingMachineRes);
-const WashingMachineSkills = [strike, ember];
+const WashingMachineSkills = [strike, ice, freeze];
 
 const bossRes = new Resistance(1, 0, 1, 2, 1, -1, -1, -1);
 const bossStats = new Stats(10, 50, 99, 5, 5, 5, 5, 5, bossRes);
-const bossSkills = [strike, ember];
+const bossSkills = [strike, blaze, bolt, force, gust];
 
 var DUMMY = new Pawn('Rob', buddyStats, 100, buddySkills, DUMMYanim, [attack_phys]);
 var Microwave = new Pawn('Microwave', MicrowaveStats, 100, MicrowaveSkills, MicrowaveAnim, [sfx_microwave]);
