@@ -31,31 +31,31 @@ var playerPreset = new MC("Bob", playerStats, 100, inv, skills, [attack_phys]);
 
 
 const buddyRes = new Resistance(1, 1, 1, 1, 1, 1, 1, 1);
-const buddyStats = new Stats(5, 45, 15, 10, 5, 5, 5, 5, buddyRes);
+const buddyStats = new Stats(5, 45, 0, 10, 5, 5, 5, 5, buddyRes);
 const buddySkills = [strike, blaze, bolt, freeze, gust];
 
 const MicrowaveRes = new Resistance(1, 1, 0, 2, 1, -1, 1, 1);
-const MicrowaveStats = new Stats(2, 22, 99, 5, 5, 5, 5, 5, MicrowaveRes);
+const MicrowaveStats = new Stats(2, 22, 45, 5, 5, 5, 5, 5, MicrowaveRes);
 const MicrowaveSkills = [strike, ember, blaze];
 
 const PlungerRes = new Resistance(1, 1, 2, 1, 1, 2, 1, 1);
-const PlungerStats = new Stats(3, 17, 99, 5, 5, 5, 5, 5, PlungerRes);
+const PlungerStats = new Stats(3, 17, 20, 5, 5, 5, 5, 5, PlungerRes);
 const PlungerSkills = [strike, ice];
 
 const VacuumRes = new Resistance(1, 2, 1, 2, -1, 0, 1, 1);
-const VacuumStats = new Stats(5, 30, 99, 5, 5, 5, 5, 5, VacuumRes);
+const VacuumStats = new Stats(5, 30, 25, 5, 5, 5, 5, 5, VacuumRes);
 const VacuumSkills = [strike, static, gust];
 
 const PhoneRes = new Resistance(1, 1, 1, 1, 2, 0, 1, 1);
-const PhoneStats = new Stats(7, 15, 99, 5, 5, 5, 5, 5, PhoneRes);
+const PhoneStats = new Stats(7, 15, 30, 5, 5, 5, 5, 5, PhoneRes);
 const PhoneSkills = [strike, force];
 
 const WashingMachineRes = new Resistance(0, 1, 2, 2, 1, -1, 1, 1);
-const WashingMachineStats = new Stats(5, 25, 99, 5, 5, 5, 5, 5, WashingMachineRes);
+const WashingMachineStats = new Stats(5, 30, 35, 5, 5, 5, 5, 5, WashingMachineRes);
 const WashingMachineSkills = [strike, ice, freeze];
 
 const bossRes = new Resistance(1, 0, 1, 2, 1, -1, -1, -1);
-const bossStats = new Stats(10, 50, 99, 5, 5, 5, 5, 5, bossRes);
+const bossStats = new Stats(10, 50, 50, 5, 5, 5, 5, 5, bossRes);
 const bossSkills = [strike, blaze, bolt, force, gust];
 
 var DUMMY = new Pawn('Rob', buddyStats, 100, buddySkills, DUMMYanim, [attack_phys]);
