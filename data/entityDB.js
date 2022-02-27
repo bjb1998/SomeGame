@@ -31,7 +31,7 @@ var playerPreset = new MC("Bob", playerStats, 100, inv, skills, [attack_phys]);
 
 
 const buddyRes = new Resistance(1, 1, 1, 1, 1, 1, 1, 1);
-const buddyStats = new Stats(5, 45, 0, 10, 5, 5, 5, 5, buddyRes);
+const buddyStats = new Stats(5, 45, 40, 10, 5, 5, 5, 5, buddyRes);
 const buddySkills = [strike, blaze, bolt, freeze, gust];
 
 const MicrowaveRes = new Resistance(1, 1, 0, 2, 1, -1, 1, 1);
