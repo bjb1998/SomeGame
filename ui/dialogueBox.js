@@ -149,3 +149,20 @@ class Dialogue {
         if (currentState === GameState.DIALOGUE) currentState = state;
     }
 }
+
+class Chest extends Dialogue {
+    constructor(item, quantity) {
+        super('', WashingMachineAnim, ['There\'s something inside...', 'It\'s ' + quantity + ' ' + item.name + 's!',
+            'The chest is now empty...']);
+        this.opened = false;
+        this.item = item;
+        this.quantity = quantity;
+    }
+
+    end(state) {
+        if(!this.opened)
+            playerPreset.inv.give(this.item, this.quantity);
+        this.opened = true;
+        if (currentState === GameState.DIALOGUE) currentState = state;
+    }
+}

@@ -4,10 +4,9 @@
     "\\data",
     "\\scripts",
     "\\ui",
-    "\\ui\\menus",
     "\\ui\\menus\\battle",
     "\\world"
   ],
-  "SelectedNode": "\\data\\entityDB.js",
+  "SelectedNode": "\\scripts\\items.js",
   "PreviewInSolutionExplorer": false
 }
