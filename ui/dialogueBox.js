@@ -152,7 +152,7 @@ class Dialogue {
 
 class Chest extends Dialogue {
     constructor(item, quantity) {
-        super('', WashingMachineAnim, ['There\'s something inside...', 'It\'s ' + quantity + ' ' + item.name + 's!',
+        super('', TreasureAnim, ['There\'s something inside...', 'It\'s ' + quantity + ' ' + item.name + 's!',
             'The chest is now empty...']);
         this.opened = false;
         this.item = item;

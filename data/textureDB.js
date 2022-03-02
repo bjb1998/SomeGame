@@ -9,6 +9,8 @@ const doorSprite = new Texture('./assets/door_texture.jpg');
 const healDoorSprite = new Texture('./assets/door_heal_texture.jpg');
 const storeDoorSprite = new Texture('./assets/door_store_texture.jpg');
 
+const treasureSprite = new Texture('./assets/Treasure.png');
+
 const backgroundTitle = new Texture('./assets/background-title.png');
 const backgroundHeal = new Texture('./assets/background-heal.png');
 const backgroundStore = new Texture('./assets/background-shop.png');

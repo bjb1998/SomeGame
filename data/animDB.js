@@ -5,5 +5,6 @@ const VacuumAnim = new Anim(VacuumTexture.image, 0, 0, 277, 509, 5, 0.2, 0.30, -
 const PhoneAnim = new Anim(PhoneTexture.image, 0, 0, 756, 992, 19, 0.06, 0.1, 0);
 const WashingMachineAnim = new Anim(WashingMachineTexture.image, 0, 0, 444, 663, 16, 0.1, 0.2, -40);
 const bossAnim = new Anim(bossTexture.image, 0, 0, 47, 103, 7, 0.1, 2, -105);
+const TreasureAnim = new Anim(treasureSprite.image, 0, 0, 340, 374, 9, 0.2, 0.5, -100)
 
 
