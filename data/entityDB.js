@@ -55,7 +55,7 @@ const WashingMachineStats = new Stats(5, 30, 35, 5, 5, 5, 5, 5, WashingMachineRe
 const WashingMachineSkills = [strike, ice, freeze];
 
 const bossRes = new Resistance(1, 0, 1, 2, 1, -1, -1, -1);
-const bossStats = new Stats(10, 50, 50, 5, 5, 5, 5, 5, bossRes);
+const bossStats = new Stats(10, 99, 50, 5, 5, 5, 5, 5, bossRes);
 const bossSkills = [strike, blaze, bolt, force, gust];
 
 var DUMMY = new Pawn('Rob', buddyStats, 100, buddySkills, DUMMYanim, [attack_phys]);
