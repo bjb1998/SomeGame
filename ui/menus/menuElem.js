@@ -89,6 +89,7 @@ class MenuElem {
         if (confirm && confirm != this.confirmBuffer) {
             this.state = 1;
             playSfx(sfx_confirm);
+            
         } else if ((decline && decline != this.denyBuffer) || this.done) {
             this.state = -1;
             playSfx(sfx_confirm);

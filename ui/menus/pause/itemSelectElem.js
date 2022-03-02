@@ -24,7 +24,8 @@ class itemMenuElem extends pauseMenuElem {
             this.drawText(this.options[i].item.name + ' x' + this.options[i].count, this.width - 100, (50 * (i + 2)) - 9 + (this.height / 8.5)); //draw the options in order by index
         }
 
-        this.drawDesc(this.options[this.selection].item.desc);
+        if(this.options[this.selection])
+            this.drawDesc(this.options[this.selection].item.desc);
 
     }
 
