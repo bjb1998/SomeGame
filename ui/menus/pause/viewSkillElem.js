@@ -37,7 +37,8 @@ class popUpSkillMenu extends pauseMenuElem{
     };
 
     drawMenuText() {
-        super.drawMenuText();
+        for (var i = 0; i < this.options.length; i++)
+            this.drawText(this.options[i], this.width - 100, (50 * (i + 2)) + (this.height / 8.5)); //draw the options in order by index
         this.drawDesc(this.desc);
     }
 

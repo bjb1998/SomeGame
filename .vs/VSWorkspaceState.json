@@ -4,8 +4,10 @@
     "\\data",
     "\\scripts",
     "\\ui",
-    "\\world"
+    "\\ui\\menus",
+    "\\ui\\menus\\battle",
+    "\\ui\\menus\\pause"
   ],
-  "SelectedNode": "\\data\\entityDB.js",
+  "SelectedNode": "\\ui\\menus\\pause\\viewSkillElem.js",
   "PreviewInSolutionExplorer": false
 }
