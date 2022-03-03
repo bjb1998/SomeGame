@@ -6,24 +6,18 @@ class swapElem extends partyMenuElem{
     }
 }
 
-class swapSelectionElem extends pauseMenuElem {
+class swapSelectionElem extends partyMenuElem {
     constructor(member, prevMenu) {
-        super(prevMenu.background, prevMenu.party,
-            prevMenu.posX, prevMenu.posY,
-            prevMenu.fontSize,
-            prevMenu.width, prevMenu.height);
+        super(prevMenu.party, prevMenu);
         this.member = member;
-    }
-
-    drawMenuText() {
-        for (var i = 0; i < this.options.active.length; i++) {
-            this.drawText(this.options.active[i].name, this.width - 100, (50 * (i + 2)) + (this.height / 8.5));
-        }
+        console.log(this);
+        console.log(this.options);
     }
 
     nextMenu() {
-        const other = this.options.active[this.selection];
-        this.options.swapActive(this.member, other);
+        console.log(this.options);
+        const other = this.options[this.selection];
+        this.party.swapActive(this.member, other);
         this.done = true;
     }
 }
