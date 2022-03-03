@@ -37,12 +37,9 @@ class itemMenuElem extends pauseMenuElem {
 
 }
 
-class selectElem extends pauseMenuElem{
+class selectElem extends partyMenuElem{
     constructor(inv, itemSlot, prevMenu) {
-        super(prevMenu.background, prevMenu.party,
-            prevMenu.posX, prevMenu.posY,
-            prevMenu.fontSize,
-            prevMenu.width, prevMenu.height);
+        super(prevMenu.party, prevMenu);
         this.inv = inv;
         this.itemSlot = itemSlot;
     }
@@ -52,13 +49,12 @@ class selectElem extends pauseMenuElem{
         this.controls = menu.controls;
         this.menus = null;
         this.party = menu.party;
+        console.log(this.party);
     }
 
     drawMenuText() {
-        var i;
-        for (i = 0; i < this.party.active.length; i++) {
-            this.drawText(this.party.active[i].name, this.width - 100, (50 * (i + 2)) + (this.height / 8.5));
-        }
+        for (var i = 0; i < this.options.length; i++)
+            this.drawText(this.options[i].name, this.width - 100, (50 * (i + 2)) + (this.height / 8.5)); //draw the options in order by index
     }
 
     nextMenu() {
