@@ -170,7 +170,7 @@ class Chest extends Dialogue {
 class Door extends Dialogue {
     constructor() {
         super('Door Guardian',  VacuumAnim,
-        ['You must must have a group power level of 15 to enter', 'your power level isn\'t even enough to open the door']);
+        ['You must have a group power level of 15 to enter', 'your power level isn\'t even enough to open the door']);
         this.level = false;
     }
 
