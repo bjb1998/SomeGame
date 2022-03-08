@@ -166,3 +166,23 @@ class Chest extends Dialogue {
         if (currentState === GameState.DIALOGUE) currentState = state;
     }
 }
+
+class Door extends Dialogue {
+    constructor() {
+        super('Door Guardian',  VacuumAnim,
+        ['You must must have a group power level of 15 to enter', 'your power level isn\'t even enough to open the door']);
+        this.level = false;
+    }
+
+    getSpeaker(){
+        if(playerPreset.stats.lvl + sidekick.stats.lvl >= 15) {
+            mapOne[202] = 0;
+            mapOne[201] = 0;
+            this.txt[1] = 'you are worthy of entering the boss room';
+        }
+        else{
+            this.txt[1] = 'your power level isn\'t even enough to open the door, current power level is only '+ (playerPreset.stats.lvl + sidekick.stats.lvl);
+        }
+        return this.speaker;
+    }
+}

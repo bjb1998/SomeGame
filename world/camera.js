@@ -104,7 +104,6 @@ class Camera {
         //move back to the player to draw
         for (var s = ray.length - 1; s >= 0; s--) {
             var step = ray[s];
-
             if (s === hit) {
                 texture = map.textures[ray[s].value - 1];                   //get the texture for the space based on the arrays value
                 var textureX = Math.floor(texture.image.width * step.offset);     //get the texture offset from the ray

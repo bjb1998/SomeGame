@@ -31,8 +31,9 @@ var playerPreset = new MC("Bob", playerStats, 100, inv, skills, [attack_phys]);
 
 
 const buddyRes = new Resistance(1, 1, 1, 1, 1, 1, 1, 1);
-const buddyStats = new Stats(5, 45, 40, 10, 5, 5, 5, 5, buddyRes);
+const buddyStats = new Stats(5, 45, 40, 1, 5, 5, 5, 5, buddyRes);
 const buddySkills = [strike, blaze, bolt, freeze, gust];
+
 
 const MicrowaveRes = new Resistance(1, 1, 0, 2, 1, -1, 1, 1);
 const MicrowaveStats = new Stats(2, 22, 45, 5, 5, 5, 5, 5, MicrowaveRes);
@@ -59,6 +60,8 @@ const bossStats = new Stats(10, 99, 50, 5, 5, 5, 5, 5, bossRes);
 const bossSkills = [strike, blaze, bolt, force, gust];
 
 var DUMMY = new Pawn('Rob', buddyStats, 100, buddySkills, DUMMYanim, [attack_phys]);
+var sidekick = newEnemy(DUMMY);
+
 var Microwave = new Pawn('Microwave', MicrowaveStats, 100, MicrowaveSkills, MicrowaveAnim, [sfx_microwave]);
 var Plunger = new Pawn('Plunger', PlungerStats, 100, PlungerSkills, PlungerAnim, [sfx_Plunger]);
 var Vacuum = new Pawn('Vacuum', VacuumStats, 100, VacuumSkills, VacuumAnim, [sfx_vacuum]);

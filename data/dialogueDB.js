@@ -31,9 +31,12 @@ const bossNpc = new Dialogue('Very Hyperactive Mage', bossAnim,
     ['So it is you who has been fooling around with my creations.', 'Oh, so you live here?',
         'Very well then, guess i\ll kill you.']);
 
+
 const chestOne = new Chest(potion, 5);
 const chestTwo = new Chest(magicite, 5);
 const chestThree = new Chest(megaMagicite, 2);
 const chestFour = new Chest(cyanidePill, 1);
+
+const doorDiag = new Door();
 
 const battleDiag = new Dialogue('', null, ['The Battle Begins!']);

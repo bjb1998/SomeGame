@@ -3,7 +3,7 @@
 window.onload = () => {
     var player = playerPreset;
     var theParty = new Party(player);
-    theParty.recruit(newEnemy(DUMMY));
+    theParty.recruit(sidekick);
     var battler;
 
     var game = document.getElementById('game');
